@@ -1,0 +1,3 @@
+# Java bytecode
+*.class
+*.jar
