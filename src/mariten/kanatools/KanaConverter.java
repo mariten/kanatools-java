@@ -11,8 +11,8 @@ public class KanaConverter
     public static final char OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA         = 'h';
     public static final char OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA         = 'K';
     public static final char OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA         = 'k';
-    public static final char OP_HANKAKU_NUMERIC_TO_ZENKAKU_NUMERIC           = 'N';
-    public static final char OP_ZENKAKU_NUMERIC_TO_HANKAKU_NUMERIC           = 'n';
+    public static final char OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER             = 'N';
+    public static final char OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER             = 'n';
     public static final char OP_HANKAKU_ALPHABET_TO_ZENKAKU_ALPHABET         = 'R';
     public static final char OP_ZENKAKU_ALPHABET_TO_HANKAKU_ALPHABET         = 'r';
     public static final char OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE               = 'S';
@@ -77,9 +77,11 @@ public class KanaConverter
                     break;
                 case OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA:
                     break;
-                case OP_HANKAKU_NUMERIC_TO_ZENKAKU_NUMERIC:
+                case OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER:
+                    current_char = convertHankakuNumberToZenkakuNumber(current_char);
                     break;
-                case OP_ZENKAKU_NUMERIC_TO_HANKAKU_NUMERIC:
+                case OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER:
+                    current_char = convertZenkakuNumberToHankakuNumber(current_char);
                     break;
                 case OP_HANKAKU_ALPHABET_TO_ZENKAKU_ALPHABET:
                     break;
@@ -102,6 +104,37 @@ public class KanaConverter
         return new_string.toString();
     }
     //}}}
+
+
+    // Numeric constants
+    protected static final char HANKAKU_NUMBER_FIRST = '0';
+    protected static final char HANKAKU_NUMBER_LAST  = '9';
+    protected static final char ZENKAKU_NUMBER_FIRST = '０';
+    protected static final char ZENKAKU_NUMBER_LAST  = '９';
+
+
+    //{{{ 'N': convertHankakuNumberToZenkakuNumber()
+    protected static char convertHankakuNumberToZenkakuNumber(char target)
+    {
+        if(target >= HANKAKU_NUMBER_FIRST && target <= HANKAKU_NUMBER_LAST) {
+            // Offset by difference in char-code position
+            return (char)(target + (ZENKAKU_NUMBER_FIRST - HANKAKU_NUMBER_FIRST));
+        } else {
+            return target;
+        }
+    }
+    //}}}
+
+
+    //{{{ 'n': convertZenkakuNumberToHankakuNumber()
+    protected static char convertZenkakuNumberToHankakuNumber(char target)
+    {
+        if(target >= ZENKAKU_NUMBER_FIRST && target <= ZENKAKU_NUMBER_LAST) {
+            // Offset by difference in char-code position
+            return (char)(target - (ZENKAKU_NUMBER_FIRST - HANKAKU_NUMBER_FIRST));
+        } else {
+            return target;
+        }
+    }
+    //}}}
 }
-
-
