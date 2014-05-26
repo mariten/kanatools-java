@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="kanatools-java" basedir="." default="compile">
+    <description>Utilities for working with Japanese text in Java</description>
+
+    <!-- Define relevant directories/targets -->
+    <property name="src_dir"         value="src" />
+    <property name="build_dir"       value="compiled" />
+    <property name="classes_dir"     value="${build_dir}/classes" />
+    <property name="jar_dir"         value="${build_dir}/jar" />
+    <property name="jar_name"        value="kanaconverter.jar" />
+
+    <!-- Define relevant paths -->
+    <path id="application" location="${jar_dir}/{$jar_name}" />
+
+
+    <!-- Clean all files produced by past build processes -->
+    <target name="clean">
+        <delete dir="${classes_dir}" />
+        <delete dir="${jar_dir}" />
+    </target>
+
+    <!-- Init build process -->
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build_dir}" />
+    </target>
+
+    <!-- Compile Java sources files -->
+    <target name="compile" depends="init">
+        <mkdir dir="${classes_dir}" />
+        <javac srcdir="${src_dir}" destdir="${classes_dir}" includeantruntime="false" />
+    </target>
+
+    <!-- Wrap compiled file(s) into JAR -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar_dir}" />
+        <jar destfile="${jar_dir}/${jar_name}" basedir="${classes_dir}" />
+    </target>
+
+</project>
