@@ -44,6 +44,34 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'S': testHankakuSpaceToZenkakuSpace()
+    @Test
+    public void testHankakuSpaceToZenkakuSpace()
+    {
+        this.assertConverted(KanaConverter.OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE,
+            "Little spaces　and big spaces",
+            "Little　spaces　and　big　spaces"
+        );
+    }
+    //}}}
+
+
+    //{{{ 's': testZenkakuSpaceToHankakuSpace()
+    @Test
+    public void testZenkakuSpaceToHankakuSpace()
+    {
+        this.assertConverted(KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE,
+            "Ｌｉｔｔｌｅ ｓｐａｃｅｓ　ａｎｄ ｂｉｇ　ｓｐａｃｅｓ",
+            "Ｌｉｔｔｌｅ ｓｐａｃｅｓ ａｎｄ ｂｉｇ ｓｐａｃｅｓ"
+        );
+
+        // Test that converted spaces are trimmed by the "trim" function
+        String trimmed_test = convert_tester.mbConvertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE, "utf8").trim();
+        assertEquals("テスト", trimmed_test);
+    }
+    //}}}
+
+
     //{{{ assertConverted()
     private void assertConverted(String conv_options, String str_to_convert, String expected_result)
     {

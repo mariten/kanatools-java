@@ -88,8 +88,10 @@ public class KanaConverter
                 case OP_ZENKAKU_ALPHABET_TO_HANKAKU_ALPHABET:
                     break;
                 case OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE:
+                    current_char = convertHankakuSpaceToZenkakuSpace(current_char);
                     break;
                 case OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE:
+                    current_char = convertZenkakuSpaceToHankakuSpace(current_char);
                     break;
                 case OP_COLLAPSE_HANKAKU_VOICE_MARKS:
                     // Collapse voiced characters (hankaku) to voiced-kana-chars (zenkaku).  Use with 'K' or 'H'
@@ -125,6 +127,10 @@ public class KanaConverter
     protected static final char ZENKAKU_NUMBER_FIRST = '０';
     protected static final char ZENKAKU_NUMBER_LAST  = '９';
 
+    // Other constants
+    protected static final char HANKAKU_SPACE = ' ';
+    protected static final char ZENKAKU_SPACE = '　';
+
 
     //{{{ 'N': convertHankakuNumberToZenkakuNumber()
     protected static char convertHankakuNumberToZenkakuNumber(char target)
@@ -145,6 +151,30 @@ public class KanaConverter
         if(target >= ZENKAKU_NUMBER_FIRST && target <= ZENKAKU_NUMBER_LAST) {
             // Offset by difference in char-code position
             return (char)(target - (ZENKAKU_NUMBER_FIRST - HANKAKU_NUMBER_FIRST));
+        } else {
+            return target;
+        }
+    }
+    //}}}
+
+
+    //{{{ 'S': convertHankakuSpaceToZenkakuSpace()
+    protected static char convertHankakuSpaceToZenkakuSpace(char target)
+    {
+        if(target == HANKAKU_SPACE) {
+            return ZENKAKU_SPACE;
+        } else {
+            return target;
+        }
+    }
+    //}}}
+
+
+    //{{{ 's': convertZenkakuSpaceToHankakuSpace()
+    protected static char convertZenkakuSpaceToHankakuSpace(char target)
+    {
+        if(target == ZENKAKU_SPACE) {
+            return HANKAKU_SPACE;
         } else {
             return target;
         }
