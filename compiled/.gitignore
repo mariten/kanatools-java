@@ -1,3 +1,4 @@
 # Java bytecode
 *.class
 *.jar
+test-report/
