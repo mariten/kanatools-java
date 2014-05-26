@@ -103,6 +103,19 @@ public class KanaConverter
 
         return new_string.toString();
     }
+
+    /**
+      * Same as "mbConvertKana()" above, but with second param as char
+      *
+      * @param  original_string  Input string to perform conversion on
+      * @param  conversion_op    One character indicating which type of conversion to perform
+      * @param  encoding         Character encoding of input string
+      * @return                  original_string with specified conversion performed
+      */
+    public String mbConvertKana(String original_string, char conversion_op, String encoding)
+    {
+        return mbConvertKana(original_string, String.valueOf(conversion_op), encoding);
+    }
     //}}}
 
 
