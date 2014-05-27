@@ -41,6 +41,30 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'R': testHankakuLetterToZenkakuLetter()
+    @Test
+    public void testHankakuLetterToZenkakuLetter()
+    {
+        this.assertConverted(KanaConverter.OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER,
+            " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+            " !\"#$%&'()*+,-./0123456789:;<=>?@ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ[\\]^_`ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ{|}~"
+        );
+    }
+    //}}}
+
+
+    //{{{ 'r': testZenkakuLetterToHankakuLetter()
+    @Test
+    public void testZenkakuLetterToHankakuLetter()
+    {
+        this.assertConverted(KanaConverter.OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER,
+            "　！”＃＄％＆’（）＊＋，−．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［￥］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝〜",
+            "　！”＃＄％＆’（）＊＋，−．／０１２３４５６７８９：；＜＝＞？＠ABCDEFGHIJKLMNOPQRSTUVWXYZ［￥］＾＿｀abcdefghijklmnopqrstuvwxyz｛｜｝〜"
+        );
+    }
+    //}}}
+
+
     //{{{ 'S': testHankakuSpaceToZenkakuSpace()
     @Test
     public void testHankakuSpaceToZenkakuSpace()
@@ -84,11 +108,15 @@ public class KanaConverterTest
     //{{{ assertConvertedUsingPHP()
     private void assertConvertedUsingPHP(String conv_options, String str_to_convert, String expected_result)
     {
+        // Use single quotes in PHP code, so "encode" single quotes in string input
+        // Break up input string and concatenate a single quote character using PHP syntax
+        String str_to_convert_for_php = str_to_convert.replace("'", "' . \"'\" . '");
+
         // Create shell command with each param as element of String array
         String[] command_for_php = new String[] {
             "php",
             "-r",
-            "echo(mb_convert_kana('" + str_to_convert + "', '" + conv_options + "', 'UTF-8'));"
+            "echo(mb_convert_kana('" + str_to_convert_for_php + "', '" + conv_options + "', 'UTF-8'));"
         };
 
         Process php_process = null;

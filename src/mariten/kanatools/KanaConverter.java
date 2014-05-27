@@ -13,8 +13,8 @@ public class KanaConverter
     public static final char OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA         = 'k';
     public static final char OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER             = 'N';
     public static final char OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER             = 'n';
-    public static final char OP_HANKAKU_ALPHABET_TO_ZENKAKU_ALPHABET         = 'R';
-    public static final char OP_ZENKAKU_ALPHABET_TO_HANKAKU_ALPHABET         = 'r';
+    public static final char OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER             = 'R';
+    public static final char OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER             = 'r';
     public static final char OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE               = 'S';
     public static final char OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE               = 's';
     public static final char OP_COLLAPSE_HANKAKU_VOICE_MARKS                 = 'V';
@@ -83,9 +83,11 @@ public class KanaConverter
                 case OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER:
                     current_char = convertZenkakuNumberToHankakuNumber(current_char);
                     break;
-                case OP_HANKAKU_ALPHABET_TO_ZENKAKU_ALPHABET:
+                case OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER:
+                    current_char = convertHankakuLetterToZenkakuLetter(current_char);
                     break;
-                case OP_ZENKAKU_ALPHABET_TO_HANKAKU_ALPHABET:
+                case OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER:
+                    current_char = convertZenkakuLetterToHankakuLetter(current_char);
                     break;
                 case OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE:
                     current_char = convertHankakuSpaceToZenkakuSpace(current_char);
@@ -127,6 +129,16 @@ public class KanaConverter
     protected static final char ZENKAKU_NUMBER_FIRST = '０';
     protected static final char ZENKAKU_NUMBER_LAST  = '９';
 
+    // Alphabetic constants
+    protected static final char HANKAKU_LETTER_UPPER_FIRST = 'A';
+    protected static final char HANKAKU_LETTER_UPPER_LAST  = 'Z';
+    protected static final char HANKAKU_LETTER_LOWER_FIRST = 'a';
+    protected static final char HANKAKU_LETTER_LOWER_LAST  = 'z';
+    protected static final char ZENKAKU_LETTER_UPPER_FIRST = 'Ａ';
+    protected static final char ZENKAKU_LETTER_UPPER_LAST  = 'Ｚ';
+    protected static final char ZENKAKU_LETTER_LOWER_FIRST = 'ａ';
+    protected static final char ZENKAKU_LETTER_LOWER_LAST  = 'ｚ';
+
     // Other constants
     protected static final char HANKAKU_SPACE = ' ';
     protected static final char ZENKAKU_SPACE = '　';
@@ -152,6 +164,42 @@ public class KanaConverter
             // Offset by difference in char-code position
             return (char)(target - (ZENKAKU_NUMBER_FIRST - HANKAKU_NUMBER_FIRST));
         } else {
+            return target;
+        }
+    }
+    //}}}
+
+
+    //{{{ 'R': convertHankakuLetterToZenkakuLetter()
+    protected static char convertHankakuLetterToZenkakuLetter(char target)
+    {
+        if(target >= HANKAKU_LETTER_LOWER_FIRST && target <= HANKAKU_LETTER_LOWER_LAST) {
+            // Offset by difference in lower-case char-code position
+            return (char)(target + (ZENKAKU_LETTER_LOWER_FIRST - HANKAKU_LETTER_LOWER_FIRST));
+        }
+        else if(target >= HANKAKU_LETTER_UPPER_FIRST && target <= HANKAKU_LETTER_UPPER_LAST) {
+            // Offset by difference in upper-case char-code position
+            return (char)(target + (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
+        }
+        else {
+            return target;
+        }
+    }
+    //}}}
+
+
+    //{{{ 'r': convertZenkakuLetterToHankakuLetter()
+    protected static char convertZenkakuLetterToHankakuLetter(char target)
+    {
+        if(target >= ZENKAKU_LETTER_LOWER_FIRST && target <= ZENKAKU_LETTER_LOWER_LAST) {
+            // Offset by difference in lower-case char-code position
+            return (char)(target - (ZENKAKU_LETTER_LOWER_FIRST - HANKAKU_LETTER_LOWER_FIRST));
+        }
+        else if(target >= ZENKAKU_LETTER_UPPER_FIRST && target <= ZENKAKU_LETTER_UPPER_LAST) {
+            // Offset by difference in upper-case char-code position
+            return (char)(target - (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
+        }
+        else {
             return target;
         }
     }
