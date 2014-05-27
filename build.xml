@@ -10,7 +10,7 @@
     <property name="build_dir"       value="compiled" />
     <property name="classes_dir"     value="${build_dir}/classes" />
     <property name="build_test_dir"  value="${build_dir}/test" />
-    <property name="report_dir"      value="${build_dir}/test-report" />
+    <property name="report_dir"      value="${build_dir}/report-junit" />
     <property name="jar_dir"         value="${build_dir}/jar" />
     <property name="jar_name"        value="kanatools.jar" />
 
