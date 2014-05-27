@@ -8,14 +8,11 @@ import static org.junit.Assert.*;
 
 public class KanaConverterTest
 {
-    private KanaConverter convert_tester = new KanaConverter();
-
-
     //{{{ testErrorCases()
     @Test
     public void testErrorCases()
     {
-        assertNull(convert_tester.mbConvertKana(null, "C", "utf8"));
+        assertNull(KanaConverter.mbConvertKana(null, "C", "utf8"));
     }
     //}}}
 
@@ -66,7 +63,7 @@ public class KanaConverterTest
         );
 
         // Test that converted spaces are trimmed by the "trim" function
-        String trimmed_test = convert_tester.mbConvertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE, "utf8").trim();
+        String trimmed_test = KanaConverter.mbConvertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE, "utf8").trim();
         assertEquals("テスト", trimmed_test);
     }
     //}}}
@@ -75,7 +72,7 @@ public class KanaConverterTest
     //{{{ assertConverted()
     private void assertConverted(String conv_options, String str_to_convert, String expected_result)
     {
-        assertEquals(expected_result, convert_tester.mbConvertKana(str_to_convert, conv_options, "utf8"));
+        assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_options, "utf8"));
         assertConvertedUsingPHP(conv_options, str_to_convert, expected_result);
     }
     private void assertConverted(char conv_option, String str_to_convert, String expected_result) {

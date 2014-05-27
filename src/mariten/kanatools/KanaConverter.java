@@ -30,7 +30,7 @@ public class KanaConverter
       * @param  encoding         Character encoding of input string
       * @return                  Content of "original_string" with specified conversions performed
       */
-    public String mbConvertKana(String original_string, String conversion_ops, String encoding)
+    public static String mbConvertKana(String original_string, String conversion_ops, String encoding)
     {
         // Ensure function received strings, not nulls
         if(original_string == null
@@ -114,7 +114,7 @@ public class KanaConverter
       * @param  encoding         Character encoding of input string
       * @return                  original_string with specified conversion performed
       */
-    public String mbConvertKana(String original_string, char conversion_op, String encoding)
+    public static String mbConvertKana(String original_string, char conversion_op, String encoding)
     {
         return mbConvertKana(original_string, String.valueOf(conversion_op), encoding);
     }
