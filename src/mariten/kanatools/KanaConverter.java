@@ -66,8 +66,10 @@ public class KanaConverter
                 case OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC:
                     break;
                 case OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA:
+                    current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
                     break;
                 case OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA:
+                    current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
                     break;
                 case OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA:
                     break;
@@ -139,9 +141,43 @@ public class KanaConverter
     protected static final char ZENKAKU_LETTER_LOWER_FIRST = 'ａ';
     protected static final char ZENKAKU_LETTER_LOWER_LAST  = 'ｚ';
 
+    // Hiragana constants
+    public static final char HIRAGANA_FIRST = 'ぁ';
+    public static final char HIRAGANA_LAST  = 'ん';
+
+    // Katakana constants
+    public static final char ZENKAKU_KATAKANA_FIRST = 'ァ';
+    public static final char ZENKAKU_KATAKANA_LAST  = 'ン';
+
     // Other constants
     protected static final char HANKAKU_SPACE = ' ';
     protected static final char ZENKAKU_SPACE = '　';
+
+
+    //{{{ 'C': convertZenkakuHiraganaToZenkakuKatakana()
+    protected static char convertZenkakuHiraganaToZenkakuKatakana(char target)
+    {
+        if(target >= HIRAGANA_FIRST && target <= HIRAGANA_LAST) {
+            // Offset by difference in hira/kata kana char-code position
+            return (char)(target + (ZENKAKU_KATAKANA_FIRST - HIRAGANA_FIRST));
+        } else {
+            return target;
+        }
+    }
+    //}}}
+
+
+    //{{{ 'c': convertZenkakuKatakanaToZenkakuHiragana()
+    protected static char convertZenkakuKatakanaToZenkakuHiragana(char target)
+    {
+        if(target >= ZENKAKU_KATAKANA_FIRST && target <= ZENKAKU_KATAKANA_LAST) {
+            // Offset by difference in hira/kata kana char-code position
+            return (char)(target - (ZENKAKU_KATAKANA_FIRST - HIRAGANA_FIRST));
+        } else {
+            return target;
+        }
+    }
+    //}}}
 
 
     //{{{ 'N': convertHankakuNumberToZenkakuNumber()

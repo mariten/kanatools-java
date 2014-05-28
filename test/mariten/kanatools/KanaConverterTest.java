@@ -17,6 +17,30 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'C': testZenkakuHiraganaToZenkakuKatakana()
+    @Test
+    public void testZenkakuHiraganaToZenkakuKatakana()
+    {
+        this.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA,
+            "〶 | ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをん | ゔゕゖゝゞ",
+            "〶 | ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲン | ゔゕゖゝゞ"
+        );
+    }
+    //}}}
+
+
+    //{{{ 'c': testZenkakuKatakanaToZenkakuHiragana()
+    @Test
+    public void testZenkakuKatakanaToZenkakuHiragana()
+    {
+        this.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA,
+            "んゔゕゖゝゞ | ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴ | ヵヶヷヸヹヺ・ーヽヾ",
+            "んゔゕゖゝゞ | ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんヴ | ヵヶヷヸヹヺ・ーヽヾ"
+        );
+    }
+    //}}}
+
+
     //{{{ 'N': testHankakuNumberToZenkakuNumber()
     @Test
     public void testHankakuNumberToZenkakuNumber()
