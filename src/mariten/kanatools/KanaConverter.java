@@ -53,7 +53,7 @@ public class KanaConverter
             char this_char = original_string.charAt(i);
             char next_char = 0;
             if(i < (char_count - 1)) {
-                next_char = original_string.charAt(i);
+                next_char = original_string.charAt(i + 1);
             }
 
             char current_char = this_char;
