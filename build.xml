@@ -39,12 +39,12 @@
     <!-- Compile Java sources files -->
     <target name="compile" depends="init">
         <mkdir dir="${classes_dir}" />
-        <javac srcdir="${src_dir}" destdir="${classes_dir}" classpathref="classpath" includeantruntime="false" />
+        <javac srcdir="${src_dir}" destdir="${classes_dir}" debug="on" classpathref="classpath" includeantruntime="false" />
     </target>
 
     <target name="compile_tests" depends="compile">
         <mkdir dir="${build_test_dir}" />
-        <javac srcdir="${test_dir}" destdir="${build_test_dir}" includeantruntime="false">
+        <javac srcdir="${test_dir}" destdir="${build_test_dir}" debug="on" includeantruntime="false">
             <classpath>
                 <path location="${classes_dir}" />
                 <path refid="classpath" />
