@@ -17,6 +17,30 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'A': testHankakuAlphanumericToZenkakuAlphanumeric()
+    @Test
+    public void testHankakuAlphanumericToZenkakuAlphanumeric()
+    {
+        this.assertConverted(KanaConverter.OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC,
+            " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+            " ！\"＃＄％＆'（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［\\］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝~"
+        );
+    }
+    //}}}
+
+
+    //{{{ 'a': testZenkakuAlphanumericToHankakuAlphanumeric()
+    @Test
+    public void testZenkakuAlphanumericToHankakuAlphanumeric()
+    {
+        this.assertConverted(KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC,
+            " ！”＃＄％＆’（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～",
+            " !”#$%&’()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[＼]^_`abcdefghijklmnopqrstuvwxyz{|}～"
+        );
+    }
+    //}}}
+
+
     //{{{ 'C': testZenkakuHiraganaToZenkakuKatakana()
     @Test
     public void testZenkakuHiraganaToZenkakuKatakana()

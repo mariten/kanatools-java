@@ -62,8 +62,10 @@ public class KanaConverter
 
                 switch(current_flag) {
                 case OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC:
+                    current_char = convertHankakuAlphanumericToZenkakuAlphanumeric(current_char);
                     break;
                 case OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC:
+                    current_char = convertZenkakuAlphanumericToHankakuAlphanumeric(current_char);
                     break;
                 case OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA:
                     current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
@@ -141,6 +143,12 @@ public class KanaConverter
     protected static final char ZENKAKU_LETTER_LOWER_FIRST = 'ａ';
     protected static final char ZENKAKU_LETTER_LOWER_LAST  = 'ｚ';
 
+    // Punctuation constants
+    public static final char HANKAKU_ALPHANUMERIC_FIRST = '!';
+    public static final char HANKAKU_ALPHANUMERIC_LAST  = '}';
+    public static final char ZENKAKU_ALPHANUMERIC_FIRST = '！';
+    public static final char ZENKAKU_ALPHANUMERIC_LAST  = '｝';
+
     // Hiragana constants
     public static final char HIRAGANA_FIRST = 'ぁ';
     public static final char HIRAGANA_LAST  = 'ん';
@@ -152,6 +160,44 @@ public class KanaConverter
     // Other constants
     protected static final char HANKAKU_SPACE = ' ';
     protected static final char ZENKAKU_SPACE = '　';
+
+
+    //{{{ 'A': convertHankakuAlphanumericToZenkakuAlphanumeric()
+    protected static char convertHankakuAlphanumericToZenkakuAlphanumeric(char target)
+    {
+        if(target >= HANKAKU_ALPHANUMERIC_FIRST && target <= HANKAKU_ALPHANUMERIC_LAST) {
+            switch(target) {
+            case '\'':
+            case '\"':
+            case '\\':
+                break;
+            default:
+                return (char)(target + (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
+            }
+        }
+
+        return target;
+    }
+    //}}}
+
+
+    //{{{ 'a': convertZenkakuAlphanumericToHankakuAlphanumeric()
+    protected static char convertZenkakuAlphanumericToHankakuAlphanumeric(char target)
+    {
+        if(target >= ZENKAKU_ALPHANUMERIC_FIRST && target <= ZENKAKU_ALPHANUMERIC_LAST) {
+            switch(target) {
+            case '’':
+            case '”':
+            case '＼':
+                break;
+            default:
+                return (char)(target - (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
+            }
+        }
+
+        return target;
+    }
+    //}}}
 
 
     //{{{ 'C': convertZenkakuHiraganaToZenkakuKatakana()
