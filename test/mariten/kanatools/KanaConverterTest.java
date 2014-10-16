@@ -12,7 +12,7 @@ public class KanaConverterTest
     @Test
     public void testErrorCases()
     {
-        assertNull(KanaConverter.mbConvertKana(null, "C"));
+        assertNull(KanaConverter.mbConvertKana(null, KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA));
     }
     //}}}
 
@@ -142,13 +142,14 @@ public class KanaConverterTest
 
 
     //{{{ assertConverted()
-    private void assertConverted(String conv_options, String str_to_convert, String expected_result)
+    private void assertConverted(int[] conv_options, String str_to_convert, String expected_result)
     {
         assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_options));
-        assertConvertedUsingPHP(conv_options, str_to_convert, expected_result);
+        //assertConvertedUsingPHP(conv_options, str_to_convert, expected_result);
     }
-    private void assertConverted(char conv_option, String str_to_convert, String expected_result) {
-        assertConverted(String.valueOf(conv_option), str_to_convert, expected_result);
+    private void assertConverted(int conv_option, String str_to_convert, String expected_result) {
+        int[] conv_options = new int[] {conv_option};
+        this.assertConverted(conv_options, str_to_convert, expected_result);
     }
     //}}}
 

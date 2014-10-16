@@ -3,21 +3,23 @@ package mariten.kanatools;
 public class KanaConverter
 {
     // Conversion Operations Types
-    public static final char OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC = 'A';
-    public static final char OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC = 'a';
-    public static final char OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA         = 'C';
-    public static final char OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA         = 'c';
-    public static final char OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA         = 'H';
-    public static final char OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA         = 'h';
-    public static final char OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA         = 'K';
-    public static final char OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA         = 'k';
-    public static final char OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER             = 'N';
-    public static final char OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER             = 'n';
-    public static final char OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER             = 'R';
-    public static final char OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER             = 'r';
-    public static final char OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE               = 'S';
-    public static final char OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE               = 's';
-    public static final char OP_COLLAPSE_HANKAKU_VOICE_MARKS                 = 'V';
+    //// Matched numeric values to originals in PHP's source code
+    //// https://github.com/php/php-src/blob/a84e5dc37dc0ff8c313164d9db141d3d9f2b2730/ext/mbstring/mbstring.c#L3434
+    public static final int OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC  = 0x00000001;
+    public static final int OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC  = 0x00000010;
+    public static final int OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA          = 0x00010000;
+    public static final int OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA          = 0x00020000;
+    public static final int OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA          = 0x00000200;
+    public static final int OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA          = 0x00002000;
+    public static final int OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA          = 0x00000100;
+    public static final int OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA          = 0x00001000;
+    public static final int OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER              = 0x00000004;
+    public static final int OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER              = 0x00000040;
+    public static final int OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER              = 0x00000002;
+    public static final int OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER              = 0x00000020;
+    public static final int OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE                = 0x00000008;
+    public static final int OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE                = 0x00000080;
+    public static final int OP_COLLAPSE_HANKAKU_VOICE_MARKS                  = 0x00000800;
 
 
     //{{{ mbConvertKana()
@@ -26,10 +28,10 @@ public class KanaConverter
       * @details http://www.php.net/manual/en/function.mb-convert-kana.php
       *
       * @param  original_string  Input string to perform conversion on
-      * @param  conversion_ops   One or more characters indicating which type of conversion to perform
+      * @param  conversion_ops   Array indicating which type of conversion to perform
       * @return                  Content of "original_string" with specified conversions performed
       */
-    public static String mbConvertKana(String original_string, String conversion_ops)
+    public static String mbConvertKana(String original_string, int[] conversion_ops)
     {
         // Ensure function received strings, not nulls
         if(original_string == null
@@ -37,7 +39,7 @@ public class KanaConverter
             return null;
         }
 
-        int flag_count = conversion_ops.length();
+        int flag_count = conversion_ops.length;
         if(flag_count < 1) {
             // Return original if no conversion requested
             return original_string;
@@ -56,7 +58,7 @@ public class KanaConverter
 
             char current_char = this_char;
             for(int j = 0; j < flag_count; j++) {
-                char current_flag = conversion_ops.charAt(j);
+                int current_flag = conversion_ops[j];
 
                 switch(current_flag) {
                 case OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC:
@@ -111,15 +113,16 @@ public class KanaConverter
     }
 
     /**
-      * Same as "mbConvertKana()" above, but with second param as char
+      * Same as "mbConvertKana()" above, but with second param as single int
       *
       * @param  original_string  Input string to perform conversion on
-      * @param  conversion_op    One character indicating which type of conversion to perform
+      * @param  conversion_op    One integer indicating which type of conversion to perform
       * @return                  original_string with specified conversion performed
       */
-    public static String mbConvertKana(String original_string, char conversion_op)
+    public static String mbConvertKana(String original_string, int conversion_op)
     {
-        return mbConvertKana(original_string, String.valueOf(conversion_op));
+        int[] conversion_ops = new int[] {conversion_op};
+        return mbConvertKana(original_string, conversion_ops);
     }
     //}}}
 
