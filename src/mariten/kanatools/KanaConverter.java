@@ -27,15 +27,13 @@ public class KanaConverter
       *
       * @param  original_string  Input string to perform conversion on
       * @param  conversion_ops   One or more characters indicating which type of conversion to perform
-      * @param  encoding         Character encoding of input string
       * @return                  Content of "original_string" with specified conversions performed
       */
-    public static String mbConvertKana(String original_string, String conversion_ops, String encoding)
+    public static String mbConvertKana(String original_string, String conversion_ops)
     {
         // Ensure function received strings, not nulls
         if(original_string == null
-        || conversion_ops == null
-        || encoding == null) {
+        || conversion_ops == null) {
             return null;
         }
 
@@ -117,12 +115,11 @@ public class KanaConverter
       *
       * @param  original_string  Input string to perform conversion on
       * @param  conversion_op    One character indicating which type of conversion to perform
-      * @param  encoding         Character encoding of input string
       * @return                  original_string with specified conversion performed
       */
-    public static String mbConvertKana(String original_string, char conversion_op, String encoding)
+    public static String mbConvertKana(String original_string, char conversion_op)
     {
-        return mbConvertKana(original_string, String.valueOf(conversion_op), encoding);
+        return mbConvertKana(original_string, String.valueOf(conversion_op));
     }
     //}}}
 

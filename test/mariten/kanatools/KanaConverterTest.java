@@ -12,7 +12,7 @@ public class KanaConverterTest
     @Test
     public void testErrorCases()
     {
-        assertNull(KanaConverter.mbConvertKana(null, "C", "utf8"));
+        assertNull(KanaConverter.mbConvertKana(null, "C"));
     }
     //}}}
 
@@ -135,7 +135,7 @@ public class KanaConverterTest
         );
 
         // Test that converted spaces are trimmed by the "trim" function
-        String trimmed_test = KanaConverter.mbConvertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE, "utf8").trim();
+        String trimmed_test = KanaConverter.mbConvertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE).trim();
         assertEquals("テスト", trimmed_test);
     }
     //}}}
@@ -144,7 +144,7 @@ public class KanaConverterTest
     //{{{ assertConverted()
     private void assertConverted(String conv_options, String str_to_convert, String expected_result)
     {
-        assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_options, "utf8"));
+        assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_options));
         assertConvertedUsingPHP(conv_options, str_to_convert, expected_result);
     }
     private void assertConverted(char conv_option, String str_to_convert, String expected_result) {
