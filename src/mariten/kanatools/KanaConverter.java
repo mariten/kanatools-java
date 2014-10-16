@@ -53,19 +53,18 @@ public class KanaConverter
       * @details http://www.php.net/manual/en/function.mb-convert-kana.php
       *
       * @param  original_string  Input string to perform conversion on
-      * @param  conversion_ops   Array indicating which type of conversion to perform
+      * @param  conversion_ops   Flag-based integer indicating which type of conversions to perform
       * @return                  Content of "original_string" with specified conversions performed
       */
-    public static String mbConvertKana(String original_string, int[] conversion_ops)
+    public static String mbConvertKana(String original_string, int conversion_ops)
     {
-        // Ensure function received strings, not nulls
+        // Ensure function received non-empty input string
         if(original_string == null
-        || conversion_ops == null) {
+        || original_string.equals("")) {
             return null;
         }
 
-        int flag_count = conversion_ops.length;
-        if(flag_count < 1) {
+        if(conversion_ops == 0) {
             // Return original if no conversion requested
             return original_string;
         }
@@ -82,52 +81,61 @@ public class KanaConverter
             }
 
             char current_char = this_char;
-            for(int j = 0; j < flag_count; j++) {
-                int current_flag = conversion_ops[j];
 
-                switch(current_flag) {
-                case OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC:
-                    current_char = convertHankakuAlphanumericToZenkakuAlphanumeric(current_char);
-                    break;
-                case OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC:
-                    current_char = convertZenkakuAlphanumericToHankakuAlphanumeric(current_char);
-                    break;
-                case OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA:
-                    current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
-                    break;
-                case OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA:
-                    current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
-                    break;
-                case OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA:
-                    break;
-                case OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA:
-                    break;
-                case OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA:
-                    break;
-                case OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA:
-                    break;
-                case OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER:
-                    current_char = convertHankakuNumberToZenkakuNumber(current_char);
-                    break;
-                case OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER:
-                    current_char = convertZenkakuNumberToHankakuNumber(current_char);
-                    break;
-                case OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER:
-                    current_char = convertHankakuLetterToZenkakuLetter(current_char);
-                    break;
-                case OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER:
-                    current_char = convertZenkakuLetterToHankakuLetter(current_char);
-                    break;
-                case OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE:
-                    current_char = convertHankakuSpaceToZenkakuSpace(current_char);
-                    break;
-                case OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE:
-                    current_char = convertZenkakuSpaceToHankakuSpace(current_char);
-                    break;
-                case OP_COLLAPSE_HANKAKU_VOICE_MARKS:
-                    // Collapse voiced characters (hankaku) to voiced-kana-chars (zenkaku).  Use with 'K' or 'H'
-                    break;
-                }
+            if((conversion_ops & OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC)  != 0) {
+                current_char = convertHankakuAlphanumericToZenkakuAlphanumeric(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC)  != 0) {
+                current_char = convertZenkakuAlphanumericToHankakuAlphanumeric(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0) {
+                current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
+                current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
+            }
+
+            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
+            }
+
+            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0) {
+            }
+
+            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)          != 0) {
+            }
+
+            if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
+            }
+
+            if((conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
+                current_char = convertHankakuNumberToZenkakuNumber(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER)              != 0) {
+                current_char = convertZenkakuNumberToHankakuNumber(current_char);
+            }
+
+            if((conversion_ops & OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER)              != 0) {
+                current_char = convertHankakuLetterToZenkakuLetter(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER)              != 0) {
+                current_char = convertZenkakuLetterToHankakuLetter(current_char);
+            }
+
+            if((conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
+                current_char = convertHankakuSpaceToZenkakuSpace(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE)                != 0) {
+                current_char = convertZenkakuSpaceToHankakuSpace(current_char);
+            }
+
+            if((conversion_ops & OP_COLLAPSE_HANKAKU_VOICE_MARKS)                  != 0) {
+                // Collapse voiced characters (hankaku) to voiced-kana-chars (zenkaku).  Use with 'K' or 'H'
             }
 
             new_string.append(current_char);
@@ -138,20 +146,15 @@ public class KanaConverter
     }
 
     /**
-      * Same as "mbConvertKana()" above, but with second param as single int
+      * Same as "mbConvertKana()" above, but takes the conversion ops as a string (PHP-style)
       *
-      * @param  original_string  Input string to perform conversion on
-      * @param  conversion_op    One integer indicating which type of conversion to perform
-      * @return                  original_string with specified conversion performed
+      * @param  original_string         Input string to perform conversion on
+      * @param  conversion_op_string    PHP mb_convert_kana style string specifying desired conversions
+      * @return                         original_string with specified conversion performed
       */
-    public static String mbConvertKana(String original_string, int conversion_op)
-    {
-        int[] conversion_ops = new int[] {conversion_op};
-        return mbConvertKana(original_string, conversion_ops);
-    }
     public static String mbConvertKana(String original_string, String conversion_ops_string)
     {
-        int[] conversion_ops = createOpsArrayFromString(conversion_ops_string);
+        int conversion_ops = createOpsArrayFromString(conversion_ops_string);
         return mbConvertKana(original_string, conversion_ops);
     }
     //}}}
@@ -343,17 +346,17 @@ public class KanaConverter
 
 
     //{{{ createOpsArrayFromString()
-    public static int[] createOpsArrayFromString(String php_style_options_string)
+    public static int createOpsArrayFromString(String php_style_options_string)
     {
         int char_op_count = php_style_options_string.length();
-        int[] conversion_ops = new int[char_op_count];
+        int conversion_op_flags = 0;
         for(int i = 0; i < char_op_count; i++) {
             char php_style_op_code = php_style_options_string.charAt(i);
             if(LETTER_OP_CODE_LOOKUP.containsKey(php_style_op_code)) {
-                conversion_ops[i] = LETTER_OP_CODE_LOOKUP.get(php_style_op_code);
+                conversion_op_flags |= LETTER_OP_CODE_LOOKUP.get(php_style_op_code);
             }
         }
-        return conversion_ops;
+        return conversion_op_flags;
     }
     //}}}
 }

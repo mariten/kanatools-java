@@ -23,14 +23,21 @@ public class KanaConverterTest
     @Test
     public void testOpFormats()
     {
-        this.assertConverted(new int[]{
-            KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA,
-            KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS,
-            KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC
-        }, "Ａ", "A");
+        // Single op (flag-style)
         this.assertConverted(KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC, "Ａ", "A");
-        this.assertConverted("a", "Ａ", "A");    // PHP mb_convert_kana style
-        this.assertConverted("KVa", "Ａ", "A");  // PHP mb_convert_kana style
+
+        // Multiple ops (flag-style)
+        int flag_ops = 0;
+        flag_ops |= KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC;
+        flag_ops |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
+        flag_ops |= KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS;
+        this.assertConverted(flag_ops, "Ａ", "A");
+
+        // Single op (PHP mb_convert_kana style)
+        this.assertConverted("a", "Ａ", "A");
+
+        // Multiple ops (PHP mb_convert_kana style)
+        this.assertConverted("KVa", "Ａ", "A");
     }
     //}}}
 
@@ -160,38 +167,34 @@ public class KanaConverterTest
 
 
     //{{{ assertConverted()
-    private void assertConverted(int[] conv_options, String str_to_convert, String expected_result)
+    private void assertConverted(int conv_flags, String str_to_convert, String expected_result)
     {
-        assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_options));
-        assertConvertedUsingPHP(conv_options, str_to_convert, expected_result);
+        assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_flags));
+        assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
     }
-    private void assertConverted(int conv_option, String str_to_convert, String expected_result) {
-        int[] conv_options = new int[] {conv_option};
-        this.assertConverted(conv_options, str_to_convert, expected_result);
-    }
-    private void assertConverted(String conv_options_string, String str_to_convert, String expected_result)
+    private void assertConverted(String conv_flags_string, String str_to_convert, String expected_result)
     {
-        int[] conv_options = KanaConverter.createOpsArrayFromString(conv_options_string);
-        this.assertConverted(conv_options, str_to_convert, expected_result);
+        int conv_flags = KanaConverter.createOpsArrayFromString(conv_flags_string);
+        this.assertConverted(conv_flags, str_to_convert, expected_result);
     }
     //}}}
 
 
     //{{{ assertConvertedUsingPHP()
-    private void assertConvertedUsingPHP(int[] conv_options, String str_to_convert, String expected_result)
+    private void assertConvertedUsingPHP(int conv_flags, String str_to_convert, String expected_result)
     {
         // Use single quotes in PHP code, so "encode" single quotes in string input
         // Break up input string and concatenate a single quote character using PHP syntax
         String str_to_convert_for_php = str_to_convert.replace("'", "' . \"'\" . '");
 
         // Create PHP string indicating conversion operations
-        String conv_options_for_php = makeOperationStringForPHP(conv_options);
+        String conv_ops_for_php = makeOperationStringForPHP(conv_flags);
 
         // Create shell command with each param as element of String array
         String[] command_for_php = new String[] {
             "php",
             "-r",
-            "echo(mb_convert_kana('" + str_to_convert_for_php + "', '" + conv_options_for_php + "', 'UTF-8'));"
+            "echo(mb_convert_kana('" + str_to_convert_for_php + "', '" + conv_ops_for_php + "', 'UTF-8'));"
         };
 
         Process php_process = null;
@@ -216,22 +219,18 @@ public class KanaConverterTest
 
 
     //{{{ makeOperationStringForPHP()
-    private String makeOperationStringForPHP(int[] conv_options)
+    private String makeOperationStringForPHP(int conv_flags)
     {
-        int op_count = conv_options.length;
-        StringBuilder php_conv_options = new StringBuilder();
-        for(int i = 0; i < op_count; i++) {
-            int op = conv_options[i];
-            if(KanaConverter.LETTER_OP_CODE_LOOKUP.containsValue(op)) {
-                for(Entry<Character, Integer> op_entry : KanaConverter.LETTER_OP_CODE_LOOKUP.entrySet()) {
-                    if(op == op_entry.getValue()) {
-                        php_conv_options.append(op_entry.getKey());
-                    }
-                }
+        StringBuilder php_conv_flags = new StringBuilder();
+        for(Entry<Character, Integer> op_map_item : KanaConverter.LETTER_OP_CODE_LOOKUP.entrySet()) {
+            char op_char = op_map_item.getKey();
+            int  op_flag = op_map_item.getValue();
+            if((conv_flags & op_flag) != 0) {
+                php_conv_flags.append(op_char);
             }
         }
 
-        return php_conv_options.toString();
+        return php_conv_flags.toString();
     }
     //}}}
 }
