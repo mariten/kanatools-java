@@ -2,6 +2,8 @@ package mariten.kanatools;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import mariten.kanatools.KanaConverter;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,6 +15,22 @@ public class KanaConverterTest
     public void testErrorCases()
     {
         assertNull(KanaConverter.mbConvertKana(null, KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA));
+    }
+    //}}}
+
+
+    //{{{ testOpFormats()
+    @Test
+    public void testOpFormats()
+    {
+        this.assertConverted(new int[]{
+            KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA,
+            KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS,
+            KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC
+        }, "Ａ", "A");
+        this.assertConverted(KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC, "Ａ", "A");
+        this.assertConverted("a", "Ａ", "A");    // PHP mb_convert_kana style
+        this.assertConverted("KVa", "Ａ", "A");  // PHP mb_convert_kana style
     }
     //}}}
 
@@ -145,27 +163,35 @@ public class KanaConverterTest
     private void assertConverted(int[] conv_options, String str_to_convert, String expected_result)
     {
         assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_options));
-        //assertConvertedUsingPHP(conv_options, str_to_convert, expected_result);
+        assertConvertedUsingPHP(conv_options, str_to_convert, expected_result);
     }
     private void assertConverted(int conv_option, String str_to_convert, String expected_result) {
         int[] conv_options = new int[] {conv_option};
+        this.assertConverted(conv_options, str_to_convert, expected_result);
+    }
+    private void assertConverted(String conv_options_string, String str_to_convert, String expected_result)
+    {
+        int[] conv_options = KanaConverter.createOpsArrayFromString(conv_options_string);
         this.assertConverted(conv_options, str_to_convert, expected_result);
     }
     //}}}
 
 
     //{{{ assertConvertedUsingPHP()
-    private void assertConvertedUsingPHP(String conv_options, String str_to_convert, String expected_result)
+    private void assertConvertedUsingPHP(int[] conv_options, String str_to_convert, String expected_result)
     {
         // Use single quotes in PHP code, so "encode" single quotes in string input
         // Break up input string and concatenate a single quote character using PHP syntax
         String str_to_convert_for_php = str_to_convert.replace("'", "' . \"'\" . '");
 
+        // Create PHP string indicating conversion operations
+        String conv_options_for_php = makeOperationStringForPHP(conv_options);
+
         // Create shell command with each param as element of String array
         String[] command_for_php = new String[] {
             "php",
             "-r",
-            "echo(mb_convert_kana('" + str_to_convert_for_php + "', '" + conv_options + "', 'UTF-8'));"
+            "echo(mb_convert_kana('" + str_to_convert_for_php + "', '" + conv_options_for_php + "', 'UTF-8'));"
         };
 
         Process php_process = null;
@@ -185,6 +211,27 @@ public class KanaConverterTest
 
         // Check results
         assertEquals(expected_result, php_result);
+    }
+    //}}}
+
+
+    //{{{ makeOperationStringForPHP()
+    private String makeOperationStringForPHP(int[] conv_options)
+    {
+        int op_count = conv_options.length;
+        StringBuilder php_conv_options = new StringBuilder();
+        for(int i = 0; i < op_count; i++) {
+            int op = conv_options[i];
+            if(KanaConverter.LETTER_OP_CODE_LOOKUP.containsValue(op)) {
+                for(Entry<Character, Integer> op_entry : KanaConverter.LETTER_OP_CODE_LOOKUP.entrySet()) {
+                    if(op == op_entry.getValue()) {
+                        php_conv_options.append(op_entry.getKey());
+                    }
+                }
+            }
+        }
+
+        return php_conv_options.toString();
     }
     //}}}
 }

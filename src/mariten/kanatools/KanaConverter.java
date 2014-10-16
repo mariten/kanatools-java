@@ -1,5 +1,8 @@
 package mariten.kanatools;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class KanaConverter
 {
     // Conversion Operations Types
@@ -20,6 +23,28 @@ public class KanaConverter
     public static final int OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE                = 0x00000008;
     public static final int OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE                = 0x00000080;
     public static final int OP_COLLAPSE_HANKAKU_VOICE_MARKS                  = 0x00000800;
+
+    //// Maintain backwards compatibility (based on mb_convert_kana's "$option" parameter from PHP)
+    //// Details: http://php.net/manual/en/function.mb-convert-kana.php
+    public static final Map<Character, Integer> LETTER_OP_CODE_LOOKUP;
+    static {
+        LETTER_OP_CODE_LOOKUP = new HashMap<Character, Integer>();
+        LETTER_OP_CODE_LOOKUP.put('A', OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC);
+        LETTER_OP_CODE_LOOKUP.put('a', OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC);
+        LETTER_OP_CODE_LOOKUP.put('C', OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
+        LETTER_OP_CODE_LOOKUP.put('c', OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA);
+        LETTER_OP_CODE_LOOKUP.put('H', OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA);
+        LETTER_OP_CODE_LOOKUP.put('h', OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA);
+        LETTER_OP_CODE_LOOKUP.put('K', OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA);
+        LETTER_OP_CODE_LOOKUP.put('k', OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA);
+        LETTER_OP_CODE_LOOKUP.put('N', OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER);
+        LETTER_OP_CODE_LOOKUP.put('n', OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER);
+        LETTER_OP_CODE_LOOKUP.put('R', OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER);
+        LETTER_OP_CODE_LOOKUP.put('r', OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER);
+        LETTER_OP_CODE_LOOKUP.put('S', OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE);
+        LETTER_OP_CODE_LOOKUP.put('s', OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE);
+        LETTER_OP_CODE_LOOKUP.put('V', OP_COLLAPSE_HANKAKU_VOICE_MARKS);
+    }
 
 
     //{{{ mbConvertKana()
@@ -122,6 +147,11 @@ public class KanaConverter
     public static String mbConvertKana(String original_string, int conversion_op)
     {
         int[] conversion_ops = new int[] {conversion_op};
+        return mbConvertKana(original_string, conversion_ops);
+    }
+    public static String mbConvertKana(String original_string, String conversion_ops_string)
+    {
+        int[] conversion_ops = createOpsArrayFromString(conversion_ops_string);
         return mbConvertKana(original_string, conversion_ops);
     }
     //}}}
@@ -308,6 +338,22 @@ public class KanaConverter
         } else {
             return target;
         }
+    }
+    //}}}
+
+
+    //{{{ createOpsArrayFromString()
+    public static int[] createOpsArrayFromString(String php_style_options_string)
+    {
+        int char_op_count = php_style_options_string.length();
+        int[] conversion_ops = new int[char_op_count];
+        for(int i = 0; i < char_op_count; i++) {
+            char php_style_op_code = php_style_options_string.charAt(i);
+            if(LETTER_OP_CODE_LOOKUP.containsKey(php_style_op_code)) {
+                conversion_ops[i] = LETTER_OP_CODE_LOOKUP.get(php_style_op_code);
+            }
+        }
+        return conversion_ops;
     }
     //}}}
 }
