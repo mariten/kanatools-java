@@ -90,6 +90,36 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'K': testHankakuKatakanaToZenkakuKatakana()
+    @Test
+    public void testHankakuKatakanaToZenkakuKatakana()
+    {
+        this.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA,
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
+            "～'。「」、・ァィゥェォャュョッーアイウエオカキクケコカ゛キ゛ク゛ケ゛コ゛サシスセソサ゛シ゛ス゛セ゛ソ゛タチツテトタ゛チ゛ツ゛テ゛ト゛ナニヌネノハヒフヘホハ゛ヒ゛フ゛ヘ゛ホ゛ハ゜ヒ゜フ゜ヘ゜ホ゜マミムメモヤユヨラリルレロワヲン゛゜ﾡ"
+        );
+    }
+    //}}}
+
+
+    //{{{ 'KV': testHankakuKatakanaToZenkakuKatakanaWithCollapse()
+    @Test
+    public void testHankakuKatakanaToZenkakuKatakanaWithCollapse()
+    {
+        int op_flags = KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA | KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS;
+        this.assertConverted(op_flags,
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
+            "～'。「」、・ァィゥェォャュョッーアイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモヤユヨラリルレロワヲン゛゜ﾡ"
+        );
+
+        this.assertConverted(op_flags,
+            "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-",
+            "Aソザザ゛ジスパパ゜ヒ1-"
+        );
+    }
+    //}}}
+
+
     //{{{ 'N': testHankakuNumberToZenkakuNumber()
     @Test
     public void testHankakuNumberToZenkakuNumber()
