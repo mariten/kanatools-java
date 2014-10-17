@@ -106,8 +106,10 @@ public class KanaConverter
                 current_char = convertHankakuNumberToZenkakuNumber(current_char);
             }
 
-            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)          != 0) {
+            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)          != 0
+            || (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
                 char collapsed_char_for_check = current_char;
+                boolean performed_hankaku_conversion = false;
                 if(do_collapse_on_hankaku_diacritic) {
                     // Check if current character requires the collapsing of a diacritic mark
                     collapsed_char_for_check = convertDiacriticHankakuKanaToZenkaku(current_char, next_char);
@@ -116,6 +118,7 @@ public class KanaConverter
                 if(collapsed_char_for_check != current_char) {
                     // Use collapsed result
                     current_char = collapsed_char_for_check;
+                    performed_hankaku_conversion = true;
 
                     // Do not include next character in final result string because
                     // it is a hankaku-only diacritic mark that isn't needed after conversion to zenkaku
@@ -123,11 +126,17 @@ public class KanaConverter
                 }
                 else {
                     // Use result from hankaku-kana unvoiced mapping
-                    current_char = convertUnvoicedHankakuKanaToZenkaku(current_char);
+                    char converted_current_char = convertUnvoicedHankakuKanaToZenkaku(current_char);
+                    if(converted_current_char != current_char) {
+                        current_char = converted_current_char;
+                        performed_hankaku_conversion = true;
+                    }
                 }
-            }
 
-            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
+                if(performed_hankaku_conversion && (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA) != 0) {
+                    // If request is for zenkaku hiragana and not katakana, perform additional kata->hira conversion
+                    current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
+                }
             }
 
             if((conversion_ops & OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC)  != 0) {

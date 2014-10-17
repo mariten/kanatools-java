@@ -90,6 +90,36 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'H': testHankakuKatakanaToZenkakuHiragana()
+    @Test
+    public void testHankakuKatakanaToZenkakuHiragana()
+    {
+        this.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA,
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
+            "～'。「」、・ぁぃぅぇぉゃゅょっーあいうえおかきくけこか゛き゛く゛け゛こ゛さしすせそさ゛し゛す゛せ゛そ゛たちつてとた゛ち゛つ゛て゛と゛なにぬねのはひふへほは゛ひ゛ふ゛へ゛ほ゛は゜ひ゜ふ゜へ゜ほ゜まみむめもやゆよらりるれろわをん゛゜ﾡ"
+        );
+    }
+    //}}}
+
+
+    //{{{ 'HV': testHankakuKatakanaToZenkakuHiraganaWithCollapse()
+    @Test
+    public void testHankakuKatakanaToZenkakuHiraganaWithCollapse()
+    {
+        int op_flags = KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA | KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS;
+        this.assertConverted(op_flags,
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
+            "～'。「」、・ぁぃぅぇぉゃゅょっーあいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもやゆよらりるれろわをん゛゜ﾡ"
+        );
+
+        this.assertConverted(op_flags,
+            "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-",
+            "Aそざざ゛じすぱぱ゜ひ1-"
+        );
+    }
+    //}}}
+
+
     //{{{ 'K': testHankakuKatakanaToZenkakuKatakana()
     @Test
     public void testHankakuKatakanaToZenkakuKatakana()
