@@ -69,6 +69,12 @@ public class KanaConverter
             return original_string;
         }
 
+        boolean collapse_hankaku_voiced = false;
+        if((conversion_ops & OP_COLLAPSE_HANKAKU_VOICE_MARKS) != 0) {
+            // Collapse voiced characters (hankaku) to voiced-kana-chars (zenkaku).  Use with 'K' or 'H'
+            collapse_hankaku_voiced = true;
+        }
+
         int char_count = original_string.length();
         StringBuffer new_string = new StringBuffer();
         int i = 0;
@@ -82,12 +88,50 @@ public class KanaConverter
 
             char current_char = this_char;
 
+            // Order of conversion operations written to be similar to original PHP
+            //// Source: https://github.com/php/php-src/blob/128eda843f7dff487fff529a384fee3c5494e0f6/ext/mbstring/libmbfl/filters/mbfilter_tl_jisx0201_jisx0208.c#L41
             if((conversion_ops & OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC)  != 0) {
                 current_char = convertHankakuAlphanumericToZenkakuAlphanumeric(current_char);
             }
 
+            if((conversion_ops & OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER)              != 0) {
+                current_char = convertHankakuLetterToZenkakuLetter(current_char);
+            }
+
+            if((conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
+                current_char = convertHankakuSpaceToZenkakuSpace(current_char);
+            }
+
+            if((conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
+                current_char = convertHankakuNumberToZenkakuNumber(current_char);
+            }
+
+            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)          != 0) {
+            }
+
+            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
+            }
+
             if((conversion_ops & OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC)  != 0) {
                 current_char = convertZenkakuAlphanumericToHankakuAlphanumeric(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER)              != 0) {
+                current_char = convertZenkakuLetterToHankakuLetter(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER)              != 0) {
+                current_char = convertZenkakuNumberToHankakuNumber(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE)                != 0) {
+                current_char = convertZenkakuSpaceToHankakuSpace(current_char);
+            }
+
+            if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
+            }
+
+            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0) {
             }
 
             if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0) {
@@ -96,46 +140,6 @@ public class KanaConverter
 
             if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
                 current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
-            }
-
-            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
-            }
-
-            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0) {
-            }
-
-            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)          != 0) {
-            }
-
-            if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
-            }
-
-            if((conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
-                current_char = convertHankakuNumberToZenkakuNumber(current_char);
-            }
-
-            if((conversion_ops & OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER)              != 0) {
-                current_char = convertZenkakuNumberToHankakuNumber(current_char);
-            }
-
-            if((conversion_ops & OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER)              != 0) {
-                current_char = convertHankakuLetterToZenkakuLetter(current_char);
-            }
-
-            if((conversion_ops & OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER)              != 0) {
-                current_char = convertZenkakuLetterToHankakuLetter(current_char);
-            }
-
-            if((conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
-                current_char = convertHankakuSpaceToZenkakuSpace(current_char);
-            }
-
-            if((conversion_ops & OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE)                != 0) {
-                current_char = convertZenkakuSpaceToHankakuSpace(current_char);
-            }
-
-            if((conversion_ops & OP_COLLAPSE_HANKAKU_VOICE_MARKS)                  != 0) {
-                // Collapse voiced characters (hankaku) to voiced-kana-chars (zenkaku).  Use with 'K' or 'H'
             }
 
             new_string.append(current_char);
