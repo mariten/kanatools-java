@@ -81,12 +81,12 @@ public class KanaConverter
         while(i < char_count) {
             // Init char holders for this round
             char this_char = original_string.charAt(i);
+            char current_char = this_char;
+            char hankaku_diacritic_suffix = 0;
             char next_char = 0;
             if(i < (char_count - 1)) {
                 next_char = original_string.charAt(i + 1);
             }
-
-            char current_char = this_char;
 
             // Order of conversion operations written to be similar to original PHP
             //// Source: https://github.com/php/php-src/blob/128eda843f7dff487fff529a384fee3c5494e0f6/ext/mbstring/libmbfl/filters/mbfilter_tl_jisx0201_jisx0208.c#L41
@@ -156,6 +156,11 @@ public class KanaConverter
             }
 
             if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
+                if(MAPPING_HANKAKU_DIACRITIC_SUFFIXES.containsKey(current_char)) {
+                    hankaku_diacritic_suffix = MAPPING_HANKAKU_DIACRITIC_SUFFIXES.get(current_char);
+                }
+
+                current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
             }
 
             if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0) {
@@ -169,7 +174,16 @@ public class KanaConverter
                 current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
             }
 
+            // Add converted character to output string buffer
             new_string.append(current_char);
+
+            // Add hankaku diacritic mark if necessary (only for zen-to-han kana conversions)
+            if(hankaku_diacritic_suffix == HANKAKU_VOICED_MARK
+            || hankaku_diacritic_suffix == HANKAKU_ASPIRATED_MARK) {
+                new_string.append(hankaku_diacritic_suffix);
+            }
+
+            // Proceed with loop
             i++;
         }
 
@@ -335,6 +349,129 @@ public class KanaConverter
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_ASPIRATED.put('ﾍ', 'ペ');
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_ASPIRATED.put('ﾎ', 'ポ');
     }
+
+    protected static final Map<Character, Character> MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA;
+    static {
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA = new HashMap<Character, Character>();
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('。', '｡');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('「', '｢');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('」', '｣');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('、', '､');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('・', '･');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヲ', 'ｦ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ァ', 'ｧ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ィ', 'ｨ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ゥ', 'ｩ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ェ', 'ｪ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ォ', 'ｫ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ャ', 'ｬ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ュ', 'ｭ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ョ', 'ｮ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ッ', 'ｯ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ー', 'ｰ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ア', 'ｱ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('イ', 'ｲ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ウ', 'ｳ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('エ', 'ｴ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('オ', 'ｵ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('カ', 'ｶ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ガ', 'ｶ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('キ', 'ｷ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ギ', 'ｷ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ク', 'ｸ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('グ', 'ｸ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ケ', 'ｹ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ゲ', 'ｹ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('コ', 'ｺ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ゴ', 'ｺ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('サ', 'ｻ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ザ', 'ｻ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('シ', 'ｼ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ジ', 'ｼ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ス', 'ｽ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ズ', 'ｽ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('セ', 'ｾ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ゼ', 'ｾ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ソ', 'ｿ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ゾ', 'ｿ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('タ', 'ﾀ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ダ', 'ﾀ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('チ', 'ﾁ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヂ', 'ﾁ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ツ', 'ﾂ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヅ', 'ﾂ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('テ', 'ﾃ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('デ', 'ﾃ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ト', 'ﾄ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ド', 'ﾄ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ナ', 'ﾅ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ニ', 'ﾆ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヌ', 'ﾇ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ネ', 'ﾈ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ノ', 'ﾉ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ハ', 'ﾊ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('バ', 'ﾊ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('パ', 'ﾊ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヒ', 'ﾋ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ビ', 'ﾋ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ピ', 'ﾋ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('フ', 'ﾌ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ブ', 'ﾌ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('プ', 'ﾌ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヘ', 'ﾍ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ベ', 'ﾍ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ペ', 'ﾍ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ホ', 'ﾎ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ボ', 'ﾎ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ポ', 'ﾎ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('マ', 'ﾏ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ミ', 'ﾐ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ム', 'ﾑ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('メ', 'ﾒ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('モ', 'ﾓ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヤ', 'ﾔ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ユ', 'ﾕ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヨ', 'ﾖ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ラ', 'ﾗ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('リ', 'ﾘ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ル', 'ﾙ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('レ', 'ﾚ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ロ', 'ﾛ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ワ', 'ﾜ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ン', 'ﾝ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('゛', 'ﾞ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('゜', 'ﾟ');
+    }
+
+    protected static final Map<Character, Character> MAPPING_HANKAKU_DIACRITIC_SUFFIXES;
+    static {
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES = new HashMap<Character, Character>();
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ガ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ギ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('グ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ゲ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ゴ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ザ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ジ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ズ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ゼ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ゾ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ダ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ヂ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ヅ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('デ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ド', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('バ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ビ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ブ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ベ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ボ', HANKAKU_VOICED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('パ', HANKAKU_ASPIRATED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ピ', HANKAKU_ASPIRATED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('プ', HANKAKU_ASPIRATED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ペ', HANKAKU_ASPIRATED_MARK);
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ポ', HANKAKU_ASPIRATED_MARK);
+    }
     //}}}
 
 
@@ -433,6 +570,19 @@ public class KanaConverter
 
         // Not a voiced/aspirated hankaku katakana character, use original
         return target;
+    }
+    //}}}
+
+
+    //{{{ convertZenkakuKatakanaToHankakuKatakana()
+    protected static char convertZenkakuKatakanaToHankakuKatakana(char target)
+    {
+        if(MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.containsKey(target)) {
+            // Return character from mapped from zen-to-han
+            return MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.get(target);
+        } else {
+            return target;
+        }
     }
     //}}}
 

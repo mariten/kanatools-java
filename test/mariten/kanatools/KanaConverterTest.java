@@ -150,6 +150,23 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'k': testZenkakuKatakanaToHankakuKatakana()
+    @Test
+    public void testZenkakuKatakanaToHankakuKatakana()
+    {
+        this.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA,
+            "～'。「」、・ァィゥェォャュョッーアイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモヤユヨラリルレロワヲン゛゜ﾡ",
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ"
+        );
+
+        this.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA,
+            "Aソザザ゛ジスパパ゜ヒ1-",
+            "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-"
+        );
+    }
+    //}}}
+
+
     //{{{ 'N': testHankakuNumberToZenkakuNumber()
     @Test
     public void testHankakuNumberToZenkakuNumber()
