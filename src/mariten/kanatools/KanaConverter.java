@@ -360,7 +360,6 @@ public class KanaConverter
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('」', '｣');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('、', '､');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('・', '･');
-        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヲ', 'ｦ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ァ', 'ｧ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ィ', 'ｨ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ゥ', 'ｩ');
@@ -374,6 +373,7 @@ public class KanaConverter
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ア', 'ｱ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('イ', 'ｲ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ウ', 'ｳ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヴ', 'ｳ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('エ', 'ｴ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('オ', 'ｵ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('カ', 'ｶ');
@@ -440,6 +440,10 @@ public class KanaConverter
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('レ', 'ﾚ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ロ', 'ﾛ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ワ', 'ﾜ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヮ', 'ﾜ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヰ', 'ｲ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヱ', 'ｴ');
+        MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ヲ', 'ｦ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('ン', 'ﾝ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('゛', 'ﾞ');
         MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.put('゜', 'ﾟ');
@@ -448,6 +452,7 @@ public class KanaConverter
     protected static final Map<Character, Character> MAPPING_HANKAKU_DIACRITIC_SUFFIXES;
     static {
         MAPPING_HANKAKU_DIACRITIC_SUFFIXES = new HashMap<Character, Character>();
+        MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ヴ', HANKAKU_VOICED_MARK);
         MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ガ', HANKAKU_VOICED_MARK);
         MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('ギ', HANKAKU_VOICED_MARK);
         MAPPING_HANKAKU_DIACRITIC_SUFFIXES.put('グ', HANKAKU_VOICED_MARK);
