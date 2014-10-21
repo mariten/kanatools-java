@@ -120,6 +120,23 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'h': testZenkakuHiraganaToHankakuKatakana()
+    @Test
+    public void testZenkakuHiraganaToHankakuKatakana()
+    {
+        this.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA,
+            "～'。「」、・ぁぃぅぇぉゃゅょっーあいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもやゆよらりるれろわをん゛゜ﾡ",
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ"
+        );
+
+        this.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA,
+            "Aそざざ゛じすぱぱ゜ひ1-",
+            "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-"
+        );
+    }
+    //}}}
+
+
     //{{{ 'K': testHankakuKatakanaToZenkakuKatakana()
     @Test
     public void testHankakuKatakanaToZenkakuKatakana()

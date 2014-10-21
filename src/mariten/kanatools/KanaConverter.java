@@ -156,18 +156,20 @@ public class KanaConverter
             }
 
             if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
-                if(MAPPING_HANKAKU_DIACRITIC_SUFFIXES.containsKey(current_char)) {
-                    hankaku_diacritic_suffix = MAPPING_HANKAKU_DIACRITIC_SUFFIXES.get(current_char);
-                }
-
+                hankaku_diacritic_suffix = determineHankakuDiacriticSuffix(current_char);
                 current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
             }
 
-            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0) {
-            }
-
-            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0) {
+            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0
+            || (conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0) {
+                // First convert from full hiragana to full katakana
                 current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
+
+                if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA) != 0) {
+                    // Proceed to convert to hankaku if requested
+                    hankaku_diacritic_suffix = determineHankakuDiacriticSuffix(current_char);
+                    current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
+                }
             }
 
             if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
@@ -582,6 +584,18 @@ public class KanaConverter
             return MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.get(target);
         } else {
             return target;
+        }
+    }
+    //}}}
+
+
+    //{{{ determineHankakuDiacriticSuffix()
+    protected static char determineHankakuDiacriticSuffix(char target)
+    {
+        if(MAPPING_HANKAKU_DIACRITIC_SUFFIXES.containsKey(target)) {
+            return MAPPING_HANKAKU_DIACRITIC_SUFFIXES.get(target);
+        } else {
+            return 0;
         }
     }
     //}}}
