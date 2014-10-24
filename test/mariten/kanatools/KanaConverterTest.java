@@ -260,6 +260,20 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ 'V': testCollapseHankakuMarkOnly()
+    @Test
+    public void testCollapseHankakuMarkOnly()
+    {
+        // This option is illegal, no conversion should be performed
+        int op_flags = KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA | KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS;
+        this.assertConverted(KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS,
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
+            "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ"
+        );
+    }
+    //}}}
+
+
     //{{{ assertConverted()
     private void assertConverted(int conv_flags, String str_to_convert, String expected_result)
     {
