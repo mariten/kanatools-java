@@ -160,8 +160,14 @@ public class KanaConverter
                 current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
             }
 
-            if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0
-            || (conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0) {
+            // Check if current character is a zenkaku katakana character
+            char full_katakana_to_hiragana_result = convertZenkakuKatakanaToZenkakuHiragana(current_char);
+
+            // Do not enter this block if the current character is a zenkaku katakana character, no matter the flags
+            // Protects against katakana characters being incorrectly converted by zen-hiragana to han-katakana logic
+            if(full_katakana_to_hiragana_result == current_char
+            && ((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0
+            ||  (conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0)) {
                 // First convert from full hiragana to full katakana
                 current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
 
@@ -173,7 +179,7 @@ public class KanaConverter
             }
 
             if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
-                current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
+                current_char = full_katakana_to_hiragana_result;
             }
 
             // Add converted character to output string buffer
