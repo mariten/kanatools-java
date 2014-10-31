@@ -215,20 +215,20 @@ public class KanaConverter
 
     //{{{ Character constants
     // Numeric constants
-    protected static final char HANKAKU_NUMBER_FIRST = '0';
-    protected static final char HANKAKU_NUMBER_LAST  = '9';
-    protected static final char ZENKAKU_NUMBER_FIRST = '０';
-    protected static final char ZENKAKU_NUMBER_LAST  = '９';
+    public static final char HANKAKU_NUMBER_FIRST = '0';
+    public static final char HANKAKU_NUMBER_LAST  = '9';
+    public static final char ZENKAKU_NUMBER_FIRST = '０';
+    public static final char ZENKAKU_NUMBER_LAST  = '９';
 
     // Alphabetic constants
-    protected static final char HANKAKU_LETTER_UPPER_FIRST = 'A';
-    protected static final char HANKAKU_LETTER_UPPER_LAST  = 'Z';
-    protected static final char HANKAKU_LETTER_LOWER_FIRST = 'a';
-    protected static final char HANKAKU_LETTER_LOWER_LAST  = 'z';
-    protected static final char ZENKAKU_LETTER_UPPER_FIRST = 'Ａ';
-    protected static final char ZENKAKU_LETTER_UPPER_LAST  = 'Ｚ';
-    protected static final char ZENKAKU_LETTER_LOWER_FIRST = 'ａ';
-    protected static final char ZENKAKU_LETTER_LOWER_LAST  = 'ｚ';
+    public static final char HANKAKU_LETTER_UPPER_FIRST = 'A';
+    public static final char HANKAKU_LETTER_UPPER_LAST  = 'Z';
+    public static final char HANKAKU_LETTER_LOWER_FIRST = 'a';
+    public static final char HANKAKU_LETTER_LOWER_LAST  = 'z';
+    public static final char ZENKAKU_LETTER_UPPER_FIRST = 'Ａ';
+    public static final char ZENKAKU_LETTER_UPPER_LAST  = 'Ｚ';
+    public static final char ZENKAKU_LETTER_LOWER_FIRST = 'ａ';
+    public static final char ZENKAKU_LETTER_LOWER_LAST  = 'ｚ';
 
     // Punctuation constants
     public static final char HANKAKU_ALPHANUMERIC_FIRST = '!';
@@ -249,13 +249,13 @@ public class KanaConverter
     public static final char HANKAKU_ASPIRATED_MARK = 'ﾟ';  // handakuten
 
     // Other constants
-    protected static final char HANKAKU_SPACE = ' ';
-    protected static final char ZENKAKU_SPACE = '　';
+    public static final char HANKAKU_SPACE = ' ';
+    public static final char ZENKAKU_SPACE = '　';
     //}}}
 
 
     //{{{ Hankaku Katakana related mappings
-    public static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED;
+    protected static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED;
     static {
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED = new HashMap<Character, Character>();
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED.put('｡', '。');
@@ -323,7 +323,7 @@ public class KanaConverter
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED.put('ﾟ', '゜');
     }
 
-    public static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_VOICED;
+    protected static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_VOICED;
     static {
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_VOICED = new HashMap<Character, Character>();
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_VOICED.put('ｶ', 'ガ');
@@ -348,7 +348,7 @@ public class KanaConverter
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_VOICED.put('ﾎ', 'ボ');
     }
 
-    public static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_ASPIRATED;
+    protected static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_ASPIRATED;
     static {
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_ASPIRATED = new HashMap<Character, Character>();
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_ASPIRATED.put('ﾊ', 'パ');
