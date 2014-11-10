@@ -401,14 +401,51 @@ public class KanaConverterTest
     @Test
     public void testMixedOps()
     {
+        // han2zen kata-kata, zen2han alphanumeric
         this.assertConverted("KVas",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\" !0:A^a|”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。アガパ゛漢 #1;B_b}\\ #1;B_b}＼・きじぴゑゖゞキジピヱヹヶヾ゜・キジピ゜字"
         );
 
+        // zen2han hira-kata, zen2han kata-kata
         this.assertConverted("hk",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”ｱｶﾞﾊﾟｲゔゕゝｱｶﾞﾊﾟｲヸヷヵヽﾞ｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼･ｷｼﾞﾋﾟｴゖゞｷｼﾞﾋﾟｴヹヶヾﾟ･ｷｼﾞﾋﾟﾟ字"
+        );
+
+        // han2zen hira, zen2han alpha-only
+        this.assertConverted(
+            KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA
+            | KanaConverter.OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER
+            | KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS,
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !0:A^a|\"　！０：A＾a｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。あがぱ゛漢 #1;B_b}\\　＃１；B＿b｝＼・きじぴゑゖゞキジピヱヹヶヾ゜・きじぴ゜字"
+        );
+
+        // zen2zen hira-kata, han2zen num-only
+        this.assertConverted(
+            KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA | KanaConverter.OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER,
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !０:A^a|\"　！０：Ａ＾ａ｜”アガパヰゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #１;B_b}\\　＃１；Ｂ＿ｂ｝＼・キジピヱゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
+        );
+
+        // zen2zen kata-hira, han2zen kata-hira, han2zen alphanumeric
+        this.assertConverted(
+            KanaConverter.OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA
+            | KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA
+            | KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS
+            | KanaConverter.OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC,
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " ！０：Ａ＾ａ｜\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝあがぱゐヸヷヵヽ゛。あがぱ゛漢 ＃１；Ｂ＿ｂ｝\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞきじぴゑヹヶヾ゜・きじぴ゜字"
+        );
+
+        // zen2han kata, han2zen num-only, alpha-only
+        this.assertConverted(
+            KanaConverter.OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA
+            | KanaConverter.OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER
+            | KanaConverter.OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER,
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !０:Ａ^ａ|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝｱｶﾞﾊﾟｲヸヷヵヽﾞ｡ｱｶﾞﾊﾟﾞ漢 #１;Ｂ_ｂ}\\　＃１；Ｂ＿ｂ｝＼･きじぴゑゖゞｷｼﾞﾋﾟｴヹヶヾﾟ･ｷｼﾞﾋﾟﾟ字"
         );
     }
     //}}}
