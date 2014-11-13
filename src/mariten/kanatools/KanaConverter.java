@@ -90,24 +90,29 @@ public class KanaConverter
 
             // Order of conversion operations written to be similar to original PHP
             //// Source: https://github.com/php/php-src/blob/128eda843f7dff487fff529a384fee3c5494e0f6/ext/mbstring/libmbfl/filters/mbfilter_tl_jisx0201_jisx0208.c#L41
-            if((conversion_ops & OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC)  != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC)  != 0) {
                 current_char = convertHankakuAlphanumericToZenkakuAlphanumeric(current_char);
             }
 
-            if((conversion_ops & OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER)              != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER)              != 0) {
                 current_char = convertHankakuLetterToZenkakuLetter(current_char);
             }
 
-            if((conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
                 current_char = convertHankakuSpaceToZenkakuSpace(current_char);
             }
 
-            if((conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
                 current_char = convertHankakuNumberToZenkakuNumber(current_char);
             }
 
-            if((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)          != 0
-            || (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
+            if(current_char == this_char
+            && ((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)         != 0
+            ||  (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)         != 0)) {
                 char collapsed_char_for_check = current_char;
                 boolean performed_hankaku_conversion = false;
                 if(do_collapse_on_hankaku_diacritic) {
@@ -139,23 +144,28 @@ public class KanaConverter
                 }
             }
 
-            if((conversion_ops & OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC)  != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC)  != 0) {
                 current_char = convertZenkakuAlphanumericToHankakuAlphanumeric(current_char);
             }
 
-            if((conversion_ops & OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER)              != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER)              != 0) {
                 current_char = convertZenkakuLetterToHankakuLetter(current_char);
             }
 
-            if((conversion_ops & OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER)              != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER)              != 0) {
                 current_char = convertZenkakuNumberToHankakuNumber(current_char);
             }
 
-            if((conversion_ops & OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE)                != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE)                != 0) {
                 current_char = convertZenkakuSpaceToHankakuSpace(current_char);
             }
 
-            if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
                 hankaku_diacritic_suffix = determineHankakuDiacriticSuffix(current_char);
                 current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
             }
@@ -165,7 +175,8 @@ public class KanaConverter
 
             // Do not enter this block if the current character is a zenkaku katakana character, no matter the flags
             // Protects against katakana characters being incorrectly converted by zen-hiragana to han-katakana logic
-            if(full_katakana_to_hiragana_result == current_char
+            if(current_char == this_char
+            && full_katakana_to_hiragana_result == current_char
             && ((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0
             ||  (conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0)) {
                 // First convert from full hiragana to full katakana
@@ -179,7 +190,8 @@ public class KanaConverter
                 }
             }
 
-            if((conversion_ops & OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
+            if(current_char == this_char
+            && (conversion_ops & OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
                 current_char = full_katakana_to_hiragana_result;
             }
 
