@@ -133,8 +133,8 @@ public class KanaConverter
                     }
                 }
 
-                if(performed_hankaku_conversion && (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA) != 0) {
-                    // If request is for zenkaku hiragana and not katakana, perform additional kata->hira conversion
+                if(performed_hankaku_conversion && (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA) == 0) {
+                    // If request is not for katakana, perform additional kata->hira conversion
                     current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
                 }
             }

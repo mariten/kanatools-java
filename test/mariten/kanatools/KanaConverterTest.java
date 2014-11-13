@@ -451,6 +451,30 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ testConflictingOps()
+    @Test
+    public void testConflictingOps()
+    {
+        // han2zen-kata, han2zen-hira
+        int op_flags = (
+            KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS |
+            KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA |
+            KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA
+        );
+        this.assertConverted(op_flags,
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。アガパ゛漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜・キジピ゜字"
+        );
+
+        // alpha, alpha-only, num-only
+        this.assertConverted("arn",
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !0:A^a|\"　!0:A^a|”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　#1;B_b}＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
+        );
+    }
+    //}}}
+
+
     //{{{ assertConverted()
     private void assertConverted(int conv_flags, String str_to_convert, String expected_result)
     {
