@@ -10,6 +10,20 @@ import static org.junit.Assert.*;
 
 public class KanaConverterTest
 {
+    protected boolean do_direct_php_testing = false;
+
+    public KanaConverterTest()
+    {
+        String php_option_from_ant = System.getProperty("test_with_php");
+        if(php_option_from_ant != null
+        && php_option_from_ant.equals("yes")) {
+            do_direct_php_testing = true;
+        } else {
+            do_direct_php_testing = false;
+        }
+    }
+
+
     //{{{ testErrorCases()
     @Test
     public void testErrorCases()
@@ -506,7 +520,9 @@ public class KanaConverterTest
     private void assertConverted(int conv_flags, String str_to_convert, String expected_result)
     {
         assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_flags));
-        assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
+        if(do_direct_php_testing) {
+            assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
+        }
     }
     private void assertConverted(String conv_flags_string, String str_to_convert, String expected_result)
     {

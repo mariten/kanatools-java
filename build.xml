@@ -53,6 +53,11 @@
         </javac>
     </target>
 
+    <!-- Tell Java to include direct PHP testing -->
+    <target name="php-testing-on">
+        <property name="test_with_php" value="yes" />
+    </target>
+
     <!-- Auto-run tests for JUnit -->
     <target name="run-junit" depends="compile-tests">
         <mkdir dir="${report_dir}" />
@@ -62,6 +67,8 @@
                 <path location="${classes_dir}" />
                 <path refid="classpath" />
             </classpath>
+
+            <sysproperty key="test_with_php" value="${test_with_php}" />
 
             <formatter type="plain" />
             <batchtest todir="${report_dir}">
@@ -84,6 +91,10 @@
 
     <!-- Perform unit tests -->
     <target name="test" depends="run-junit,check-for-failed-tests">
+    </target>
+
+    <!-- Perform unit tests with direct PHP testing using "mb_convert_kana" -->
+    <target name="test-with-php" depends="php-testing-on,run-junit,check-for-failed-tests">
     </target>
 
     <!-- Wrap compiled file(s) into JAR -->
