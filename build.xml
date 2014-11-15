@@ -43,7 +43,7 @@
     </target>
 
     <!-- Compile unit test source files -->
-    <target name="compile_tests" depends="compile">
+    <target name="compile-tests" depends="compile">
         <mkdir dir="${build_test_dir}" />
         <javac srcdir="${test_dir}" destdir="${build_test_dir}" debug="on" includeantruntime="false">
             <classpath>
@@ -54,7 +54,7 @@
     </target>
 
     <!-- Auto-run tests for JUnit -->
-    <target name="run_junit" depends="compile_tests">
+    <target name="run-junit" depends="compile-tests">
         <mkdir dir="${report_dir}" />
         <junit fork="yes" forkmode="once" printsummary="yes" showoutput="yes" failureProperty="tests_failed">
             <classpath>
@@ -71,7 +71,7 @@
     </target>
 
     <!-- Output test details if they fail -->
-    <target name="check_for_failed_tests" if="tests_failed">
+    <target name="check-for-failed-tests" if="tests_failed">
         <echo message="FAILED UNIT TEST DETAILS:${line.separator}${line.separator}" />
         <echo message="KanaConverter:" />
         <echo message="---------------------------------------------------------------------------------" />
@@ -83,7 +83,7 @@
     </target>
 
     <!-- Perform unit tests -->
-    <target name="test" depends="compile_tests,run_junit,check_for_failed_tests">
+    <target name="test" depends="run-junit,check-for-failed-tests">
     </target>
 
     <!-- Wrap compiled file(s) into JAR -->
