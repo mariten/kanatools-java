@@ -3,6 +3,12 @@ package mariten.kanatools;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+  * Provides easy, automatic string conversions often necessary when dealing with Japanese text
+  *
+  * @details Port of PHP's "mb_convert_kana" function for Java.
+  * @details http://www.php.net/manual/en/function.mb-convert-kana.php
+  */
 public class KanaConverter
 {
     // Conversion Operations Types
@@ -47,14 +53,14 @@ public class KanaConverter
     }
 
 
-    //{{{ mbConvertKana()
+    //{{{ String mbConvertKana(String, int)
     /**
-      * Port of PHP's "mb_convert_kana" function for Java.
-      * @details http://www.php.net/manual/en/function.mb-convert-kana.php
+      * Converts a string containing kana or other characters used in Japanese text input
+      * according to one or more requested conversion methods.
       *
       * @param  original_string  Input string to perform conversion on
       * @param  conversion_ops   Flag-based integer indicating which type of conversions to perform
-      * @return                  Content of "original_string" with specified conversions performed
+      * @return Content of "original_string" with specified conversions performed
       */
     public static String mbConvertKana(String original_string, int conversion_ops)
     {
@@ -209,7 +215,9 @@ public class KanaConverter
 
         return new_string.toString();
     }
+    //}}}
 
+    //{{{ String mbConvertKana(String, String)
     /**
       * Same as "mbConvertKana()" above, but takes the conversion ops as a string (PHP-style)
       *
@@ -500,7 +508,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'A': convertHankakuAlphanumericToZenkakuAlphanumeric()
+    //{{{ char convertHankakuAlphanumericToZenkakuAlphanumeric(char)
     protected static char convertHankakuAlphanumericToZenkakuAlphanumeric(char target)
     {
         if(target >= HANKAKU_ALPHANUMERIC_FIRST && target <= HANKAKU_ALPHANUMERIC_LAST) {
@@ -519,7 +527,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'a': convertZenkakuAlphanumericToHankakuAlphanumeric()
+    //{{{ char convertZenkakuAlphanumericToHankakuAlphanumeric(char)
     protected static char convertZenkakuAlphanumericToHankakuAlphanumeric(char target)
     {
         if(target >= ZENKAKU_ALPHANUMERIC_FIRST && target <= ZENKAKU_ALPHANUMERIC_LAST) {
@@ -538,7 +546,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'C': convertZenkakuHiraganaToZenkakuKatakana()
+    //{{{ char convertZenkakuHiraganaToZenkakuKatakana(char)
     protected static char convertZenkakuHiraganaToZenkakuKatakana(char target)
     {
         if(target >= HIRAGANA_FIRST && target <= HIRAGANA_LAST) {
@@ -551,7 +559,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'c': convertZenkakuKatakanaToZenkakuHiragana()
+    //{{{ char convertZenkakuKatakanaToZenkakuHiragana(char)
     protected static char convertZenkakuKatakanaToZenkakuHiragana(char target)
     {
         if(target >= ZENKAKU_KATAKANA_FIRST && target <= ZENKAKU_KATAKANA_LAST) {
@@ -564,7 +572,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ convertUnvoicedHankakuKanaToZenkaku()
+    //{{{ char convertUnvoicedHankakuKanaToZenkaku(char)
     protected static char convertUnvoicedHankakuKanaToZenkaku(char target)
     {
         if(MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED.containsKey(target)) {
@@ -578,7 +586,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ convertDiacriticHankakuKanaToZenkaku()
+    //{{{ char convertDiacriticHankakuKanaToZenkaku(char)
     protected static char convertDiacriticHankakuKanaToZenkaku(char target, char diacritic_mark)
     {
         if(diacritic_mark == HANKAKU_VOICED_MARK
@@ -599,7 +607,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ convertZenkakuKatakanaToHankakuKatakana()
+    //{{{ char convertZenkakuKatakanaToHankakuKatakana(char)
     protected static char convertZenkakuKatakanaToHankakuKatakana(char target)
     {
         if(MAPPING_ZENKAKU_TO_HANKAKU_KATAKANA.containsKey(target)) {
@@ -612,7 +620,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ determineHankakuDiacriticSuffix()
+    //{{{ char determineHankakuDiacriticSuffix(char)
     protected static char determineHankakuDiacriticSuffix(char target)
     {
         if(MAPPING_HANKAKU_DIACRITIC_SUFFIXES.containsKey(target)) {
@@ -624,7 +632,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'N': convertHankakuNumberToZenkakuNumber()
+    //{{{ char convertHankakuNumberToZenkakuNumber(char)
     protected static char convertHankakuNumberToZenkakuNumber(char target)
     {
         if(target >= HANKAKU_NUMBER_FIRST && target <= HANKAKU_NUMBER_LAST) {
@@ -637,7 +645,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'n': convertZenkakuNumberToHankakuNumber()
+    //{{{ char convertZenkakuNumberToHankakuNumber(char)
     protected static char convertZenkakuNumberToHankakuNumber(char target)
     {
         if(target >= ZENKAKU_NUMBER_FIRST && target <= ZENKAKU_NUMBER_LAST) {
@@ -650,7 +658,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'R': convertHankakuLetterToZenkakuLetter()
+    //{{{ char convertHankakuLetterToZenkakuLetter(char)
     protected static char convertHankakuLetterToZenkakuLetter(char target)
     {
         if(target >= HANKAKU_LETTER_LOWER_FIRST && target <= HANKAKU_LETTER_LOWER_LAST) {
@@ -668,7 +676,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'r': convertZenkakuLetterToHankakuLetter()
+    //{{{ char convertZenkakuLetterToHankakuLetter(char)
     protected static char convertZenkakuLetterToHankakuLetter(char target)
     {
         if(target >= ZENKAKU_LETTER_LOWER_FIRST && target <= ZENKAKU_LETTER_LOWER_LAST) {
@@ -686,7 +694,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 'S': convertHankakuSpaceToZenkakuSpace()
+    //{{{ char convertHankakuSpaceToZenkakuSpace(char)
     protected static char convertHankakuSpaceToZenkakuSpace(char target)
     {
         if(target == HANKAKU_SPACE) {
@@ -698,7 +706,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ 's': convertZenkakuSpaceToHankakuSpace()
+    //{{{ char convertZenkakuSpaceToHankakuSpace(char)
     protected static char convertZenkakuSpaceToHankakuSpace(char target)
     {
         if(target == ZENKAKU_SPACE) {
@@ -710,7 +718,7 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ createOpsArrayFromString()
+    //{{{ int createOpsArrayFromString(String)
     public static int createOpsArrayFromString(String php_style_options_string)
     {
         int char_op_count = php_style_options_string.length();

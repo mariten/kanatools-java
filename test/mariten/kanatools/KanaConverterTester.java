@@ -9,8 +9,11 @@ import static org.junit.Assert.*;
 
 public abstract class KanaConverterTester
 {
-    protected static final boolean NEVER_TEST_IN_PHP = false;
+    /** Takes in property (specified in Ant's build.xml) indicating whether to perform actual PHP testing or not */
     protected boolean do_direct_php_testing;
+
+    /** Use this constant for tests that should never perform actual PHP testing */
+    protected static final boolean NEVER_TEST_IN_PHP = false;
 
     public KanaConverterTester()
     {
@@ -24,7 +27,15 @@ public abstract class KanaConverterTester
     }
 
 
-    //{{{ assertConverted()
+    //{{{ void assertConverted(int, boolean, String, String)
+    /**
+      * Convert an input string using KanaConverter and assert it matches its expected result
+      *
+      * @param  conv_flags        Flag-based integer of conversion options for use by mbConvertKana function
+      * @param  execute_php_test  Also check that these strings match each other using PHP's "mb_convert_kana" function?
+      * @param  str_to_convert    String to test (pass to mbConvertKana function)
+      * @param  expected_result   Expected results of mbConvertKana function
+      */
     protected void assertConverted(int conv_flags, boolean execute_php_test, String str_to_convert, String expected_result)
     {
         assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_flags));
@@ -32,15 +43,24 @@ public abstract class KanaConverterTester
             assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
         }
     }
+    //}}}
+
+    //{{{ void assertConverted(String, boolean, String, String)
     protected void assertConverted(String conv_flags_string, boolean execute_php_test, String str_to_convert, String expected_result)
     {
         int conv_flags = KanaConverter.createOpsArrayFromString(conv_flags_string);
         this.assertConverted(conv_flags, execute_php_test, str_to_convert, expected_result);
     }
+    //}}}
+
+    //{{{ void assertConverted(int, String, String)
     protected void assertConverted(int conv_flags, String str_to_convert, String expected_result)
     {
         this.assertConverted(conv_flags, this.do_direct_php_testing, str_to_convert, expected_result);
     }
+    //}}}
+
+    //{{{ void assertConverted(String, String, String)
     protected void assertConverted(String conv_flags_string, String str_to_convert, String expected_result)
     {
         this.assertConverted(conv_flags_string, this.do_direct_php_testing, str_to_convert, expected_result);
@@ -48,7 +68,14 @@ public abstract class KanaConverterTester
     //}}}
 
 
-    //{{{ assertConvertedUsingPHP()
+    //{{{ void assertConvertedUsingPHP(int, String, String)
+    /**
+      * Perform an actual call to PHP's "mb_convert_kana" function and assert the converted string matches the expected string.
+      *
+      * @param  conv_flags       flag-based integer containing conversion methods (will be converted to PHP-style string)
+      * @param  str_to_convert   String to pass to PHP for conversion by "mb_convert_kana"
+      * @param  expected_result  Expected string output from PHP
+      */
     protected void assertConvertedUsingPHP(int conv_flags, String str_to_convert, String expected_result)
     {
         // Use single quotes in PHP code, so "encode" single quotes in string input
@@ -89,7 +116,13 @@ public abstract class KanaConverterTester
     //}}}
 
 
-    //{{{ makeOperationStringForPHP()
+    //{{{ String makeOperationStringForPHP(int)
+    /**
+      * Convert a KanaConverter flag-based integer set of operations to a PHP-style operation string.
+      *
+      * @param  conv_flags  Flag-based integer to convert
+      * @return Operations string for PHP's "mb_convert_kana" (the "$option" parameter)
+      */
     protected String makeOperationStringForPHP(int conv_flags)
     {
         if(conv_flags <= 0) {
