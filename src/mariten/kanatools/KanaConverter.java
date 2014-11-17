@@ -53,7 +53,7 @@ public class KanaConverter
     }
 
 
-    //{{{ String mbConvertKana(String, int)
+    //{{{ String convertKana(String, int)
     /**
       * Converts a string containing kana or other characters used in Japanese text input
       * according to one or more requested conversion methods.
@@ -62,7 +62,7 @@ public class KanaConverter
       * @param  conversion_ops   Flag-based integer indicating which type of conversions to perform
       * @return Content of "original_string" with specified conversions performed
       */
-    public static String mbConvertKana(String original_string, int conversion_ops)
+    public static String convertKana(String original_string, int conversion_ops)
     {
         // Don't perform conversions on empty string
         if(original_string.equals("")) {
@@ -217,18 +217,18 @@ public class KanaConverter
     }
     //}}}
 
-    //{{{ String mbConvertKana(String, String)
+    //{{{ String convertKana(String, String)
     /**
-      * Same as "mbConvertKana()" above, but takes the conversion ops as a string (PHP-style)
+      * Same as "convertKana()" above, but takes the conversion ops as a string (PHP-style)
       *
       * @param  original_string         Input string to perform conversion on
       * @param  conversion_op_string    PHP mb_convert_kana style string specifying desired conversions
       * @return                         original_string with specified conversion performed
       */
-    public static String mbConvertKana(String original_string, String conversion_ops_string)
+    public static String convertKana(String original_string, String conversion_ops_string)
     {
         int conversion_ops = createOpsArrayFromString(conversion_ops_string);
-        return mbConvertKana(original_string, conversion_ops);
+        return convertKana(original_string, conversion_ops);
     }
     //}}}
 

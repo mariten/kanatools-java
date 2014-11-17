@@ -31,14 +31,14 @@ public abstract class KanaConverterTester
     /**
       * Convert an input string using KanaConverter and assert it matches its expected result
       *
-      * @param  conv_flags        Flag-based integer of conversion options for use by mbConvertKana function
+      * @param  conv_flags        Flag-based integer of conversion options for use by convertKana function
       * @param  execute_php_test  Also check that these strings match each other using PHP's "mb_convert_kana" function?
-      * @param  str_to_convert    String to test (pass to mbConvertKana function)
-      * @param  expected_result   Expected results of mbConvertKana function
+      * @param  str_to_convert    String to test (pass to convertKana function)
+      * @param  expected_result   Expected results of convertKana function
       */
     protected void assertConverted(int conv_flags, boolean execute_php_test, String str_to_convert, String expected_result)
     {
-        assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_flags));
+        assertEquals(expected_result, KanaConverter.convertKana(str_to_convert, conv_flags));
         if(execute_php_test) {
             assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
         }

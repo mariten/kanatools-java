@@ -16,6 +16,9 @@ Fully supports all conversions between hankaku and zenkaku hiragana, katakana, a
 4. Determine which conversion operations you want to perform: [Conversion Operation List](https://github.com/mariten/kanatools-java/blob/master/src/mariten/kanatools/KanaConverter.java#L11)
 5. Call the static function wherever you like
 ```java
-int conversion_ops = DESIRED_OP_1 | DESIRED_OP_2 | DESIRED_OP_3;
-String new_string = KanaConverter.mbConvertKana(input_string, conversion_ops);
+int conversion_ops = 0;
+conversion_ops |= DESIRED_OP_1;
+conversion_ops |= DESIRED_OP_2;
+conversion_ops |= DESIRED_OP_3;
+String new_string = KanaConverter.convertKana(input_string, conversion_ops);
 ```

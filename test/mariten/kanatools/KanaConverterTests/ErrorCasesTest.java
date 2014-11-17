@@ -33,7 +33,7 @@ public class ErrorCasesTest extends KanaConverterTester
         // Pass null for input string, ensure NullPointerException is thrown
         String null_input_result = "not null";
         try {
-            null_input_result = KanaConverter.mbConvertKana(null, KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
+            null_input_result = KanaConverter.convertKana(null, KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         }
         catch(NullPointerException null_input_ex) {
             null_input_result = "caught exception";
@@ -43,7 +43,7 @@ public class ErrorCasesTest extends KanaConverterTester
         // Pass null for operation flags, ensure NullPointerException is thrown
         String null_ops_result = "";
         try {
-            null_ops_result = KanaConverter.mbConvertKana("A", null);
+            null_ops_result = KanaConverter.convertKana("A", null);
         }
         catch(NullPointerException null_ops_ex) {
             null_ops_result = "caught exception";

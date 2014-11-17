@@ -340,7 +340,7 @@ public class SingleOpTest extends KanaConverterTester
         );
 
         // Test that converted spaces are trimmed by the "trim" function
-        String trimmed_test = KanaConverter.mbConvertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE).trim();
+        String trimmed_test = KanaConverter.convertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE).trim();
         assertEquals("テスト", trimmed_test);
     }
     //}}}
