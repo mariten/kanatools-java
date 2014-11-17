@@ -8,12 +8,12 @@ import mariten.kanatools.KanaConverter;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class KanaConverterTest
+public class KanaConverterTester
 {
     protected static final boolean NEVER_TEST_IN_PHP = false;
     protected boolean do_direct_php_testing;
 
-    public KanaConverterTest()
+    public KanaConverterTester()
     {
         String php_option_from_ant = System.getProperty("test_with_php");
         if(php_option_from_ant != null
