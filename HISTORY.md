@@ -1,3 +1,11 @@
+v0.9.0 :: Nov 17 2014
+======================
+* Improved build process, make direct command-line based PHP testing optional (off by default for `ant test`)
+* Fixed bugs found in some multi-method conversions, and optimized main loop of the `convertKana` function
+* Added multi-method unit tests (include those unusual cases where conflicting methods are unnaturally mixed together) and error cases.  Also split up unit tests into multiple files.
+* Cleaned up code, added Javadocs where helpful
+* Wrote basic download/install/usage documentation in README
+
 v0.5.0 :: Oct 31 2014
 ======================
 * Beta version of **KanaConverter**

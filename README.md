@@ -4,6 +4,64 @@
 # 総合カナ変換用ユーティリティ関数
 **kanatools-java** とは、Java におけるひらがな、カタカナ、ローマ字のあらゆる全角・半角変換および考慮を自動で行うぷちライブラリー
 
+# KanaConverter
+**KanaConverter** is a Java port of the [`mb_convert_kana`](http://www.php.net/manual/en/function.mb-convert-kana.php) function, which is a function that can perform every possible type of kana or Japanese text related conversion on a given input string in just a single line of code.
+
+Fully supports all conversions between hankaku and zenkaku hiragana, katakana, and alphanumeric characters. Specify the input string and the desired conversion methods and it will do the rest.
+
+### Usage
+1. Include in your code with the `import mariten.kanatools.KanaConverter;` statement
+2. Determine which conversion operations you want to perform: [Conversion Operation List](https://github.com/mariten/kanatools-java/blob/master/src/mariten/kanatools/KanaConverter.java#L11)
+3. Call the static function wherever you like
+```java
+int conversion_ops = 0;
+conversion_ops |= DESIRED_OP_1;
+conversion_ops |= DESIRED_OP_2;
+conversion_ops |= DESIRED_OP_3;
+String new_string = KanaConverter.convertKana(input_string, conversion_ops);
+```
+
+### Examples
+##### Converting Between Katakana and Hiragana
+* Convert *zen-kaku* hiragana to *zen-kaku* katakana
+```java
+String testing_hira = "てすてぃんぐ";
+
+// Set the single conversion flag in a flag-based integer
+int conversion_flag = KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA;
+
+// Convert the string
+String testing_kata = KanaConverter.convertKana(testing_kata, conversion_flag);
+System.out.println(testing_kata);
+```
+Prints:
+```
+テスティング
+```
+
+##### Use Standard Katakana and Alphanumeric Characters
+* Convert *han-kaku* katakana characters to *zen-kaku*
+* Convert *zen-kaku* alphanumeric characters to *han-kaku*
+```java
+String address = "東京都北区赤羽６−３０−１　赤羽ﾋﾙｽﾞ"
+
+// Set the necessary conversion flags in a flag-based integer
+int conversion_flags = 0;
+conversion_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
+conversion_flags |= KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS;
+conversion_flags |= KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC;
+conversion_flags |= KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE;
+
+// Convert the string
+String standardized_address = KanaConverter.convertKana(address, conversion_flags);
+System.out.println(standardized_address);
+```
+Prints:
+```
+東京都北区赤羽6-30-1 赤羽ヒルズ
+```
+
+
 # Download and Install
 ### Quicker Option: Download Pre-Built JAR from GitHub
 1. Fetch the [**JAR**](https://github.com/mariten/kanatools-java/blob/master/compiled/jar/kanatools.jar) from the **master** branch of this repository
@@ -21,23 +79,6 @@ ant jar
 # ...
 
 cp compiled/jar/kanatools.jar wherever/your/Java/CLASSPATH/is
-```
-
-# KanaConverter
-**KanaConverter** is a Java port of the [`mb_convert_kana`](http://www.php.net/manual/en/function.mb-convert-kana.php) function, which is a function that can perform every possible type of kana or Japanese text related conversion on a given input string in just a single line of code.
-
-Fully supports all conversions between hankaku and zenkaku hiragana, katakana, and alphanumeric characters. Specify the input string and the desired conversion methods and it will do the rest.
-
-### Usage
-1. Include in your code with the `import mariten.kanatools.KanaConverter;` statement
-2. Determine which conversion operations you want to perform: [Conversion Operation List](https://github.com/mariten/kanatools-java/blob/master/src/mariten/kanatools/KanaConverter.java#L11)
-3. Call the static function wherever you like
-```java
-int conversion_ops = 0;
-conversion_ops |= DESIRED_OP_1;
-conversion_ops |= DESIRED_OP_2;
-conversion_ops |= DESIRED_OP_3;
-String new_string = KanaConverter.convertKana(input_string, conversion_ops);
 ```
 
 # Development
