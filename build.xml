@@ -27,7 +27,11 @@
         <delete dir="${classes_dir}" />
         <delete dir="${build_test_dir}" />
         <delete dir="${report_dir}" />
-        <delete dir="${jar_dir}" />
+        <exec executable="git">
+            <arg value="checkout" />
+            <arg value="--" />
+            <arg value="${jar_dir}/${jar_name}" />
+        </exec>
     </target>
 
     <!-- Init build process -->
