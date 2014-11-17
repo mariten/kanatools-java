@@ -72,7 +72,9 @@
 
             <formatter type="plain" />
             <batchtest todir="${report_dir}">
-                <fileset dir="${build_test_dir}" />
+                <fileset dir="${build_test_dir}">
+                    <include name="**/KanaConverterTests/*Test.class" />
+                </fileset>
             </batchtest>
         </junit>
     </target>
@@ -82,9 +84,11 @@
         <echo message="FAILED UNIT TEST DETAILS:${line.separator}${line.separator}" />
         <echo message="KanaConverter:" />
         <echo message="---------------------------------------------------------------------------------" />
-        <exec executable="cat">
-            <arg value="${report_dir}/TEST-mariten.kanatools.KanaConverterTest.txt" />
-        </exec>
+        <concat>
+            <fileset dir="${report_dir}">
+                <include name="*.KanaConverterTests.*.txt" />
+            </fileset>
+        </concat>
         <echo message="---------------------------------------------------------------------------------" />
         <fail message="Did not pass all unit tests" />
     </target>
