@@ -10,7 +10,8 @@ import static org.junit.Assert.*;
 
 public class KanaConverterTest
 {
-    protected boolean do_direct_php_testing = false;
+    protected static final boolean NEVER_TEST_IN_PHP = false;
+    protected boolean do_direct_php_testing;
 
     public KanaConverterTest()
     {
@@ -518,14 +519,14 @@ public class KanaConverterTest
         );
 
         // Pass 0 (no methods) for operation flags, ensure no changes
-        this.assertConverted(0,
+        this.assertConverted(0, this.NEVER_TEST_IN_PHP,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
 
         // Pass negative integer for operation flags, ensure no changes
         int negative_op = 0 - KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA;
-        this.assertConverted(negative_op,
+        this.assertConverted(negative_op, this.NEVER_TEST_IN_PHP,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -554,17 +555,25 @@ public class KanaConverterTest
 
 
     //{{{ assertConverted()
-    private void assertConverted(int conv_flags, String str_to_convert, String expected_result)
+    private void assertConverted(int conv_flags, boolean execute_php_test, String str_to_convert, String expected_result)
     {
         assertEquals(expected_result, KanaConverter.mbConvertKana(str_to_convert, conv_flags));
-        if(do_direct_php_testing) {
+        if(execute_php_test) {
             assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
         }
     }
-    private void assertConverted(String conv_flags_string, String str_to_convert, String expected_result)
+    private void assertConverted(String conv_flags_string, boolean execute_php_test, String str_to_convert, String expected_result)
     {
         int conv_flags = KanaConverter.createOpsArrayFromString(conv_flags_string);
-        this.assertConverted(conv_flags, str_to_convert, expected_result);
+        this.assertConverted(conv_flags, execute_php_test, str_to_convert, expected_result);
+    }
+    private void assertConverted(int conv_flags, String str_to_convert, String expected_result)
+    {
+        this.assertConverted(conv_flags, this.do_direct_php_testing, str_to_convert, expected_result);
+    }
+    private void assertConverted(String conv_flags_string, String str_to_convert, String expected_result)
+    {
+        this.assertConverted(conv_flags_string, this.do_direct_php_testing, str_to_convert, expected_result);
     }
     //}}}
 
