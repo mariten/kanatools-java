@@ -58,14 +58,13 @@ public class KanaConverter
       */
     public static String mbConvertKana(String original_string, int conversion_ops)
     {
-        // Ensure function received non-empty input string
-        if(original_string == null
-        || original_string.equals("")) {
-            return null;
+        // Don't perform conversions on empty string
+        if(original_string.equals("")) {
+            return "";
         }
 
-        if(conversion_ops == 0) {
-            // Return original if no conversion requested
+        // Return original if no conversion requested
+        if(conversion_ops <= 0) {
             return original_string;
         }
 

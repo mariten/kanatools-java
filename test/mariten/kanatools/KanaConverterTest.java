@@ -24,15 +24,6 @@ public class KanaConverterTest
     }
 
 
-    //{{{ testErrorCases()
-    @Test
-    public void testErrorCases()
-    {
-        assertNull(KanaConverter.mbConvertKana(null, KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA));
-    }
-    //}}}
-
-
     //{{{ testOpFormats()
     @Test
     public void testOpFormats()
@@ -516,6 +507,52 @@ public class KanaConverterTest
     //}}}
 
 
+    //{{{ testErrorCases()
+    @Test
+    public void testErrorCases()
+    {
+        // Pass empty string for input string
+        this.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA,
+            "",
+            ""
+        );
+
+        // Pass 0 (no methods) for operation flags, ensure no changes
+        this.assertConverted(0,
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
+        );
+
+        // Pass negative integer for operation flags, ensure no changes
+        int negative_op = 0 - KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA;
+        this.assertConverted(negative_op,
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
+        );
+
+        // Pass null for input string, ensure NullPointerException is thrown
+        String null_input_result = "not null";
+        try {
+            null_input_result = KanaConverter.mbConvertKana(null, KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
+        }
+        catch(NullPointerException null_input_ex) {
+            null_input_result = "caught exception";
+        }
+        assertEquals("caught exception", null_input_result);
+
+        // Pass null for operation flags, ensure NullPointerException is thrown
+        String null_ops_result = "";
+        try {
+            null_ops_result = KanaConverter.mbConvertKana("A", null);
+        }
+        catch(NullPointerException null_ops_ex) {
+            null_ops_result = "caught exception";
+        }
+        assertEquals("caught exception", null_ops_result);
+    }
+    //}}}
+
+
     //{{{ assertConverted()
     private void assertConverted(int conv_flags, String str_to_convert, String expected_result)
     {
@@ -559,6 +596,9 @@ public class KanaConverterTest
             // Get standard output from executed command
             BufferedReader process_output = new BufferedReader(new InputStreamReader(php_process.getInputStream()));
             php_result = process_output.readLine();
+            if(php_result == null) {
+                php_result = "";
+            }
         } catch(Exception e) {
             System.out.println("Exception running PHP command:");
             System.out.println(e.getStackTrace().toString());
@@ -573,6 +613,10 @@ public class KanaConverterTest
     //{{{ makeOperationStringForPHP()
     private String makeOperationStringForPHP(int conv_flags)
     {
+        if(conv_flags <= 0) {
+            return "";
+        }
+
         StringBuilder php_conv_flags = new StringBuilder();
         for(Entry<Character, Integer> op_map_item : KanaConverter.LETTER_OP_CODE_LOOKUP.entrySet()) {
             char op_char = op_map_item.getKey();
