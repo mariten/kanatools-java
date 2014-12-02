@@ -135,6 +135,15 @@ public abstract class KanaConverterTester
             int  op_flag = op_map_item.getValue();
             if((conv_flags & op_flag) != 0) {
                 php_conv_flags.append(op_char);
+                switch(op_char) {
+                case 'A':
+                    // Also convert spaces, for testing compatibility with mb_convert_kana
+                    php_conv_flags.append('S');
+                    break;
+                case 'a':
+                    // Also convert spaces, for testing compatibility with mb_convert_kana
+                    php_conv_flags.append('s');
+                }
             }
         }
 

@@ -106,13 +106,13 @@ public class KanaConverter
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
-                current_char = convertHankakuSpaceToZenkakuSpace(current_char);
+            && (conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
+                current_char = convertHankakuNumberToZenkakuNumber(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
-                current_char = convertHankakuNumberToZenkakuNumber(current_char);
+            && (conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
+                current_char = convertHankakuSpaceToZenkakuSpace(current_char);
             }
 
             if(current_char == this_char
@@ -518,8 +518,10 @@ public class KanaConverter
             case '\\':
                 break;
             default:
-                return (char)(target + (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
+                return (char)(target + (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
             }
+        } else if(target == HANKAKU_SPACE) {
+            return ZENKAKU_SPACE;
         }
 
         return target;
@@ -537,8 +539,10 @@ public class KanaConverter
             case '＼':
                 break;
             default:
-                return (char)(target - (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
+                return (char)(target - (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
             }
+        } else if(target == ZENKAKU_SPACE) {
+            return HANKAKU_SPACE;
         }
 
         return target;
