@@ -153,7 +153,7 @@ public abstract class KanaConverterTester
         }
 
         if(has_han2zen_kana_conversion
-        && ((conv_flags & KanaConverter.OP_KEEP_DIACRITIC_MARKS_SEPARATE) == 0)) {
+        && ((conv_flags & KanaConverter.OP_KEEP_DIACRITIC_MARKS_APART) == 0)) {
             // For testing compatibility with mb_convert_kana, always add "V" unless
             // no-collapse was specifically requested.
             // Added this after making diacritic-collapse default in KanaConverter

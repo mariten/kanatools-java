@@ -28,7 +28,7 @@ String new_string = KanaConverter.convertKana(input_string, conversion_ops);
 String testing_hira = "てすてぃんぐ";
 
 // Set the single conversion flag in a flag-based integer
-int conversion_flag = KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA;
+int conversion_flag = KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA;
 
 // Convert the string
 String testing_kata = KanaConverter.convertKana(testing_kata, conversion_flag);
@@ -47,8 +47,8 @@ String address = "東京都北区赤羽６−３０−１　赤羽ﾋﾙｽﾞ"
 
 // Set the necessary conversion flags in a flag-based integer
 int conversion_flags = 0;
-conversion_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
-conversion_flags |= KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC;
+conversion_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;
+conversion_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
 
 // Convert the string
 String standardized_address = KanaConverter.convertKana(address, conversion_flags);

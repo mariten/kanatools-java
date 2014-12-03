@@ -12,7 +12,7 @@ public class ErrorCasesTest extends KanaConverterTester
     public void testErrorCases()
     {
         // Pass empty string for input string
-        this.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA,
+        this.assertConverted(KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA,
             "",
             ""
         );
@@ -24,7 +24,7 @@ public class ErrorCasesTest extends KanaConverterTester
         );
 
         // Pass negative integer for operation flags, ensure no changes
-        int negative_op = 0 - KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA;
+        int negative_op = 0 - KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA;
         this.assertConverted(negative_op, super.NEVER_TEST_IN_PHP,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
@@ -33,7 +33,7 @@ public class ErrorCasesTest extends KanaConverterTester
         // Pass null for input string, ensure NullPointerException is thrown
         String null_input_result = "not null";
         try {
-            null_input_result = KanaConverter.convertKana(null, KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
+            null_input_result = KanaConverter.convertKana(null, KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA);
         }
         catch(NullPointerException null_input_ex) {
             null_input_result = "caught exception";

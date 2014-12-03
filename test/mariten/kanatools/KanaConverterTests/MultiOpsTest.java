@@ -11,13 +11,13 @@ public class MultiOpsTest extends KanaConverterTester
     public void testOpFormats()
     {
         // Single op (flag-style)
-        int single_op_flag = KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC;
+        int single_op_flag = KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
         this.assertConverted(single_op_flag, "Ａ", "A");
 
         // Multiple ops (flag-style)
         int multi_op_flags = 0;
-        multi_op_flags |= KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC;
-        multi_op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
+        multi_op_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
+        multi_op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;
         this.assertConverted(multi_op_flags, "Ａ", "A");
 
         // Single op (PHP mb_convert_kana style)
@@ -37,8 +37,8 @@ public class MultiOpsTest extends KanaConverterTester
     {
         // han2zen kata-kata, zen2han alphanumeric
         int op_flags = 0;
-        op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
-        op_flags |= KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;
+        op_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
         this.assertConverted(op_flags,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\" !0:A^a|”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。アガパ゛漢 #1;B_b}\\ #1;B_b}＼・きじぴゑゖゞキジピヱヹヶヾ゜・キジピ゜字"
@@ -52,8 +52,8 @@ public class MultiOpsTest extends KanaConverterTester
 
         // han2zen hira, zen2han alpha-only
         op_flags = 0;
-        op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA;
-        op_flags |= KanaConverter.OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA;
+        op_flags |= KanaConverter.OP_ZEN_LETTER_TO_HAN_LETTER;
         this.assertConverted(op_flags,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：A＾a｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。あがぱ゛漢 #1;B_b}\\　＃１；B＿b｝＼・きじぴゑゖゞキジピヱヹヶヾ゜・きじぴ゜字"
@@ -61,8 +61,8 @@ public class MultiOpsTest extends KanaConverterTester
 
         // zen2zen hira-kata, han2zen num-only
         op_flags = 0;
-        op_flags |= KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA;
-        op_flags |= KanaConverter.OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER;
+        op_flags |= KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA;
+        op_flags |= KanaConverter.OP_HAN_NUMBER_TO_ZEN_NUMBER;
         this.assertConverted(op_flags,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !０:A^a|\"　！０：Ａ＾ａ｜”アガパヰゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #１;B_b}\\　＃１；Ｂ＿ｂ｝＼・キジピヱゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
@@ -70,9 +70,9 @@ public class MultiOpsTest extends KanaConverterTester
 
         // zen2zen kata-hira, han2zen kata-hira, han2zen alphanumeric
         op_flags = 0;
-        op_flags |= KanaConverter.OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA;
-        op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA;
-        op_flags |= KanaConverter.OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC;
+        op_flags |= KanaConverter.OP_ZEN_KATA_TO_ZEN_HIRA;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA;
+        op_flags |= KanaConverter.OP_HAN_ASCII_TO_ZEN_ASCII;
         this.assertConverted(op_flags,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             "　！０：Ａ＾ａ｜\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝあがぱゐヸヷヵヽ゛。あがぱ゛漢　＃１；Ｂ＿ｂ｝\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞきじぴゑヹヶヾ゜・きじぴ゜字"
@@ -80,9 +80,9 @@ public class MultiOpsTest extends KanaConverterTester
 
         // zen2han kata, han2zen num-only, alpha-only
         op_flags = 0;
-        op_flags |= KanaConverter.OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA;
-        op_flags |= KanaConverter.OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER;
-        op_flags |= KanaConverter.OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER;
+        op_flags |= KanaConverter.OP_ZEN_KATA_TO_HAN_KATA;
+        op_flags |= KanaConverter.OP_HAN_LETTER_TO_ZEN_LETTER;
+        op_flags |= KanaConverter.OP_HAN_NUMBER_TO_ZEN_NUMBER;
         this.assertConverted(op_flags,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !０:Ａ^ａ|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝｱｶﾞﾊﾟｲヸヷヵヽﾞ｡ｱｶﾞﾊﾟﾞ漢 #１;Ｂ_ｂ}\\　＃１；Ｂ＿ｂ｝＼･きじぴゑゖゞｷｼﾞﾋﾟｴヹヶヾﾟ･ｷｼﾞﾋﾟﾟ字"
@@ -97,8 +97,8 @@ public class MultiOpsTest extends KanaConverterTester
     {
         // han2zen-kata, han2zen-hira
         int op_flags = 0;
-        op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA;
-        op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;
         super.assertConverted(op_flags,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。アガパ゛漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜・キジピ゜字"

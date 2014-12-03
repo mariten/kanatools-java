@@ -14,41 +14,41 @@ public class KanaConverter
     // Conversion Operations Types
     //// Matched numeric values to originals in PHP's source code
     //// https://github.com/php/php-src/blob/a84e5dc37dc0ff8c313164d9db141d3d9f2b2730/ext/mbstring/mbstring.c#L3434
-    public static final int OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC  = 0x00000001;
-    public static final int OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC  = 0x00000010;
-    public static final int OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA          = 0x00010000;
-    public static final int OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA          = 0x00020000;
-    public static final int OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA          = 0x00000200;
-    public static final int OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA          = 0x00002000;
-    public static final int OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA          = 0x00000100;
-    public static final int OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA          = 0x00001000;
-    public static final int OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER              = 0x00000004;
-    public static final int OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER              = 0x00000040;
-    public static final int OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER              = 0x00000002;
-    public static final int OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER              = 0x00000020;
-    public static final int OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE                = 0x00000008;
-    public static final int OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE                = 0x00000080;
-    public static final int OP_KEEP_DIACRITIC_MARKS_SEPARATE                 = 0x00100000;
+    public static final int OP_HAN_ASCII_TO_ZEN_ASCII      = 0x00000001;
+    public static final int OP_HAN_LETTER_TO_ZEN_LETTER    = 0x00000002;
+    public static final int OP_HAN_NUMBER_TO_ZEN_NUMBER    = 0x00000004;
+    public static final int OP_HAN_SPACE_TO_ZEN_SPACE      = 0x00000008;
+    public static final int OP_HAN_KATA_TO_ZEN_KATA        = 0x00000100;
+    public static final int OP_HAN_KATA_TO_ZEN_HIRA        = 0x00000200;
+    public static final int OP_KEEP_DIACRITIC_MARKS_APART  = 0x00100000;
+    public static final int OP_ZEN_ASCII_TO_HAN_ASCII      = 0x00000010;
+    public static final int OP_ZEN_LETTER_TO_HAN_LETTER    = 0x00000020;
+    public static final int OP_ZEN_NUMBER_TO_HAN_NUMBER    = 0x00000040;
+    public static final int OP_ZEN_SPACE_TO_HAN_SPACE      = 0x00000080;
+    public static final int OP_ZEN_KATA_TO_HAN_KATA        = 0x00001000;
+    public static final int OP_ZEN_HIRA_TO_HAN_KATA        = 0x00002000;
+    public static final int OP_ZEN_HIRA_TO_ZEN_KATA        = 0x00010000;
+    public static final int OP_ZEN_KATA_TO_ZEN_HIRA        = 0x00020000;
 
     //// Maintain backwards compatibility (based on mb_convert_kana's "$option" parameter from PHP)
     //// Details: http://php.net/manual/en/function.mb-convert-kana.php
     public static final Map<Character, Integer> LETTER_OP_CODE_LOOKUP;
     static {
         LETTER_OP_CODE_LOOKUP = new HashMap<Character, Integer>();
-        LETTER_OP_CODE_LOOKUP.put('A', OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC);
-        LETTER_OP_CODE_LOOKUP.put('a', OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC);
-        LETTER_OP_CODE_LOOKUP.put('C', OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
-        LETTER_OP_CODE_LOOKUP.put('c', OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA);
-        LETTER_OP_CODE_LOOKUP.put('H', OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA);
-        LETTER_OP_CODE_LOOKUP.put('h', OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA);
-        LETTER_OP_CODE_LOOKUP.put('K', OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA);
-        LETTER_OP_CODE_LOOKUP.put('k', OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA);
-        LETTER_OP_CODE_LOOKUP.put('N', OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER);
-        LETTER_OP_CODE_LOOKUP.put('n', OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER);
-        LETTER_OP_CODE_LOOKUP.put('R', OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER);
-        LETTER_OP_CODE_LOOKUP.put('r', OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER);
-        LETTER_OP_CODE_LOOKUP.put('S', OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE);
-        LETTER_OP_CODE_LOOKUP.put('s', OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE);
+        LETTER_OP_CODE_LOOKUP.put('A', OP_HAN_ASCII_TO_ZEN_ASCII);
+        LETTER_OP_CODE_LOOKUP.put('a', OP_ZEN_ASCII_TO_HAN_ASCII);
+        LETTER_OP_CODE_LOOKUP.put('C', OP_ZEN_HIRA_TO_ZEN_KATA);
+        LETTER_OP_CODE_LOOKUP.put('c', OP_ZEN_KATA_TO_ZEN_HIRA);
+        LETTER_OP_CODE_LOOKUP.put('H', OP_HAN_KATA_TO_ZEN_HIRA);
+        LETTER_OP_CODE_LOOKUP.put('h', OP_ZEN_HIRA_TO_HAN_KATA);
+        LETTER_OP_CODE_LOOKUP.put('K', OP_HAN_KATA_TO_ZEN_KATA);
+        LETTER_OP_CODE_LOOKUP.put('k', OP_ZEN_KATA_TO_HAN_KATA);
+        LETTER_OP_CODE_LOOKUP.put('N', OP_HAN_NUMBER_TO_ZEN_NUMBER);
+        LETTER_OP_CODE_LOOKUP.put('n', OP_ZEN_NUMBER_TO_HAN_NUMBER);
+        LETTER_OP_CODE_LOOKUP.put('R', OP_HAN_LETTER_TO_ZEN_LETTER);
+        LETTER_OP_CODE_LOOKUP.put('r', OP_ZEN_LETTER_TO_HAN_LETTER);
+        LETTER_OP_CODE_LOOKUP.put('S', OP_HAN_SPACE_TO_ZEN_SPACE);
+        LETTER_OP_CODE_LOOKUP.put('s', OP_ZEN_SPACE_TO_HAN_SPACE);
     }
 
 
@@ -74,7 +74,7 @@ public class KanaConverter
         }
 
         boolean do_collapse_on_hankaku_diacritic = true;
-        if((conversion_ops & OP_KEEP_DIACRITIC_MARKS_SEPARATE) != 0) {
+        if((conversion_ops & OP_KEEP_DIACRITIC_MARKS_APART) != 0) {
             // Do not glue hankaku katakana diacritic symbols when converting to zenkaku.
             // Use with 'K' or 'H'
             do_collapse_on_hankaku_diacritic = false;
@@ -96,28 +96,28 @@ public class KanaConverter
             // Order of conversion operations written to be similar to original PHP
             //// Source: https://github.com/php/php-src/blob/128eda843f7dff487fff529a384fee3c5494e0f6/ext/mbstring/libmbfl/filters/mbfilter_tl_jisx0201_jisx0208.c#L41
             if(current_char == this_char
-            && (conversion_ops & OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC)  != 0) {
-                current_char = convertHankakuAlphanumericToZenkakuAlphanumeric(current_char);
+            && 0 != (conversion_ops & OP_HAN_ASCII_TO_ZEN_ASCII)) {
+                current_char = convertHankakuAsciiToZenkakuAscii(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER)              != 0) {
+            && 0 != (conversion_ops & OP_HAN_LETTER_TO_ZEN_LETTER)) {
                 current_char = convertHankakuLetterToZenkakuLetter(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER)              != 0) {
+            && 0 != (conversion_ops & OP_HAN_NUMBER_TO_ZEN_NUMBER)) {
                 current_char = convertHankakuNumberToZenkakuNumber(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE)                != 0) {
+            && 0 != (conversion_ops & OP_HAN_SPACE_TO_ZEN_SPACE)) {
                 current_char = convertHankakuSpaceToZenkakuSpace(current_char);
             }
 
             if(current_char == this_char
-            && ((conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA)         != 0
-            ||  (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)         != 0)) {
+            && (0 != (conversion_ops & OP_HAN_KATA_TO_ZEN_KATA)
+            ||  0 != (conversion_ops & OP_HAN_KATA_TO_ZEN_HIRA))) {
                 char collapsed_char_for_check = current_char;
                 boolean performed_hankaku_conversion = false;
                 if(do_collapse_on_hankaku_diacritic) {
@@ -143,34 +143,35 @@ public class KanaConverter
                     }
                 }
 
-                if(performed_hankaku_conversion && (conversion_ops & OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA) == 0) {
+                if(performed_hankaku_conversion
+                && 0 == (conversion_ops & OP_HAN_KATA_TO_ZEN_KATA)) {
                     // If request is not for katakana, perform additional kata->hira conversion
                     current_char = convertZenkakuKatakanaToZenkakuHiragana(current_char);
                 }
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC)  != 0) {
-                current_char = convertZenkakuAlphanumericToHankakuAlphanumeric(current_char);
+            && 0 != (conversion_ops & OP_ZEN_ASCII_TO_HAN_ASCII)) {
+                current_char = convertZenkakuAsciiToHankakuAscii(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER)              != 0) {
+            && 0 != (conversion_ops & OP_ZEN_LETTER_TO_HAN_LETTER)) {
                 current_char = convertZenkakuLetterToHankakuLetter(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER)              != 0) {
+            && 0 != (conversion_ops & OP_ZEN_NUMBER_TO_HAN_NUMBER)) {
                 current_char = convertZenkakuNumberToHankakuNumber(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE)                != 0) {
+            && 0 != (conversion_ops & OP_ZEN_SPACE_TO_HAN_SPACE)) {
                 current_char = convertZenkakuSpaceToHankakuSpace(current_char);
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA)          != 0) {
+            && 0 != (conversion_ops & OP_ZEN_KATA_TO_HAN_KATA)) {
                 hankaku_diacritic_suffix = determineHankakuDiacriticSuffix(current_char);
                 current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
             }
@@ -182,12 +183,12 @@ public class KanaConverter
             // Protects against katakana characters being incorrectly converted by zen-hiragana to han-katakana logic
             if(current_char == this_char
             && full_katakana_to_hiragana_result == current_char
-            && ((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA)          != 0
-            ||  (conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA)          != 0)) {
+            && (0 != (conversion_ops & OP_ZEN_HIRA_TO_ZEN_KATA)
+            ||  0 != (conversion_ops & OP_ZEN_HIRA_TO_HAN_KATA))) {
                 // First convert from full hiragana to full katakana
                 current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
 
-                if((conversion_ops & OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA) != 0
+                if(0 != (conversion_ops & OP_ZEN_HIRA_TO_HAN_KATA)
                 && hankaku_diacritic_suffix == 0) {
                     // Proceed to convert to hankaku if requested (skip if zen-kata to han-kata conversion was already performed)
                     hankaku_diacritic_suffix = determineHankakuDiacriticSuffix(current_char);
@@ -196,7 +197,7 @@ public class KanaConverter
             }
 
             if(current_char == this_char
-            && (conversion_ops & OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA)          != 0) {
+            && 0 != (conversion_ops & OP_ZEN_KATA_TO_ZEN_HIRA)) {
                 current_char = full_katakana_to_hiragana_result;
             }
 
@@ -508,8 +509,8 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ char convertHankakuAlphanumericToZenkakuAlphanumeric(char)
-    protected static char convertHankakuAlphanumericToZenkakuAlphanumeric(char target)
+    //{{{ char convertHankakuAsciiToZenkakuAscii(char)
+    protected static char convertHankakuAsciiToZenkakuAscii(char target)
     {
         if(target >= HANKAKU_ALPHANUMERIC_FIRST && target <= HANKAKU_ALPHANUMERIC_LAST) {
             switch(target) {
@@ -529,8 +530,8 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ char convertZenkakuAlphanumericToHankakuAlphanumeric(char)
-    protected static char convertZenkakuAlphanumericToHankakuAlphanumeric(char target)
+    //{{{ char convertZenkakuAsciiToHankakuAscii(char)
+    protected static char convertZenkakuAsciiToHankakuAscii(char target)
     {
         if(target >= ZENKAKU_ALPHANUMERIC_FIRST && target <= ZENKAKU_ALPHANUMERIC_LAST) {
             switch(target) {

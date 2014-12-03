@@ -7,18 +7,18 @@ import static org.junit.Assert.*;
 
 public class SingleOpTest extends KanaConverterTester
 {
-    //{{{ 'A': testHankakuAlphanumericToZenkakuAlphanumeric()
+    //{{{ 'A': testHankakuAsciiToZenkakuAscii()
     @Test
-    public void testHankakuAlphanumericToZenkakuAlphanumeric()
+    public void testHankakuAsciiToZenkakuAscii()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC,
+        super.assertConverted(KanaConverter.OP_HAN_ASCII_TO_ZEN_ASCII,
             " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
             "　！\"＃＄％＆'（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［\\］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝~"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_HANKAKU_ALPHANUMERIC_TO_ZENKAKU_ALPHANUMERIC,
+        super.assertConverted(KanaConverter.OP_HAN_ASCII_TO_ZEN_ASCII,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             "　！０：Ａ＾ａ｜\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢　＃１；Ｂ＿ｂ｝\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -26,18 +26,18 @@ public class SingleOpTest extends KanaConverterTester
     //}}}
 
 
-    //{{{ 'a': testZenkakuAlphanumericToHankakuAlphanumeric()
+    //{{{ 'a': testZenkakuAsciiToHankakuAscii()
     @Test
-    public void testZenkakuAlphanumericToHankakuAlphanumeric()
+    public void testZenkakuAsciiToHankakuAscii()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC,
+        super.assertConverted(KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII,
             "　！”＃＄％＆’（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～",
             " !”#$%&’()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[＼]^_`abcdefghijklmnopqrstuvwxyz{|}～"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC,
+        super.assertConverted(KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\" !0:A^a|”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\ #1;B_b}＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -50,13 +50,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testZenkakuHiraganaToZenkakuKatakana()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA,
             "〶 | ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをん | ゔゕゖゝゞ",
             "〶 | ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲン | ゔゕゖゝゞ"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”アガパヰゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・キジピヱゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -69,13 +69,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testZenkakuKatakanaToZenkakuHiragana()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA,
+        super.assertConverted(KanaConverter.OP_ZEN_KATA_TO_ZEN_HIRA,
             "んゔゕゖゝゞ | ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴ | ヵヶヷヸヹヺ・ーヽヾ",
             "んゔゕゖゝゞ | ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんヴ | ヵヶヷヸヹヺ・ーヽヾ"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA,
+        super.assertConverted(KanaConverter.OP_ZEN_KATA_TO_ZEN_HIRA,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝあがぱゐヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞきじぴゑヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -89,8 +89,8 @@ public class SingleOpTest extends KanaConverterTester
     {
         // Check all target chars
         int op_flags = 0;
-        op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA;
-        op_flags |= KanaConverter.OP_KEEP_DIACRITIC_MARKS_SEPARATE;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA;
+        op_flags |= KanaConverter.OP_KEEP_DIACRITIC_MARKS_APART;
         super.assertConverted(op_flags,
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
             "～'。「」、・ぁぃぅぇぉゃゅょっーあいうえおかきくけこか゛き゛く゛け゛こ゛さしすせそさ゛し゛す゛せ゛そ゛たちつてとた゛ち゛つ゛て゛と゛なにぬねのはひふへほは゛ひ゛ふ゛へ゛ほ゛は゜ひ゜ふ゜へ゜ほ゜まみむめもやゆよらりるれろわをん゛゜ﾡ"
@@ -105,24 +105,24 @@ public class SingleOpTest extends KanaConverterTester
     //}}}
 
 
-    //{{{ 'HV': testHankakuKatakanaToZenkakuHiraganaWithCollapse()
+    //{{{ 'HV': testHankakuKatakanaToZenkakuHiraganaWithoutCollapse()
     @Test
-    public void testHankakuKatakanaToZenkakuHiraganaWithCollapse()
+    public void testHankakuKatakanaToZenkakuHiraganaWithoutCollapse()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA,
+        super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA,
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
             "～'。「」、・ぁぃぅぇぉゃゅょっーあいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもやゆよらりるれろわをん゛゜ﾡ"
         );
 
         // Check logic for collapsing diacritic marks
-        super.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA,
+        super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA,
             "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-",
             "Aそざざ゛じすぱぱ゜ひ1-"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_HIRAGANA,
+        super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。あがぱ゛漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜・きじぴ゜字"
         );
@@ -135,19 +135,19 @@ public class SingleOpTest extends KanaConverterTester
     public void testZenkakuHiraganaToHankakuKatakana()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_HIRA_TO_HAN_KATA,
             "～'。「」、・ぁぃぅぇぉゃゅょっーあいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもやゆよらりるれろゎわゐゑをんゔ゛゜ﾡゕゖゝゞヽヾ",
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾜｲｴｦﾝゔﾞﾟﾡゕゖゝゞヽヾ"
         );
 
         // Check logic for affixing diacritic marks
-        super.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_HIRA_TO_HAN_KATA,
             "Aそざざ゛じすぱぱ゜ひ1-",
             "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_HIRAGANA_TO_HANKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_HIRA_TO_HAN_KATA,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”ｱｶﾞﾊﾟｲゔゕゝアガパヰヸヷヵヽﾞ｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼･ｷｼﾞﾋﾟｴゖゞキジピヱヹヶヾﾟ･ｷｼﾞﾋﾟﾟ字"
         );
@@ -161,8 +161,8 @@ public class SingleOpTest extends KanaConverterTester
     {
         // Check all target chars
         int op_flags = 0;
-        op_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
-        op_flags |= KanaConverter.OP_KEEP_DIACRITIC_MARKS_SEPARATE;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;
+        op_flags |= KanaConverter.OP_KEEP_DIACRITIC_MARKS_APART;
         super.assertConverted(op_flags,
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
             "～'。「」、・ァィゥェォャュョッーアイウエオカキクケコカ゛キ゛ク゛ケ゛コ゛サシスセソサ゛シ゛ス゛セ゛ソ゛タチツテトタ゛チ゛ツ゛テ゛ト゛ナニヌネノハヒフヘホハ゛ヒ゛フ゛ヘ゛ホ゛ハ゜ヒ゜フ゜ヘ゜ホ゜マミムメモヤユヨラリルレロワヲン゛゜ﾡ"
@@ -177,24 +177,24 @@ public class SingleOpTest extends KanaConverterTester
     //}}}
 
 
-    //{{{ 'KV': testHankakuKatakanaToZenkakuKatakanaWithCollapse()
+    //{{{ 'KV': testHankakuKatakanaToZenkakuKatakanaWithoutCollapse()
     @Test
-    public void testHankakuKatakanaToZenkakuKatakanaWithCollapse()
+    public void testHankakuKatakanaToZenkakuKatakanaWithoutCollapse()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_KATA,
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
             "～'。「」、・ァィゥェォャュョッーアイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモヤユヨラリルレロワヲン゛゜ﾡ"
         );
 
         // Check logic for collapsing diacritic marks
-        super.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_KATA,
             "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-",
             "Aソザザ゛ジスパパ゜ヒ1-"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_KATA,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛。アガパ゛漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜・キジピ゜字"
         );
@@ -207,19 +207,19 @@ public class SingleOpTest extends KanaConverterTester
     public void testZenkakuKatakanaToHankakuKatakana()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_KATA_TO_HAN_KATA,
             "～'。「」、・ァィゥェォャュョッーアイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモヤユヨラリルレロヮワヰヱヲンヴ゛゜ﾡヵヶヷヸヹヺヽヾ",
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾜｲｴｦﾝｳﾞﾞﾟﾡヵヶヷヸヹヺヽヾ"
         );
 
         // Check logic for affixing diacritic marks
-        super.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_KATA_TO_HAN_KATA,
             "Aソザザ゛ジスパパ゜ヒ1-",
             "Aｿｻﾞｻﾞﾞｼﾞｽﾊﾟﾊﾟﾟﾋ1-"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_KATAKANA_TO_HANKAKU_KATAKANA,
+        super.assertConverted(KanaConverter.OP_ZEN_KATA_TO_HAN_KATA,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝｱｶﾞﾊﾟｲヸヷヵヽﾞ｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼･きじぴゑゖゞｷｼﾞﾋﾟｴヹヶヾﾟ･ｷｼﾞﾋﾟﾟ字"
         );
@@ -232,13 +232,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testHankakuNumberToZenkakuNumber()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER,
+        super.assertConverted(KanaConverter.OP_HAN_NUMBER_TO_ZEN_NUMBER,
             "/0123456789:",
             "/０１２３４５６７８９:"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_HANKAKU_NUMBER_TO_ZENKAKU_NUMBER,
+        super.assertConverted(KanaConverter.OP_HAN_NUMBER_TO_ZEN_NUMBER,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !０:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #１;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -251,13 +251,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testZenkakuNumberToHankakuNumber()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER,
+        super.assertConverted(KanaConverter.OP_ZEN_NUMBER_TO_HAN_NUMBER,
             "／０１２３４５６７８９：",
             "／0123456789："
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_NUMBER_TO_HANKAKU_NUMBER,
+        super.assertConverted(KanaConverter.OP_ZEN_NUMBER_TO_HAN_NUMBER,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！0：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃1；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -270,13 +270,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testHankakuLetterToZenkakuLetter()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER,
+        super.assertConverted(KanaConverter.OP_HAN_LETTER_TO_ZEN_LETTER,
             " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
             " !\"#$%&'()*+,-./0123456789:;<=>?@ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ[\\]^_`ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ{|}~"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_HANKAKU_LETTER_TO_ZENKAKU_LETTER,
+        super.assertConverted(KanaConverter.OP_HAN_LETTER_TO_ZEN_LETTER,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:Ａ^ａ|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;Ｂ_ｂ}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -289,13 +289,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testZenkakuLetterToHankakuLetter()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER,
+        super.assertConverted(KanaConverter.OP_ZEN_LETTER_TO_HAN_LETTER,
             "　！”＃＄％＆’（）＊＋，−．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［￥］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝〜",
             "　！”＃＄％＆’（）＊＋，−．／０１２３４５６７８９：；＜＝＞？＠ABCDEFGHIJKLMNOPQRSTUVWXYZ［￥］＾＿｀abcdefghijklmnopqrstuvwxyz｛｜｝〜"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER,
+        super.assertConverted(KanaConverter.OP_ZEN_LETTER_TO_HAN_LETTER,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：A＾a｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；B＿b｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -308,13 +308,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testHankakuSpaceToZenkakuSpace()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE,
+        super.assertConverted(KanaConverter.OP_HAN_SPACE_TO_ZEN_SPACE,
             "Little spaces　and big spaces",
             "Little　spaces　and　big　spaces"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE,
+        super.assertConverted(KanaConverter.OP_HAN_SPACE_TO_ZEN_SPACE,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             "　!0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢　#1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
@@ -327,19 +327,19 @@ public class SingleOpTest extends KanaConverterTester
     public void testZenkakuSpaceToHankakuSpace()
     {
         // Check all target chars
-        super.assertConverted(KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE,
+        super.assertConverted(KanaConverter.OP_ZEN_SPACE_TO_HAN_SPACE,
             "Ｌｉｔｔｌｅ ｓｐａｃｅｓ　ａｎｄ ｂｉｇ　ｓｐａｃｅｓ",
             "Ｌｉｔｔｌｅ ｓｐａｃｅｓ ａｎｄ ｂｉｇ ｓｐａｃｅｓ"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE,
+        super.assertConverted(KanaConverter.OP_ZEN_SPACE_TO_HAN_SPACE,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\" ！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\ ＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
 
         // Test that converted spaces are trimmed by the "trim" function
-        String trimmed_test = KanaConverter.convertKana("　テスト　　", KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE).trim();
+        String trimmed_test = KanaConverter.convertKana("　テスト　　", KanaConverter.OP_ZEN_SPACE_TO_HAN_SPACE).trim();
         assertEquals("テスト", trimmed_test);
     }
     //}}}
@@ -350,13 +350,13 @@ public class SingleOpTest extends KanaConverterTester
     public void testCollapseHankakuMarkOnly()
     {
         // This option is illegal, no conversion should be performed
-        super.assertConverted(KanaConverter.OP_KEEP_DIACRITIC_MARKS_SEPARATE,
+        super.assertConverted(KanaConverter.OP_KEEP_DIACRITIC_MARKS_APART,
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ",
             "～'｡｢｣､･ｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｶﾞｷﾞｸﾞｹﾞｺﾞｻｼｽｾｿｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾁﾂﾃﾄﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟﾡ"
         );
 
         // Check mixed input
-        super.assertConverted(KanaConverter.OP_KEEP_DIACRITIC_MARKS_SEPARATE,
+        super.assertConverted(KanaConverter.OP_KEEP_DIACRITIC_MARKS_APART,
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
             " !0:A^a|\"　！０：Ａ＾ａ｜”あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字"
         );
