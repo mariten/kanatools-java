@@ -40,17 +40,15 @@ Prints:
 ```
 
 ##### Use Standard Katakana and Alphanumeric Characters
-* Convert *han-kaku* katakana characters to *zen-kaku*
-* Convert *zen-kaku* alphanumeric characters to *han-kaku*
+* Convert *han-kaku* katakana characters to *zen-kaku* (and glue diacritic marks)
+* Convert *zen-kaku* ASCII characters to *han-kaku*
 ```java
 String address = "東京都北区赤羽６−３０−１　赤羽ﾋﾙｽﾞ"
 
 // Set the necessary conversion flags in a flag-based integer
 int conversion_flags = 0;
 conversion_flags |= KanaConverter.OP_HANKAKU_KATAKANA_TO_ZENKAKU_KATAKANA;
-conversion_flags |= KanaConverter.OP_COLLAPSE_HANKAKU_VOICE_MARKS;
 conversion_flags |= KanaConverter.OP_ZENKAKU_ALPHANUMERIC_TO_HANKAKU_ALPHANUMERIC;
-conversion_flags |= KanaConverter.OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE;
 
 // Convert the string
 String standardized_address = KanaConverter.convertKana(address, conversion_flags);

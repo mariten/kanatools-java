@@ -130,6 +130,7 @@ public abstract class KanaConverterTester
         }
 
         StringBuilder php_conv_flags = new StringBuilder();
+        boolean has_han2zen_kana_conversion = false;
         for(Entry<Character, Integer> op_map_item : KanaConverter.LETTER_OP_CODE_LOOKUP.entrySet()) {
             char op_char = op_map_item.getKey();
             int  op_flag = op_map_item.getValue();
@@ -143,8 +144,20 @@ public abstract class KanaConverterTester
                 case 'a':
                     // Also convert spaces, for testing compatibility with mb_convert_kana
                     php_conv_flags.append('s');
+                    break;
+                case 'H':
+                case 'K':
+                    has_han2zen_kana_conversion = true;
                 }
             }
+        }
+
+        if(has_han2zen_kana_conversion
+        && ((conv_flags & KanaConverter.OP_KEEP_DIACRITIC_MARKS_SEPARATE) == 0)) {
+            // For testing compatibility with mb_convert_kana, always add "V" unless
+            // no-collapse was specifically requested.
+            // Added this after making diacritic-collapse default in KanaConverter
+            php_conv_flags.append('V');
         }
 
         return php_conv_flags.toString();

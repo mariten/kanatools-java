@@ -28,7 +28,7 @@ public class KanaConverter
     public static final int OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER              = 0x00000020;
     public static final int OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE                = 0x00000008;
     public static final int OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE                = 0x00000080;
-    public static final int OP_COLLAPSE_HANKAKU_VOICE_MARKS                  = 0x00000800;
+    public static final int OP_KEEP_DIACRITIC_MARKS_SEPARATE                 = 0x00100000;
 
     //// Maintain backwards compatibility (based on mb_convert_kana's "$option" parameter from PHP)
     //// Details: http://php.net/manual/en/function.mb-convert-kana.php
@@ -49,7 +49,6 @@ public class KanaConverter
         LETTER_OP_CODE_LOOKUP.put('r', OP_ZENKAKU_LETTER_TO_HANKAKU_LETTER);
         LETTER_OP_CODE_LOOKUP.put('S', OP_HANKAKU_SPACE_TO_ZENKAKU_SPACE);
         LETTER_OP_CODE_LOOKUP.put('s', OP_ZENKAKU_SPACE_TO_HANKAKU_SPACE);
-        LETTER_OP_CODE_LOOKUP.put('V', OP_COLLAPSE_HANKAKU_VOICE_MARKS);
     }
 
 
@@ -74,10 +73,11 @@ public class KanaConverter
             return original_string;
         }
 
-        boolean do_collapse_on_hankaku_diacritic = false;
-        if((conversion_ops & OP_COLLAPSE_HANKAKU_VOICE_MARKS) != 0) {
-            // Collapse voiced characters (hankaku) to voiced-kana-chars (zenkaku).  Use with 'K' or 'H'
-            do_collapse_on_hankaku_diacritic = true;
+        boolean do_collapse_on_hankaku_diacritic = true;
+        if((conversion_ops & OP_KEEP_DIACRITIC_MARKS_SEPARATE) != 0) {
+            // Do not glue hankaku katakana diacritic symbols when converting to zenkaku.
+            // Use with 'K' or 'H'
+            do_collapse_on_hankaku_diacritic = false;
         }
 
         int char_count = original_string.length();
