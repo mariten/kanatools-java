@@ -1,0 +1,34 @@
+code {
+    color: #2E25C7;
+    background-color: #F4F2F9;
+}
+
+.bs-docs-header h1 { margin-right: 0; }
+.bs-docs-header p  { margin-right: 0; }
+
+.bs-example:after  { content: "Example"; }
+
+.navbar-brand { color: #B73A33; }
+.navbar-brand:hover  { color: #7C2A23; }
+.navbar-brand:active { color: #7C2A23; }
+
+.navbar-nav li a { color: #B73A33; }
+
+.nav-selected {
+    padding: 15px;
+    background-color: #E0E0E0;
+}
+
+.top-banner {
+    color: #E3BFAD;
+    background-color: #A72A28;
+    background-image: linear-gradient(to bottom, #89141F 0px, #A72A28 100%);
+}
+
+.kbd-red {
+    background-color: #A72A28;
+}
+
+.kbd-green {
+    background-color: #28974A;
+}

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0">
+
+    <title>Java 用の総合仮名変換 - Japanese Kana Conversion Tools for Java</title>
+    <meta name="description" content="かな・カナ・ローマ字のあらゆる全角と半角変換を簡単に処理できるライブラリ" />
+
+    <link href="/kanatools-java/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="/kanatools-java/css/docs.min.css"      type="text/css" rel="stylesheet" />
+    <link href="/kanatools-java/css/kanatools.css"     type="text/css" rel="stylesheet" />
+    <link href="/kanatools-java/css/highlight.css"     type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="navbar navbar-static-top bs-docs-nav" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/kanatools-java/en" class="navbar-brand"><b>Kana Tools for Java</b></a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <div class="nav-selected">KanaConverter</div>
+                    </li>
+                    <li>
+                        <a href="/kanatools-java/en/kana-sorter">KanaSorter</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mariten/kanatools-java/raw/master/compiled/jar/kanatools.jar">Download JAR</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mariten/kanatools-java">GitHub</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><div class="nav-selected">English</div></li>
+                    <li><a href="/kanatools-java/ja/kana-converter">日本語</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="bs-docs-header top-banner">
+        <div class="container text-center">
+            <h1>KanaConverter</h1>
+            <p>Easy back-and-forth conversion of <i>kana</i>, <i>hankaku</i>, <i>zenkaku</i>, and other characters used in Japanese text</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="bs-docs-section">
+            <h2 class="page-header">Summary</h2>
+            <p class="lead">Perform multiple conversions on Japanese text with just a single static function call</p>
+
+            <ul>
+                <li>Mix and match the <kbd class="kbd-red">KanaConverter</kbd> operation constants using a flag-style integer</li>
+                <li>Call the <code>convertKana</code> function once on an input string it will quickly handle each conversion in a single run</li>
+                <li>Uses UTF-8</li>
+                <li>Inspired by <a target="_blank" href="http://php.net/manual/en/function.mb-convert-kana.php">mb_convert_kana</a>, a native PHP function that similarly handles multi-method Japanese text conversions.</li>
+            </ul>
+
+
+            <h3>Sample with Single Conversion</h3>
+            <p>Convert <i>hankaku</i> katakana in a string to <i>zenkaku</i></p>
+            <div class="highlight">
+                <pre><code class="language-java">String input_str = "ｶﾅ･ﾂｰﾙｽﾞ　ｖ１．０";
+int conv_op_flags = KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;
+String output_str = KanaConverter.convertKana(input_str, conv_op_flags);
+System.out.println(output_str);
+// "カナ・ツールズ　ｖ１．０"</code></pre>
+            </div>
+
+            <h3>Sample with Multiple Conversions</h3>
+            <p>Convert <i>hankaku</i> katakana in a string to <i>zenkaku</i>, also convert <i>zenkaku</i> ASCII characters to <i>hankaku</i></p>
+            <div class="highlight">
+                <pre><code class="language-java">String input_str = "ｶﾅ･ﾂｰﾙｽﾞ　ｖ１．０";
+int conv_op_flags = KanaConverter.OP_HAN_KATA_TO_ZEN_KATA | KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
+String output_str = KanaConverter.convertKana(input_str, conv_op_flags);
+System.out.println(output_str);
+// "カナ・ツールズ v1.0"</code></pre>
+            </div>
+        </div>
+
+        <div class="bs-docs-section">
+            <h2 class="page-header"><code>convertKana</code> Function</h2>
+            <h3 class>Description</h3>
+            <div class="highlight">
+                <pre><code class="language-java">public static String convertKana(String original_string, int    conversion_ops)
+public static String convertKana(String original_string, String conversion_ops)</code></pre>
+            </div>
+            <p>Converts a string containing kana or other characters used in Japanese text input according to one or more requested conversion methods.</p>
+            <h3>Parameters</h3>
+            <dl class="dl-horizontal">
+                <dt>original_string</dt>
+                <dd>UTF-8 <code>String</code> to convert</dd>
+                <dt>conversion_ops</dt>
+                <dd>
+                    Flag-based <code>int</code> indicating which type of conversions to perform, see <a href="#conversion-list">list of possible conversions</a> below.<br />
+                    Optionally, if passed as a <code>String</code> according to PHP's <a target="_blank" href="http://php.net/manual/en/function.mb-convert-kana.php">mb_convert_kana</a> conversion letter codes.
+                </dd>
+            </dl>
+
+            <h3>Return Value</h3>
+            <p>The converted UTF-8 <code>String</code></p>
+
+
+        </div>
+
+        <div class="bs-docs-section">
+            <a name="conversion-list"></a>
+            <h2 class="page-header">Supported Conversion Operations</h2>
+            <p class="lead">List of all conversion types that <kbd class="kbd-red">KanaConverter</kbd> can perform on an input string.</p>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Conversion Operation</th>
+                    <th>Example</th>
+                    <th>Target Characters</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <code><b>OP_HAN_ASCII_TO_ZEN_ASCII</b></code><br />
+                        Standard-width ASCII to double-width
+                    </td>
+                    <td><kbd class="kbd-green">Ja&nbsp;(12)</kbd>&nbsp;→<br /><kbd class="kbd-green">Ｊａ&nbsp;&nbsp;（１２）</kbd></td>
+                    <td>All <i>hankaku</i> ASCII alpha-numeric characters, spaces, and symbols except <kbd>'</kbd>, <kbd>"</kbd>, and <kbd>\</kbd></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_HAN_LETTER_TO_ZEN_LETTER</b></code><br />
+                        Standard-width alphabetic letters to double-width
+                    </td>
+                    <td><kbd class="kbd-green">Ja</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">Ｊａ</kbd></td>
+                    <td>All <i>hankaku</i> upper and lower case letters</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_HAN_NUMBER_TO_ZEN_NUMBER</b></code><br />
+                        Standard-width numbers to double-width
+                    </td>
+                    <td><kbd class="kbd-green">12</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">１２</kbd></td>
+                    <td>All <i>hankaku</i> numerals</kbd></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_HAN_SPACE_TO_ZEN_SPACE</b></code><br />
+                        Standard-width spaces to double-width
+                    </td>
+                    <td><kbd class="kbd-green">&nbsp;</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">　</kbd></td>
+                    <td>The <i>hankaku</i> space character</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_HAN_KATA_TO_ZEN_HIRA</b></code><br />
+                        Half-width katakana to full-width hiragana
+                    </td>
+                    <td><kbd class="kbd-green">ｼﾞｬ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">じゃ</kbd></td>
+                    <td>All <i>hankaku</i> katakana characters plus <kbd>ｰ</kbd>, <kbd>｡</kbd>, <kbd>｢</kbd>, <kbd>｣</kbd>, <kbd>､</kbd>, and <kbd>･</kbd></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_HAN_KATA_TO_ZEN_KATA</b></code><br />
+                        Half-width katakana to full-width
+                    </td>
+                    <td><kbd class="kbd-green">ｼﾞｬ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">ジャ</kbd></td>
+                    <td>All <i>hankaku</i> katakana characters plus <kbd>ｰ</kbd>, <kbd>｡</kbd>, <kbd>｢</kbd>, <kbd>｣</kbd>, <kbd>､</kbd>, and <kbd>･</kbd></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_KEEP_DIACRITIC_MARKS_APART</b></code><br />
+                        Keep <i>hankaku</i> katakana diacritic marks separate
+                    </td>
+                    <td><kbd class="kbd-green">ｼﾞｬ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">シ゛ャ</kbd></td>
+                    <td><kbd>ﾞ</kbd> and <kbd>ﾟ</kbd> will remain their own characters when converting to <i>zenkaku</i>.  Mix this operation with either <code>OP_HAN_KATA_TO_ZEN_HIRA</code> or <code>OP_HAN_KATA_TO_ZEN_KATA</code></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_ASCII_TO_HAN_ASCII</b></code><br />
+                        Double-width ASCII characters to standard-width
+                    </td>
+                    <td><kbd class="kbd-green">Ｊａ&nbsp;&nbsp;（１２）</kbd><br />→&nbsp;<kbd class="kbd-green">Ja&nbsp;(12)</kbd></td>
+                    <td>All <i>zenkaku</i> ASCII alpha-numeric characters, spaces, and symbols except <kbd>’</kbd>, <kbd>”</kbd>, and <kbd>＼</kbd></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_LETTER_TO_HAN_LETTER</b></code><br />
+                        Double-width alphabetic letters to standard-width
+                    </td>
+                    <td><kbd class="kbd-green">Ｊａ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">Ja</kbd></td>
+                    <td>All <i>zenkaku</i> upper and lower case letters</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_NUMBER_TO_HAN_NUMBER</b></code><br />
+                        Double-width numbers to standard-width
+                    </td>
+                    <td><kbd class="kbd-green">１２</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">12</kbd></td>
+                    <td>All <i>zenkaku</i> numerals</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_SPACE_TO_HAN_SPACE</b></code><br />
+                        Double-width spaces to standard-width
+                    </td>
+                    <td><kbd class="kbd-green">　</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">&nbsp;</kbd></td>
+                    <td>The <i>zenkaku</i> space character</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_HIRA_TO_HAN_KATA</b></code><br />
+                        Full-width hirgana to half-width katakana
+                    </td>
+                    <td><kbd class="kbd-green">じゃ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">ｼﾞｬ</kbd></td>
+                    <td>All <i>zenkaku</i> hiragana characters plus <kbd>ー</kbd>, <kbd>。</kbd>, <kbd>「</kbd>, <kbd>」</kbd>, <kbd>、</kbd>, and <kbd>・</kbd></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_HIRA_TO_ZEN_KATA</b></code><br />
+                        Full-width hiragana to full-width katakana
+                    </td>
+                    <td><kbd class="kbd-green">じゃ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">ジャ</kbd></td>
+                    <td>All <i>zenkaku</i> hiragana characters</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_KATA_TO_HAN_KATA</b></code><br />
+                        Full-width katakana to half-with
+                    </td>
+                    <td><kbd class="kbd-green">ジャ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">ｼﾞｬ</kbd></td>
+                    <td>All <i>zenkaku</i> katakana characters plus <kbd>ー</kbd>, <kbd>。</kbd>, <kbd>「</kbd>, <kbd>」</kbd>, <kbd>、</kbd>, and <kbd>・</kbd></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><b>OP_ZEN_KATA_TO_ZEN_HIRA</b></code><br />
+                        Full-width katakana to full-width hiragana
+                    </td>
+                    <td><kbd class="kbd-green">ジャ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">じゃ</kbd></td>
+                    <td>All <i>zenkaku</i> katakana characters except <kbd>ヴ</kbd></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="bs-callout bs-callout-info">
+                <h4>Further Details on Target Characters</h4>
+                <p>For a complete listing of the target characters of each conversion method, please have a look inside the <a target="_blank" href="https://github.com/mariten/kanatools-java/blob/master/test/mariten/kanatools/KanaConverterTests/SingleOpTest.java">SingleOpTest unit test in the repository</a> which tests the entire character range of every supported method.</p>
+            </div>
+        </div>
+
+        <div class="bs-docs-section">
+            <h2 class="page-header">Examples</h2>
+            <p class="lead">A few examples of <kbd class="kbd-red">KanaConverter</kbd> in action</p>
+
+            <h3>Handling Addresses</h3>
+            <p>Addresses and phone numbers often come with a mix of <i>hankaku</i> and <i>zenkaku</i> katakana as well as ASCII characters.</p>
+            <p>Easily standardize address inputs into <i>zenkaku</i> katakana and <i>hankaku</i> ASCII.</p>
+            <div class="bs-example">
+                <h4>Before</h4>
+                <pre>東京都北区赤羽６−３０−１　赤羽ﾋﾙｽﾞ</pre>
+                <h4>After</h4>
+                <pre>東京都北区赤羽6-30-1 赤羽ヒルズ</pre>
+            </div>
+            <div class="highlight">
+                <pre><code class="language-java">// Set the necessary conversion flags in a flag-based integer
+int conversion_flags = 0;
+conversion_flags |= KanaConverter.OP_HAN_KATAKANA_TO_ZEN_KATA;
+conversion_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
+
+// Convert the string
+String standardized_address = KanaConverter.convertKana(input_address, conversion_flags);</code></pre>
+            </div>
+
+            <h3>Mixed Kana Input</h3>
+            <p>Easily convert words that are part-hiragana and part-katakana entirely to one or the other.</p>
+            <div class="bs-example">
+                <h4>Before</h4>
+                <pre>デカい</pre>
+                <h4>After</h4>
+                <pre>でかい</pre>
+            </div>
+            <div class="highlight">
+                <pre><code class="language-java">String mixed_word = "デカい";
+int conversion_flags = KanaConverter.OP_ZEN_KATA_TO_ZEN_HIRA;
+String all_hiragana_word = KanaConverter.convertKana(mixed_word, conversion_flags);</code></pre>
+            </div>
+
+            <h3>Example using PHP-style conversion ops</h3>
+            <p>Specify the conversions options as a string of one-letter chars (same as PHP's <a target="_blank" href="http://php.net/manual/en/function.mb-convert-kana.php">mb_convert_kana</a>.</p>
+            <div class="bs-example">
+                <h4>Before</h4>
+                <pre>ぴー・エイチ・ぴー　文字列　ｓｔｙｌｅ</pre>
+                <h4>After</h4>
+                <pre>ﾋﾟｰ・ｴｲﾁ・ﾋﾟｰ 文字列 style</pre>
+            </div>
+            <div class="highlight">
+                <pre><code class="language-java">String php_style_string_conversion_ops = "ah"
+String converted_str = KanaConverter.convertKana(input_str, php_style_string_conversion_ops);</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bs-docs-footer">
+        <div class="container">
+            <p>Designed and built by <a href="https://github.com/mariten">mariten</a></p>
+            <ul class="bs-docs-footer-links muted">
+                <li><a href="https://github.com/mariten/kanatools-java/raw/master/compiled/jar/kanatools.jar">Download JAR</a></li>
+                <li>·</li>
+                <li><a href="https://github.com/mariten/kanatools-java">GitHub Repository</a></li>
+                <li>·</li>
+                <li><a href="https://github.com/mariten/kanatools-java/blob/master/HISTORY.md">Change History</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="/kanatools-java/js/jquery.min.js"    type="text/javascript"></script>
+    <script src="/kanatools-java/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/kanatools-java/js/highlight.min.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
