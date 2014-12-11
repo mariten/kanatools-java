@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0">
 
-    <title>Java 用の総合仮名変換 - Japanese Kana Conversion Tools for Java</title>
-    <meta name="description" content="かな・カナ・ローマ字のあらゆる全角と半角変換を簡単に処理できるライブラリ" />
+    <title>Hiragana and Katakana Conversion in Java - Kanatools</title>
+    <meta name="description" content="Easy-to-use multi-method converter for Japanaese kana, full-width (zenkaku), and half-width (hankaku) text" />
+    <meta name="keywords" content="japanese,nihongo,hiragana,katakana,kana,full-width,zenkaku,half-width,hankaku,ascii,romaji,java,convert,conversion,converter,mb_convert_kana" />
 
     <link href="/kanatools-java/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="/kanatools-java/css/docs.min.css"      type="text/css" rel="stylesheet" />
@@ -15,7 +16,7 @@
 </head>
 
 <body>
-    <header class="navbar navbar-static-top bs-docs-nav" role="navigation">
+    <header class="navbar navbar-static-top bs-docs-nav">
         <div class="container">
             <div class="navbar-header">
                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -116,7 +117,7 @@ public static String convertKana(String original_string, String conversion_ops)<
         </div>
 
         <div class="bs-docs-section">
-            <a name="conversion-list"></a>
+            <a id="conversion-list"></a>
             <h2 class="page-header">Supported Conversion Operations</h2>
             <p class="lead">List of all conversion types that <kbd class="kbd-red">KanaConverter</kbd> can perform on an input string.</p>
 
@@ -151,7 +152,7 @@ public static String convertKana(String original_string, String conversion_ops)<
                         Standard-width numbers to double-width
                     </td>
                     <td><kbd class="kbd-green">12</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">１２</kbd></td>
-                    <td>All <i>hankaku</i> numerals</kbd></td>
+                    <td>All <i>hankaku</i> numerals</td>
                 </tr>
                 <tr>
                     <td>
@@ -317,6 +318,8 @@ String converted_str = KanaConverter.convertKana(input_str, php_style_string_con
                 <li><a href="https://github.com/mariten/kanatools-java/raw/master/compiled/jar/kanatools.jar">Download JAR</a></li>
                 <li>·</li>
                 <li><a href="https://github.com/mariten/kanatools-java">GitHub Repository</a></li>
+                <li>·</li>
+                <li><a href="https://github.com/mariten/kanatools-java/issues">Issue Tracker</a></li>
                 <li>·</li>
                 <li><a href="https://github.com/mariten/kanatools-java/blob/master/HISTORY.md">Change History</a></li>
             </ul>
