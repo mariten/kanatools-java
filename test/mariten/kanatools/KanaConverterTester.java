@@ -111,6 +111,7 @@ public abstract class KanaConverterTester
         }
 
         // Check results
+        php_result = processPhpResult(php_result, conv_flags);
         assertEquals(expected_result, php_result);
     }
     //}}}
@@ -161,6 +162,36 @@ public abstract class KanaConverterTester
         }
 
         return php_conv_flags.toString();
+    }
+    //}}}
+
+
+    //{{{ String processPhpResult(String, int)
+    /**
+      * Add special logic to account for differences between this library and PHP's mb_convert_kana.
+      * @note   PHP ignores conversion of quote, double-quote, and backslash
+      *
+      * @param  php_raw_result  Actual result (output) of execution of mb_convert_kana
+      * @param  conv_flags      Flag-based integer to convert
+      * @result String updated to conform to the rules of this library
+      */
+    protected String processPhpResult(String php_raw_result, int conv_flags)
+    {
+        String php_processed_result = php_raw_result;
+        if(0 != (conv_flags & KanaConverter.OP_HAN_ASCII_TO_ZEN_ASCII)) {
+            php_processed_result = php_processed_result
+            .replace('\'', '＇')
+            .replace('\"', '＂')
+            .replace('\\', '＼');
+        }
+        if(0 != (conv_flags & KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII)) {
+            php_processed_result = php_processed_result
+            .replace('＇', '\'')
+            .replace('＂', '\"')
+            .replace('＼', '\\');
+        }
+
+        return php_processed_result;
     }
     //}}}
 }

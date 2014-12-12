@@ -513,14 +513,7 @@ public class KanaConverter
     protected static char convertHankakuAsciiToZenkakuAscii(char target)
     {
         if(target >= HANKAKU_ALPHANUMERIC_FIRST && target <= HANKAKU_ALPHANUMERIC_LAST) {
-            switch(target) {
-            case '\'':
-            case '\"':
-            case '\\':
-                break;
-            default:
-                return (char)(target + (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
-            }
+            return (char)(target + (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
         } else if(target == HANKAKU_SPACE) {
             return ZENKAKU_SPACE;
         }
@@ -534,14 +527,7 @@ public class KanaConverter
     protected static char convertZenkakuAsciiToHankakuAscii(char target)
     {
         if(target >= ZENKAKU_ALPHANUMERIC_FIRST && target <= ZENKAKU_ALPHANUMERIC_LAST) {
-            switch(target) {
-            case '’':
-            case '”':
-            case '＼':
-                break;
-            default:
-                return (char)(target - (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
-            }
+            return (char)(target - (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
         } else if(target == ZENKAKU_SPACE) {
             return HANKAKU_SPACE;
         }
