@@ -252,10 +252,10 @@ public class KanaConverter
     public static final char ZENKAKU_LETTER_LOWER_LAST  = 'ｚ';
 
     // Punctuation constants
-    public static final char HANKAKU_ALPHANUMERIC_FIRST = '!';
-    public static final char HANKAKU_ALPHANUMERIC_LAST  = '}';
-    public static final char ZENKAKU_ALPHANUMERIC_FIRST = '！';
-    public static final char ZENKAKU_ALPHANUMERIC_LAST  = '｝';
+    public static final char HANKAKU_ASCII_FIRST = '!';
+    public static final char HANKAKU_ASCII_LAST  = '}';
+    public static final char ZENKAKU_ASCII_FIRST = '！';
+    public static final char ZENKAKU_ASCII_LAST  = '｝';
 
     // Hiragana constants
     public static final char HIRAGANA_FIRST = 'ぁ';
@@ -512,8 +512,8 @@ public class KanaConverter
     //{{{ char convertHankakuAsciiToZenkakuAscii(char)
     protected static char convertHankakuAsciiToZenkakuAscii(char target)
     {
-        if(target >= HANKAKU_ALPHANUMERIC_FIRST && target <= HANKAKU_ALPHANUMERIC_LAST) {
-            return (char)(target + (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
+        if(target >= HANKAKU_ASCII_FIRST && target <= HANKAKU_ASCII_LAST) {
+            return (char)(target + (ZENKAKU_ASCII_FIRST - HANKAKU_ASCII_FIRST));
         } else if(target == HANKAKU_SPACE) {
             return ZENKAKU_SPACE;
         }
@@ -526,8 +526,8 @@ public class KanaConverter
     //{{{ char convertZenkakuAsciiToHankakuAscii(char)
     protected static char convertZenkakuAsciiToHankakuAscii(char target)
     {
-        if(target >= ZENKAKU_ALPHANUMERIC_FIRST && target <= ZENKAKU_ALPHANUMERIC_LAST) {
-            return (char)(target - (ZENKAKU_ALPHANUMERIC_FIRST - HANKAKU_ALPHANUMERIC_FIRST));
+        if(target >= ZENKAKU_ASCII_FIRST && target <= ZENKAKU_ASCII_LAST) {
+            return (char)(target - (ZENKAKU_ASCII_FIRST - HANKAKU_ASCII_FIRST));
         } else if(target == ZENKAKU_SPACE) {
             return HANKAKU_SPACE;
         }
