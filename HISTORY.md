@@ -1,3 +1,13 @@
+v1.0.0 :: Dec 19 2014
+======================
+* Initial fully-operational version of **KanaConverter**
+* Include space character conversion in zenkaku/hankaku ascii conversions (breaking with `mb_convert_kana`, but more convenient)
+* Collapse hankaku diacritic marks by default (breaking with `mb_convert_kana`, but more convenient).  Removed operation to collapse marks (`OP_COLLAPSE_HANKAKU_VOICE_MARKS`), and then added new operation to request not collapsing diacritic marks (`OP_KEEP_DIACRITIC_MARKS_SEPARATE`).
+* Shortened names of operation constants, makes for easier calling
+* Do not exclude conversion of `'`, `"`, and `\` when performing zenkaku or hankaku ASCII conversions (breaking with and PHP's `mb_convert_kana`).  This is an unnecessary safety check (MySQL and/or programmatic escaping should be left to user), and prevented users from being able to convert those three characters using this library.
+* Added EN/JA documentation website using GitHub Pages
+* Wrote basic download/install/usage documentation in README
+
 v0.9.0 :: Nov 17 2014
 ======================
 * Improved build process, make direct command-line based PHP testing optional (off by default for `ant test`)
