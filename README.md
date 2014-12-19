@@ -38,11 +38,10 @@ Please follow this process:
 
 0. If you are considering major changes, please consult me before starting (even just briefly)
 1. Fork this repository
-2. Create a new branch name for your development branch (something unique, not `develop`)
-3. Make your changes.  Please add or update unit tests accordingly.
-4. Ensure that `ant test` completes successfully.  Pull requests with failing or buggy unit tests will be rejected.
-5. Send the pull request and include an explanation of what your change accomplishes.
-6. After a code review, your change will be merged into the master branch.
-7. Depending on your change, I would appreicate it if you updated the documentation on the `gh-pages` branch as well.
+2. Make your changes in a new branch.  Please add or update unit tests accordingly.
+3. Ensure that `ant test` completes successfully.  Pull requests with failing or buggy unit tests will be rejected.
+4. Send the pull request to the **develop** branch and include an explanation of what your change accomplishes.
+5. After a code review, your change will be merged and subsequently released into the **master** branch.
+6. Depending on your change, I would appreicate it if you updated the documentation on the `gh-pages` branch as well.
 
 **Looking forward to your pull requests!** :memo: :octocat:
