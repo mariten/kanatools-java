@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0">
+
+    <title>Kana-Insensitive Sorting in Java - Kanatools</title>
+    <meta name="description" content="Sort strings according to their Japanese hiragana and katakana order" />
+    <meta name="keywords" content="japanese,nihongo,hiragana,katakana,kana,full-width,zenkaku,half-width,hankaku,ascii,romaji,java,convert,conversion,converter,mb_convert_kana" />
+
+    <link href="/kanatools-java/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="/kanatools-java/css/docs.min.css"      type="text/css" rel="stylesheet" />
+    <link href="/kanatools-java/css/kanatools.css"     type="text/css" rel="stylesheet" />
+    <link href="/kanatools-java/css/highlight.css"     type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="navbar navbar-static-top bs-docs-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/kanatools-java/en" class="navbar-brand"><b>Kana Tools for Java</b></a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/kanatools-java/en/kana-converter">KanaConverter</a>
+                    </li>
+                    <li>
+                        <div class="nav-selected">KanaSorter</div>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mariten/kanatools-java/raw/master/compiled/jar/kanatools.jar">Download JAR</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mariten/kanatools-java">GitHub</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><div class="nav-selected">English</div></li>
+                    <li><a href="/kanatools-java/ja/kana-sorter">日本語</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="bs-docs-header top-banner">
+        <div class="container text-center">
+            <h1>KanaSorter</h1>
+            <p>Perform a kana-insensitive sort on a collection of strings (coming in 2015)</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="bs-docs-section">
+            <h2 class="page-header">Under Development - Coming in 2015!</h2>
+            <p class="lead">Will sort a collection of strings accouting for their hiragana/katakana order</p>
+
+            <p>Most sorting logic uses unicode character number to determine the sort order of strings, and since all hiragana characters are before katakana characters this means that <kbd>ん</kbd> will be sorted before <kbd>ア</kbd></p>
+
+            <p><kbd class="kbd-red">KanaSorter</kbd> will look at a character's hiragana/katakana order when sorting, ensuring that <kbd>ア</kbd> will be sorted with the same priority as <kbd>あ</kbd></p>
+        </div>
+    </section>
+
+    <footer class="bs-docs-footer">
+        <div class="container">
+            <p>Designed and built by <a href="https://github.com/mariten">mariten</a></p>
+            <ul class="bs-docs-footer-links muted">
+                <li><a href="https://github.com/mariten/kanatools-java/raw/master/compiled/jar/kanatools.jar">Download JAR</a></li>
+                <li>·</li>
+                <li><a href="https://github.com/mariten/kanatools-java">GitHub Repository</a></li>
+                <li>·</li>
+                <li><a href="https://github.com/mariten/kanatools-java/issues">Issue Tracker</a></li>
+                <li>·</li>
+                <li><a href="https://github.com/mariten/kanatools-java/blob/master/HISTORY.md">Change History</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="/kanatools-java/js/jquery.min.js"    type="text/javascript"></script>
+    <script src="/kanatools-java/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/kanatools-java/js/highlight.min.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
