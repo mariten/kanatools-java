@@ -54,20 +54,21 @@
     <section class="bs-docs-header top-banner">
         <div class="container text-center">
             <h1>KanaConverter</h1>
-            <p>仮名・ひらがな・カタカナ・ローマ字のテキストおよび、全角・半角の文字のあらゆる相互変換</p>
+            <p>全角・半角 の ひらがな・カタカナ・ローマ字 の相互変換</p>
         </div>
     </section>
 
     <section class="container">
         <div class="bs-docs-section">
             <h2 class="page-header">概要</h2>
-            <p class="lead">1個の静的関数を呼ぶことで、文字列にあらゆる仮名文字やローマ字変換オプションを同時で処理できます</p>
+            <p class="lead">1つの静的関数を呼ぶだけで、あらゆる仮名文字・ローマ字の相互変換を可能に</p>
 
             <ul>
-                <li><kbd class="kbd-red">KanaConverter</kbd> の変換オプション定数はフラグ型の値に足すことで複数な変換が同時できます</li>
-                <li>一度 <code>convertKana</code> を呼んで、各変換オプションを素早く行います</li>
+                <li><kbd class="kbd-red">KanaConverter</kbd> にオプション与えると、複数の変換を同時に行えます</li>
+                <li>一度 <code>convertKana</code> を呼び出した後に変換オプションを与えると実行できます</li>
+                <li>実行速度の高速化を心がけています</li>
                 <li>UTF-8 対応</li>
-                <li>PHP 搭載の同様な <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> がインスピレーションでした。</li>
+                <li>PHP にある <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> にインスパイアされました</li>
             </ul>
 
 
@@ -82,7 +83,7 @@ System.out.println(output_str);
             </div>
 
             <h3>【例】複数の変換オプション</h3>
-            <p>同時で半角カタカナを全角に変換したり、全角英数字を半角に変換したりするサンプルコード</p>
+            <p>半角カタカナを全角に、全角英数字を半角に、同時に変換するサンプルコード</p>
             <div class="highlight">
                 <pre><code class="language-java">String input_str = "ｶﾅ･ﾂｰﾙｽﾞ　ｖ１．０";
 int conv_op_flags = KanaConverter.OP_HAN_KATA_TO_ZEN_KATA | KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
@@ -99,7 +100,7 @@ System.out.println(output_str);
                 <pre><code class="language-java">public static String convertKana(String original_string, int    conversion_ops)
 public static String convertKana(String original_string, String conversion_ops)</code></pre>
             </div>
-            <p>1つ以上の変換オプションによって、ある文字列の内容を変換します</p>
+            <p>変換オプションを与えると、ある文字列の内容の変換</p>
             <h3>パラメータ</h3>
             <dl class="dl-horizontal">
                 <dt>original_string</dt>
@@ -185,7 +186,7 @@ public static String convertKana(String original_string, String conversion_ops)<
                         濁点・半濁点を単独の文字として残す
                     </td>
                     <td><kbd class="kbd-green">ｼﾞｬ</kbd>&nbsp;→&nbsp;<kbd class="kbd-green">シ゛ャ</kbd></td>
-                    <td><kbd>ﾞ</kbd> と <kbd>ﾟ</kbd> を半角から全角に変換する際、全角の文字と合体しません。この変換種類は <code>OP_HAN_KATA_TO_ZEN_HIRA</code> あるいは <code>OP_HAN_KATA_TO_ZEN_KATA</code> しか利用できません。</td>
+                    <td><kbd>ﾞ</kbd> と <kbd>ﾟ</kbd> を半角から全角に変換する際に、全角の文字として合体させない。この変換オプションは、 <code>OP_HAN_KATA_TO_ZEN_HIRA</code>・<code>OP_HAN_KATA_TO_ZEN_KATA</code>でしか利用できない。</td>
                 </tr>
                 <tr>
                     <td>
@@ -256,17 +257,17 @@ public static String convertKana(String original_string, String conversion_ops)<
 
             <div class="bs-callout bs-callout-info">
                 <h4>対象文字の詳細</h4>
-                <p>各変換オプション、<a target="_blank" href="https://github.com/mariten/kanatools-java/blob/master/test/mariten/kanatools/KanaConverterTests/SingleOpTest.java">リポにある SingleOpTest</a> という全対象文字を単体テストするを参照して下さい。</p>
+                <p>各変換オプションは、リポジトリ上にある<a target="_blank" href="https://github.com/mariten/kanatools-java/blob/master/test/mariten/kanatools/KanaConverterTests/SingleOpTest.java">SingleOpTest(全対象文字の単体テスト)</a>を参照して下さい。</p>
             </div>
         </div>
 
         <div class="bs-docs-section">
-            <h2 class="page-header">例コード</h2>
-            <p class="lead"><kbd class="kbd-red">KanaConverter</kbd> の実例</p>
+            <h2 class="page-header">サンプルコード</h2>
+            <p class="lead"><kbd class="kbd-red">KanaConverter</kbd> の利用例</p>
 
             <h3>住所処理</h3>
-            <p>住所や電話番号などは、カタカナと英数字はよく全角・半角が混ぜた状態で入力されています。</p>
-            <p>これで、簡単に住所にある文字を統一できます。</p>
+            <p>住所や電話番号などは、カタカナや英数字などがよく全角・半角が混ぜた状態で入力されます。</p>
+            <p>これを簡単に統一できます。</p>
             <div class="bs-example">
                 <h4>変換前</h4>
                 <pre>東京都北区赤羽６−３０−１　赤羽ﾋﾙｽﾞ</pre>
@@ -284,7 +285,7 @@ String standardized_address = KanaConverter.convertKana(input_address, conversio
             </div>
 
             <h3>ひらがなとカタカナが混ざっている場合</h3>
-            <p>ある文字列が一部ひらがなと一部カタカナになっていても、簡単に変換できます。</p>
+            <p>文字列にひらがなとカタカナが混ざっていても、簡単に変換できます。</p>
             <div class="bs-example">
                 <h4>変換前</h4>
                 <pre>デカい</pre>
@@ -298,7 +299,7 @@ String all_hiragana_word = KanaConverter.convertKana(mixed_word, conversion_flag
             </div>
 
             <h3>PHP 式の変換オプションの例</h3>
-            <p>変換オプションは PHP の <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> と同様、英字の一文字ずつでも指定できます。</p>
+            <p>変換オプションは PHP の <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> と同様、省略した一文字の英字を用いても指定できます。</p>
             <div class="bs-example">
                 <h4>変換前</h4>
                 <pre>ぴー・エイチ・ぴー　文字列　ｓｔｙｌｅ</pre>
