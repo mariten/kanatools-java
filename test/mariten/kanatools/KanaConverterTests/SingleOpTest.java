@@ -83,9 +83,9 @@ public class SingleOpTest extends KanaConverterTester
     //}}}
 
 
-    //{{{ 'H': testHankakuKatakanaToZenkakuHiragana()
+    //{{{ 'H-': testHankakuKatakanaToZenkakuHiraganaWithoutCollapse()
     @Test
-    public void testHankakuKatakanaToZenkakuHiragana()
+    public void testHankakuKatakanaToZenkakuHiraganaWithoutCollapse()
     {
         // Check all target chars
         int op_flags = 0;
@@ -105,9 +105,9 @@ public class SingleOpTest extends KanaConverterTester
     //}}}
 
 
-    //{{{ 'HV': testHankakuKatakanaToZenkakuHiraganaWithoutCollapse()
+    //{{{ 'H': testHankakuKatakanaToZenkakuHiragana()
     @Test
-    public void testHankakuKatakanaToZenkakuHiraganaWithoutCollapse()
+    public void testHankakuKatakanaToZenkakuHiragana()
     {
         // Check all target chars
         super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_HIRA,
@@ -155,9 +155,9 @@ public class SingleOpTest extends KanaConverterTester
     //}}}
 
 
-    //{{{ 'K': testHankakuKatakanaToZenkakuKatakana()
+    //{{{ 'K-': testHankakuKatakanaToZenkakuKatakanaWithoutCollapse()
     @Test
-    public void testHankakuKatakanaToZenkakuKatakana()
+    public void testHankakuKatakanaToZenkakuKatakanaWithoutCollapse()
     {
         // Check all target chars
         int op_flags = 0;
@@ -177,9 +177,9 @@ public class SingleOpTest extends KanaConverterTester
     //}}}
 
 
-    //{{{ 'KV': testHankakuKatakanaToZenkakuKatakanaWithoutCollapse()
+    //{{{ 'K': testHankakuKatakanaToZenkakuKatakana()
     @Test
-    public void testHankakuKatakanaToZenkakuKatakanaWithoutCollapse()
+    public void testHankakuKatakanaToZenkakuKatakana()
     {
         // Check all target chars
         super.assertConverted(KanaConverter.OP_HAN_KATA_TO_ZEN_KATA,
