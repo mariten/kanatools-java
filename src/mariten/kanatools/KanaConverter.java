@@ -94,6 +94,14 @@ public class KanaConverter
                 next_char = original_string.charAt(i + 1);
             }
 
+            // Skip all conversions if character is on the excluded chars list
+            boolean is_ignore_char = isIgnoreChar(current_char, chars_to_ignore);
+            if(is_ignore_char) {
+                new_string.append(current_char);
+                i++;
+                continue;
+            }
+
             // Order of conversion operations written to be similar to original PHP
             //// Source: https://github.com/php/php-src/blob/128eda843f7dff487fff529a384fee3c5494e0f6/ext/mbstring/libmbfl/filters/mbfilter_tl_jisx0201_jisx0208.c#L41
             if(current_char == this_char
@@ -725,6 +733,23 @@ public class KanaConverter
         } else {
             return target;
         }
+    }
+    //}}}
+
+
+    //{{{ boolean isIgnoreChar(char, String)
+    protected static boolean isIgnoreChar(char char_to_check, String chars_to_ignore)
+    {
+        int ignore_char_count = chars_to_ignore.length();
+        for(int i = 0; i < ignore_char_count; i++) {
+            if(char_to_check == chars_to_ignore.charAt(i)) {
+                // Matched
+                return true;
+            }
+        }
+
+        // No matches
+        return false;
     }
     //}}}
 
