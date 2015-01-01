@@ -15,6 +15,18 @@
 * [日本語の参考資料](http://mariten.github.io/kanatools-java/ja/kana-converter/)
 * [English Documentation](http://mariten.github.io/kanatools-java/en/kana-converter/)
 
+### Example
+```java
+String input_str = "ﾃｽﾃｨﾝｸﾞ　１−２−３";
+
+int conv_op_flags = 0;
+conv_op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;    //半角カタカナを全角カタカナに変換
+conv_op_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;  //全角英数字を半角英数字に変換
+
+String output_str = KanaConverter.convertKana(input_str, conv_op_flags);
+System.out.println(output_str);
+// "テスティング 1-2-3"
+```
 
 # Download and Install
 1. Fetch the [**JAR**](https://github.com/mariten/kanatools-java/blob/master/compiled/jar/kanatools.jar) from the **master** branch of this repository
