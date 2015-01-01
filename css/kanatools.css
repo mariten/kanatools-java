@@ -3,6 +3,8 @@ code {
     background-color: #F4F2F9;
 }
 
+.fixed-font { font-family: Menlo,Monaco,Consolas,"Courier New",monospace; }
+
 .bs-docs-header h1 { margin-right: 0; }
 .bs-docs-header p  { margin-right: 0; }
 
