@@ -44,6 +44,16 @@ public class MultiOpsTest extends KanaConverterTester
             " !0:A^a|\" !0:A^a|\"あがぱゐゔゕゝアガパヰヸヷヵヽ゛。アガパ゛漢 #1;B_b}\\ #1;B_b}\\・きじぴゑゖゞキジピヱヹヶヾ゜・キジピ゜字"
         );
 
+        // han2zen kata-kata, zen2han alphanumeric, with exclusions
+        op_flags = 0;
+        op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;
+        op_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
+        String chars_to_exclude = "＂＼";
+        this.assertConvertedWithExclusions(op_flags, chars_to_exclude,
+            " !0:A^a|\"　！０：Ａ＾ａ｜＂あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
+            " !0:A^a|\" !0:A^a|＂あがぱゐゔゕゝアガパヰヸヷヵヽ゛。アガパ゛漢 #1;B_b}\\ #1;B_b}＼・きじぴゑゖゞキジピヱヹヶヾ゜・キジピ゜字"
+        );
+
         // zen2han hira-kata, zen2han kata-kata
         this.assertConverted("hk",
             " !0:A^a|\"　！０：Ａ＾ａ｜＂あがぱゐゔゕゝアガパヰヸヷヵヽ゛｡ｱｶﾞﾊﾟﾞ漢 #1;B_b}\\　＃１；Ｂ＿ｂ｝＼・きじぴゑゖゞキジピヱヹヶヾ゜･ｷｼﾞﾋﾟﾟ字",
