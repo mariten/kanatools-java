@@ -67,6 +67,7 @@
                 <li><kbd class="kbd-red">KanaConverter</kbd> にオプション与えると、複数の変換を同時に行えます</li>
                 <li>一度 <code>convertKana</code> を呼び出した後に変換オプションを与えると実行できます</li>
                 <li>実行速度の高速化を心がけています</li>
+                <li>特定の文字を変換から除外することも可能です</li>
                 <li>UTF-8 対応</li>
                 <li>PHP にある <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> にインスパイアされました</li>
             </ul>
@@ -98,7 +99,9 @@ System.out.println(output_str);
             <h3 class>説明</h3>
             <div class="highlight">
                 <pre><code class="language-java">public static String convertKana(String original_string, int    conversion_ops)
-public static String convertKana(String original_string, String conversion_ops)</code></pre>
+public static String convertKana(String original_string, String conversion_ops)
+public static String convertKana(String original_string, int    conversion_ops, String chars_to_ignore)
+public static String convertKana(String original_string, String conversion_ops, String chars_to_ignore)</code></pre>
             </div>
             <p>変換オプションを与えると、ある文字列の内容の変換</p>
             <h3>パラメータ</h3>
@@ -110,6 +113,8 @@ public static String convertKana(String original_string, String conversion_ops)<
                     ほしい変換オプションが足されるフラグ型の <code>int</code> (下記<a href="#conversion-list">変換オプション一覧</a>を参照して下さい)<br />
                     それとも、この値は PHP の <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> なりの文字列形式でも渡せます
                 </dd>
+                <dt class="fixed-font">chars_to_ignore</dt>
+                <dd>【任意引数】<code>original_string</code> に入っている文字がこの文字列にも入っている場合、変換せずに返却文字列にそのまま入れます。</dd>
             </dl>
 
             <h3>返却値</h3>
@@ -296,6 +301,20 @@ String standardized_address = KanaConverter.convertKana(input_address, conversio
                 <pre><code class="language-java">String mixed_word = "デカい";
 int conversion_flags = KanaConverter.OP_ZEN_KATA_TO_ZEN_HIRA;
 String all_hiragana_word = KanaConverter.convertKana(mixed_word, conversion_flags);</code></pre>
+            </div>
+
+            <h3>変換から除外文字がある例</h3>
+            <p>HTML タグの括弧など、必要に応じて特定の文字を変換から除外することができます。</p>
+            <div class="bs-example">
+                <h4>Before</h4>
+                <pre>＜ｓｃｒｉｐｔ＞</pre>
+                <h4>After</h4>
+                <pre>＜script＞</pre>
+            </div>
+            <div class="highlight">
+                <pre><code class="language-java">String string_with_html = "＜ｓｃｒｉｐｔ＞";
+String excluded_chars = "＜＞";
+String safe_conversion = KanaConverter.convertKana(string_with_html, KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII, excluded_chars);</code></pre>
             </div>
 
             <h3>PHP 式の変換オプションの例</h3>
