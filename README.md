@@ -15,6 +15,7 @@
 * [日本語の参考資料](http://mariten.github.io/kanatools-java/ja/kana-converter/)
 * [English Documentation](http://mariten.github.io/kanatools-java/en/kana-converter/)
 
+
 # Download and Install
 1. Fetch the [**JAR**](https://github.com/mariten/kanatools-java/blob/master/compiled/jar/kanatools.jar) from the **master** branch of this repository
 2. Add to your lib directory or somewhere that is included in your Java CLASSPATH
@@ -42,8 +43,8 @@ Please follow this process:
 1. Fork this repository
 2. Make your changes in a new branch.  Please add or update unit tests accordingly.
 3. Ensure that `ant test` completes successfully.  Pull requests with failing or buggy unit tests will be rejected.
-4. Send the pull request to the **develop** branch and include an explanation of what your change accomplishes.
-5. After a code review, your change will be merged and subsequently released into the **master** branch.
+4. Send the pull request to the **staging** branch and include an explanation of what your change accomplishes.  Please do not commit the JAR file in your pull request, that will only be done at release time.
+5. After a code review, your change will be merged and subsequently released into the **master** branch, at which time the changes will be reflected in an updated JAR file.
 6. Depending on your change, I would appreicate it if you updated the documentation on the `gh-pages` branch as well.
 
 **Looking forward to your pull requests!** :memo: :octocat:
