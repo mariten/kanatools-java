@@ -34,7 +34,7 @@ System.out.println(output_str);
 
 # Development
 ### Requirements
-* :coffee: Java 1.6+
+* :coffee: Java 1.7+
 * :ant: Ant
 * :u6709: Japanese font for your editor or console
 
