@@ -52,16 +52,17 @@ public class KanaConverter
     }
 
 
-    //{{{ String convertKana(String, int)
+    //{{{ String convertKana(String, int, String)
     /**
       * Converts a string containing kana or other characters used in Japanese text input
       * according to one or more requested conversion methods.
       *
       * @param  original_string  Input string to perform conversion on
       * @param  conversion_ops   Flag-based integer indicating which type of conversions to perform
+      * @param  chars_to_ignore  Each character in this string will be excluded from conversion
       * @return Content of "original_string" with specified conversions performed
       */
-    public static String convertKana(String original_string, int conversion_ops)
+    public static String convertKana(String original_string, int conversion_ops, String chars_to_ignore)
     {
         // Don't perform conversions on empty string
         if(original_string.equals("")) {
@@ -91,6 +92,14 @@ public class KanaConverter
             char next_char = 0;
             if(i < (char_count - 1)) {
                 next_char = original_string.charAt(i + 1);
+            }
+
+            // Skip all conversions if character is on the excluded chars list
+            boolean is_ignore_char = isIgnoreChar(current_char, chars_to_ignore);
+            if(is_ignore_char) {
+                new_string.append(current_char);
+                i++;
+                continue;
             }
 
             // Order of conversion operations written to be similar to original PHP
@@ -218,18 +227,37 @@ public class KanaConverter
     }
     //}}}
 
-    //{{{ String convertKana(String, String)
+    //{{{ String convertKana(String, int)
+    /**
+      * Same as "convertKana()" above, but defaults to no ignored characters
+      */
+    public static String convertKana(String original_string, int conversion_ops)
+    {
+        return convertKana(original_string, conversion_ops, "");
+    }
+    //}}}
+    //{{{ String convertKana(String, String, String)
     /**
       * Same as "convertKana()" above, but takes the conversion ops as a string (PHP-style)
       *
       * @param  original_string         Input string to perform conversion on
       * @param  conversion_op_string    PHP mb_convert_kana style string specifying desired conversions
+      * @param  chars_to_ignore         Each character in this string will be excluded from conversion
       * @return                         original_string with specified conversion performed
+      */
+    public static String convertKana(String original_string, String conversion_ops_string, String chars_to_ignore)
+    {
+        int conversion_ops = createOpsArrayFromString(conversion_ops_string);
+        return convertKana(original_string, conversion_ops, chars_to_ignore);
+    }
+    //}}}
+    //{{{ String convertKana(String, String)
+    /**
+      * Same as "convertKana()" above, but takes the conversion ops as a string (PHP-style)
       */
     public static String convertKana(String original_string, String conversion_ops_string)
     {
-        int conversion_ops = createOpsArrayFromString(conversion_ops_string);
-        return convertKana(original_string, conversion_ops);
+        return convertKana(original_string, conversion_ops_string, "");
     }
     //}}}
 
@@ -705,6 +733,23 @@ public class KanaConverter
         } else {
             return target;
         }
+    }
+    //}}}
+
+
+    //{{{ boolean isIgnoreChar(char, String)
+    protected static boolean isIgnoreChar(char char_to_check, String chars_to_ignore)
+    {
+        int ignore_char_count = chars_to_ignore.length();
+        for(int i = 0; i < ignore_char_count; i++) {
+            if(char_to_check == chars_to_ignore.charAt(i)) {
+                // Matched
+                return true;
+            }
+        }
+
+        // No matches
+        return false;
     }
     //}}}
 

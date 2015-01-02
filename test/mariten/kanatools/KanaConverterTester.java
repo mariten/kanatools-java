@@ -44,7 +44,6 @@ public abstract class KanaConverterTester
         }
     }
     //}}}
-
     //{{{ void assertConverted(String, boolean, String, String)
     protected void assertConverted(String conv_flags_string, boolean execute_php_test, String str_to_convert, String expected_result)
     {
@@ -52,18 +51,30 @@ public abstract class KanaConverterTester
         this.assertConverted(conv_flags, execute_php_test, str_to_convert, expected_result);
     }
     //}}}
-
     //{{{ void assertConverted(int, String, String)
     protected void assertConverted(int conv_flags, String str_to_convert, String expected_result)
     {
         this.assertConverted(conv_flags, this.do_direct_php_testing, str_to_convert, expected_result);
     }
     //}}}
-
     //{{{ void assertConverted(String, String, String)
     protected void assertConverted(String conv_flags_string, String str_to_convert, String expected_result)
     {
         this.assertConverted(conv_flags_string, this.do_direct_php_testing, str_to_convert, expected_result);
+    }
+    //}}}
+    //{{{ void assertConvertedWithExclusions(int, String, String, String)
+    /**
+      * Like "assertConverted()", however allow passing excluded characters and do not test in PHP
+      *
+      * @param  conv_flags        Flag-based integer of conversion options for use by convertKana function
+      * @param  chars_to_ignore   Characters to exclude from conversions
+      * @param  str_to_convert    String to test (pass to convertKana function)
+      * @param  expected_result   Expected results of convertKana function
+      */
+    protected void assertConvertedWithExclusions(int conv_flags, String chars_to_ignore, String str_to_convert, String expected_result)
+    {
+        assertEquals(expected_result, KanaConverter.convertKana(str_to_convert, conv_flags, chars_to_ignore));
     }
     //}}}
 
