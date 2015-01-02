@@ -1,3 +1,9 @@
+v1.1.0 :: Jan 02 2015
+======================
+* Added ability to exclude certain characters from conversion in the `kanaConvert` function.
+* Updated EN and JA documentation accordingly.
+* Setup for Travis CI auto unit testing and added the "build status" image to README
+
 v1.0.0 :: Dec 19 2014
 ======================
 * Initial fully-operational version of **KanaConverter**
