@@ -110,10 +110,10 @@ public static String convertKana(String original_string, String conversion_ops, 
                 <dt class="fixed-font">conversion_ops</dt>
                 <dd>
                     ほしい変換オプションが足されるフラグ型の <code>int</code> (下記<a href="#conversion-list">変換オプション一覧</a>を参照して下さい)<br />
-                    それとも、この値は PHP の <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> なりの文字列形式でも渡せます
+                    または、PHP の <a target="_blank" href="http://php.net/manual/ja/function.mb-convert-kana.php">mb_convert_kana</a> と同様に<code>String</code>も渡せます
                 </dd>
                 <dt class="fixed-font">chars_to_ignore</dt>
-                <dd>【任意引数】<code>original_string</code> に入っている文字がこの文字列にも入っている場合、変換せずに返却文字列にそのまま入れます。</dd>
+                <dd>変換から除外する文字列（省略可）</dd>
             </dl>
 
             <h3>返却値</h3>
