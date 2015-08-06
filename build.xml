@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="kanatools-java" basedir="." default="compile">
+<project name="kanatools-java" basedir="." default="compile" xmlns:jacoco="antlib:org.jacoco.ant">
     <description>Utilities for working with Japanese text in Java</description>
 
     <!-- Define relevant directories/targets -->
@@ -11,6 +11,7 @@
     <property name="classes_dir"     value="${build_dir}/classes" />
     <property name="build_test_dir"  value="${build_dir}/test" />
     <property name="report_dir"      value="${build_dir}/report-junit" />
+    <property name="coverage_dir"    value="${build_dir}/coverage" />
     <property name="jar_dir"         value="${build_dir}/jar" />
     <property name="jar_name"        value="kanatools.jar" />
 
@@ -20,6 +21,10 @@
         <fileset dir="${lib_dir}" includes="*.jar" />
     </path>
 
+    <!-- Includes -->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="${lib_dir}/jacocoant.jar" />
+    </taskdef>
 
 
     <!-- Clean all files produced by past build processes -->
@@ -27,6 +32,7 @@
         <delete dir="${classes_dir}" />
         <delete dir="${build_test_dir}" />
         <delete dir="${report_dir}" />
+        <delete dir="${coverage_dir}" />
         <exec executable="git">
             <arg value="checkout" />
             <arg value="--" />
@@ -65,22 +71,45 @@
     <!-- Auto-run tests for JUnit -->
     <target name="run-junit" depends="compile-tests">
         <mkdir dir="${report_dir}" />
-        <junit fork="yes" forkmode="once" printsummary="yes" showoutput="yes" failureProperty="tests_failed">
-            <classpath>
-                <path location="${build_test_dir}" />
-                <path location="${classes_dir}" />
-                <path refid="classpath" />
-            </classpath>
+        <mkdir dir="${coverage_dir}" />
 
-            <sysproperty key="test_with_php" value="${test_with_php}" />
+        <jacoco:coverage destfile="${coverage_dir}/jacoco.exec">
+            <junit fork="yes" forkmode="once" printsummary="yes" showoutput="yes" failureProperty="tests_failed">
+                <classpath>
+                    <path location="${build_test_dir}" />
+                    <path location="${classes_dir}" />
+                    <path refid="classpath" />
+                </classpath>
 
-            <formatter type="plain" />
-            <batchtest todir="${report_dir}">
-                <fileset dir="${build_test_dir}">
-                    <include name="**/KanaConverterTests/*Test.class" />
-                </fileset>
-            </batchtest>
-        </junit>
+                <sysproperty key="test_with_php" value="${test_with_php}" />
+
+                <formatter type="plain" />
+                <formatter type="xml" />
+                <batchtest todir="${report_dir}">
+                    <fileset dir="${build_test_dir}">
+                        <include name="**/KanaConverterTests/*Test.class" />
+                    </fileset>
+                </batchtest>
+            </junit>
+        </jacoco:coverage>
+
+        <jacoco:report>
+            <executiondata>
+                <file file="${coverage_dir}/jacoco.exec" />
+            </executiondata>
+
+            <structure name="kanatools-java">
+                <classfiles>
+                    <fileset dir="${classes_dir}" />
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${src_dir}" />
+                </sourcefiles>
+            </structure>
+
+            <html destdir="${coverage_dir}" />
+            <xml destfile="${coverage_dir}/coverage.xml" encoding="UTF-8" />
+        </jacoco:report>
     </target>
 
     <!-- Output test details if they fail -->
