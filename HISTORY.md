@@ -1,8 +1,16 @@
+v1.1.1 :: Aug 07 2015
+======================
+* Added JaCoCo code coverage report to `ant test` build process - provides line-by-line guide to which code within the source file is actually executed during unit testing
+* Using the info learned from JaCoCo, added coverage for a few remaining edge cases and refactored the code slightly to achieve 100% coverage for **KanaConverter**
+* Also changed scope of `createOpsArrayFromString` to private
+
+
 v1.1.0 :: Jan 02 2015
 ======================
 * Added ability to exclude certain characters from conversion in the `kanaConvert` function.
 * Updated EN and JA documentation accordingly.
 * Setup for Travis CI auto unit testing and added the "build status" image to README
+
 
 v1.0.0 :: Dec 19 2014
 ======================
@@ -14,6 +22,7 @@ v1.0.0 :: Dec 19 2014
 * Added EN/JA documentation website using GitHub Pages
 * Wrote basic download/install/usage documentation in README
 
+
 v0.9.0 :: Nov 17 2014
 ======================
 * Improved build process, make direct command-line based PHP testing optional (off by default for `ant test`)
@@ -22,12 +31,14 @@ v0.9.0 :: Nov 17 2014
 * Cleaned up code, added Javadocs where helpful
 * Wrote basic download/install/usage documentation in README
 
+
 v0.5.0 :: Oct 31 2014
 ======================
 * Beta version of **KanaConverter**
 * Implemented remaining methods, including those related to Hankaku Katakana handling
 * Re-organized code for more modularity, more effectively spliting up different logic into different functions
 * Unit tests for each single method that cover each conversion types full character span, as well as a mixed input test string
+
 
 v0.1.0 :: Jun 11 2014
 ======================
