@@ -104,8 +104,7 @@ public class KanaConverter
 
             // Order of conversion operations written to be similar to original PHP
             //// Source: https://github.com/php/php-src/blob/128eda843f7dff487fff529a384fee3c5494e0f6/ext/mbstring/libmbfl/filters/mbfilter_tl_jisx0201_jisx0208.c#L41
-            if(current_char == this_char
-            && 0 != (conversion_ops & OP_HAN_ASCII_TO_ZEN_ASCII)) {
+            if(0 != (conversion_ops & OP_HAN_ASCII_TO_ZEN_ASCII)) {
                 current_char = convertHankakuAsciiToZenkakuAscii(current_char);
             }
 
@@ -226,7 +225,6 @@ public class KanaConverter
         return new_string.toString();
     }
     //}}}
-
     //{{{ String convertKana(String, int)
     /**
       * Same as "convertKana()" above, but defaults to no ignored characters
