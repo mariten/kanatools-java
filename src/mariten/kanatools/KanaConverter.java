@@ -196,8 +196,7 @@ public class KanaConverter
                 // First convert from full hiragana to full katakana
                 current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
 
-                if(0 != (conversion_ops & OP_ZEN_HIRA_TO_HAN_KATA)
-                && hankaku_diacritic_suffix == 0) {
+                if(0 != (conversion_ops & OP_ZEN_HIRA_TO_HAN_KATA)) {
                     // Proceed to convert to hankaku if requested (skip if zen-kata to han-kata conversion was already performed)
                     hankaku_diacritic_suffix = determineHankakuDiacriticSuffix(current_char);
                     current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
