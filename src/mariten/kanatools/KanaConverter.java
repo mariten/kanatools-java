@@ -752,7 +752,7 @@ public class KanaConverter
 
 
     //{{{ int createOpsArrayFromString(String)
-    public static int createOpsArrayFromString(String php_style_options_string)
+    private static int createOpsArrayFromString(String php_style_options_string)
     {
         int char_op_count = php_style_options_string.length();
         int conversion_op_flags = 0;

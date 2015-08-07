@@ -2,6 +2,7 @@ package mariten.kanatools;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import mariten.kanatools.KanaConverter;
@@ -52,8 +53,19 @@ public abstract class KanaConverterTester
     protected void assertConverted(String conv_flags_string, boolean execute_php_test, String str_to_convert, String expected_result)
     {
         assertEquals(expected_result, KanaConverter.convertKana(str_to_convert, conv_flags_string));
-        int conv_flags = KanaConverter.createOpsArrayFromString(conv_flags_string);
         if(execute_php_test) {
+            int conv_flags = -1;
+            try {
+                // Translate int-flag op format to PHP-style string op format using restricted function in KanaConverter
+                Class target_class = Class.forName("mariten.kanatools.KanaConverter");
+                Method restricted_converter = target_class.getDeclaredMethod("createOpsArrayFromString", String.class);
+                restricted_converter.setAccessible(true);
+                Object function_result = restricted_converter.invoke(null, conv_flags_string);
+                conv_flags = (Integer)function_result;
+            } catch (Exception ex) {
+                fail("Reflection failed: " + ex.getMessage());
+            }
+
             assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
         }
     }
