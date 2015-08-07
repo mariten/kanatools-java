@@ -2,6 +2,7 @@ package mariten.kanatools;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import mariten.kanatools.KanaConverter;
@@ -17,6 +18,7 @@ public abstract class KanaConverterTester
 
     public KanaConverterTester()
     {
+        // Determine whether PHP testing was requested by Ant
         String php_option_from_ant = System.getProperty("test_with_php");
         if(php_option_from_ant != null
         && php_option_from_ant.equals("yes")) {
@@ -24,6 +26,9 @@ public abstract class KanaConverterTester
         } else {
             do_direct_php_testing = false;
         }
+
+        // Test instantiation
+        KanaConverter kana_converter_object = new KanaConverter();
     }
 
 
@@ -47,8 +52,22 @@ public abstract class KanaConverterTester
     //{{{ void assertConverted(String, boolean, String, String)
     protected void assertConverted(String conv_flags_string, boolean execute_php_test, String str_to_convert, String expected_result)
     {
-        int conv_flags = KanaConverter.createOpsArrayFromString(conv_flags_string);
-        this.assertConverted(conv_flags, execute_php_test, str_to_convert, expected_result);
+        assertEquals(expected_result, KanaConverter.convertKana(str_to_convert, conv_flags_string));
+        if(execute_php_test) {
+            int conv_flags = -1;
+            try {
+                // Translate int-flag op format to PHP-style string op format using restricted function in KanaConverter
+                Class target_class = Class.forName("mariten.kanatools.KanaConverter");
+                Method restricted_converter = target_class.getDeclaredMethod("createOpsArrayFromString", String.class);
+                restricted_converter.setAccessible(true);
+                Object function_result = restricted_converter.invoke(null, conv_flags_string);
+                conv_flags = (Integer)function_result;
+            } catch (Exception ex) {
+                fail("Reflection failed: " + ex.getMessage());
+            }
+
+            assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
+        }
     }
     //}}}
     //{{{ void assertConverted(int, String, String)

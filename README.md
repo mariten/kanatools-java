@@ -43,6 +43,7 @@ Perform the following process on the command line
 ```bash
 git clone https://github.com/mariten/kanatools-java.git
 cd kanatools-java
+git checkout staging
 ant test
 ```
 

@@ -104,8 +104,7 @@ public class KanaConverter
 
             // Order of conversion operations written to be similar to original PHP
             //// Source: https://github.com/php/php-src/blob/128eda843f7dff487fff529a384fee3c5494e0f6/ext/mbstring/libmbfl/filters/mbfilter_tl_jisx0201_jisx0208.c#L41
-            if(current_char == this_char
-            && 0 != (conversion_ops & OP_HAN_ASCII_TO_ZEN_ASCII)) {
+            if(0 != (conversion_ops & OP_HAN_ASCII_TO_ZEN_ASCII)) {
                 current_char = convertHankakuAsciiToZenkakuAscii(current_char);
             }
 
@@ -197,8 +196,7 @@ public class KanaConverter
                 // First convert from full hiragana to full katakana
                 current_char = convertZenkakuHiraganaToZenkakuKatakana(current_char);
 
-                if(0 != (conversion_ops & OP_ZEN_HIRA_TO_HAN_KATA)
-                && hankaku_diacritic_suffix == 0) {
+                if(0 != (conversion_ops & OP_ZEN_HIRA_TO_HAN_KATA)) {
                     // Proceed to convert to hankaku if requested (skip if zen-kata to han-kata conversion was already performed)
                     hankaku_diacritic_suffix = determineHankakuDiacriticSuffix(current_char);
                     current_char = convertZenkakuKatakanaToHankakuKatakana(current_char);
@@ -226,7 +224,6 @@ public class KanaConverter
         return new_string.toString();
     }
     //}}}
-
     //{{{ String convertKana(String, int)
     /**
       * Same as "convertKana()" above, but defaults to no ignored characters
@@ -755,7 +752,7 @@ public class KanaConverter
 
 
     //{{{ int createOpsArrayFromString(String)
-    public static int createOpsArrayFromString(String php_style_options_string)
+    private static int createOpsArrayFromString(String php_style_options_string)
     {
         int char_op_count = php_style_options_string.length();
         int conversion_op_flags = 0;
