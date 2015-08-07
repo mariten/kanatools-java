@@ -25,6 +25,9 @@ public abstract class KanaConverterTester
         } else {
             do_direct_php_testing = false;
         }
+
+        // Test instantiation
+        KanaConverter kana_converter_object = new KanaConverter();
     }
 
 
