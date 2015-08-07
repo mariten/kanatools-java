@@ -17,6 +17,7 @@ public abstract class KanaConverterTester
 
     public KanaConverterTester()
     {
+        // Determine whether PHP testing was requested by Ant
         String php_option_from_ant = System.getProperty("test_with_php");
         if(php_option_from_ant != null
         && php_option_from_ant.equals("yes")) {
@@ -47,8 +48,11 @@ public abstract class KanaConverterTester
     //{{{ void assertConverted(String, boolean, String, String)
     protected void assertConverted(String conv_flags_string, boolean execute_php_test, String str_to_convert, String expected_result)
     {
+        assertEquals(expected_result, KanaConverter.convertKana(str_to_convert, conv_flags_string));
         int conv_flags = KanaConverter.createOpsArrayFromString(conv_flags_string);
-        this.assertConverted(conv_flags, execute_php_test, str_to_convert, expected_result);
+        if(execute_php_test) {
+            assertConvertedUsingPHP(conv_flags, str_to_convert, expected_result);
+        }
     }
     //}}}
     //{{{ void assertConverted(int, String, String)
