@@ -50,6 +50,8 @@
     <target name="compile" depends="init">
         <mkdir dir="${classes_dir}" />
         <javac srcdir="${src_dir}" destdir="${classes_dir}" source="1.5" target="1.5" debug="on" classpathref="classpath" includeantruntime="false">
+            <compilerarg value="-Xlint:-options"/>
+            <compilerarg value="-Xlint:unchecked"/>
         </javac>
     </target>
 
@@ -61,6 +63,7 @@
                 <path location="${classes_dir}" />
                 <path refid="classpath" />
             </classpath>
+            <compilerarg value="-Xlint:unchecked"/>
         </javac>
     </target>
 
