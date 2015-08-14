@@ -278,9 +278,9 @@ public class KanaConverter
 
     // Punctuation constants
     public static final char HANKAKU_ASCII_FIRST = '!';
-    public static final char HANKAKU_ASCII_LAST  = '}';
+    public static final char HANKAKU_ASCII_LAST  = '~';
     public static final char ZENKAKU_ASCII_FIRST = '！';
-    public static final char ZENKAKU_ASCII_LAST  = '｝';
+    public static final char ZENKAKU_ASCII_LAST  = '～';
 
     // Hiragana constants
     public static final char HIRAGANA_FIRST = 'ぁ';

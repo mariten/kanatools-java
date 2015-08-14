@@ -1,2 +1,5 @@
+# Java bytecode
+*.class
+
 # Editor swap files
 *.swp

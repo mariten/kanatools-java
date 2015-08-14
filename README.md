@@ -4,11 +4,13 @@
 ### 日本語
 * **kanatools-java** とは、Java にて日本語文字処理を簡単にやってくれる小さなライブラリです。
 * 数行のコードだけで、仮名やローマ字の変換等の処理が素早くできます。
+* Java 1.5 以上で使用できます。
 * [詳細を見る...](http://mariten.github.io/kanatools-java/ja/)
 
 ### English
 * **kanatools-java** is a small collection of utilities that make your life easier when dealing with Japanese text.
 * Quickly process text containing kana characters with just a few lines of code.
+* Works with Java 1.5 and above
 * [Read more...](http://mariten.github.io/kanatools-java/en/)
 
 # KanaConverter
@@ -17,15 +19,19 @@
 
 ### Example
 ```java
-String input_str = "ﾃｽﾃｨﾝｸﾞ　１−２−３";
+String before = "ﾃｽﾃｨﾝｸﾞ　１−２−３";
 
 int conv_op_flags = 0;
 conv_op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;    //半角カタカナを全角カタカナに変換
 conv_op_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;  //全角英数字を半角英数字に変換
 
-String output_str = KanaConverter.convertKana(input_str, conv_op_flags);
-System.out.println(output_str);
-// "テスティング 1-2-3"
+String after = KanaConverter.convertKana(before, conv_op_flags);
+```
+
+Effect:
+```
+before: "ﾃｽﾃｨﾝｸﾞ　１−２−３"
+after:  "テスティング 1-2-3"
 ```
 
 # Download and Install
@@ -34,9 +40,11 @@ System.out.println(output_str);
 
 # Development
 ### Requirements
-* :coffee: Java 1.7+
+* :coffee: Java
+    * **JDK 1.5+ for users** (those who just want to include the JAR in their own project)
+    * **JDK 1.6+ for contributors** (those who want to build and test the code in this library)
 * :ant: Ant
-* :u6709: Japanese font for your editor or console
+* :u6709: Japanese text display for your editor or console
 
 ### Setup
 Perform the following process on the command line
