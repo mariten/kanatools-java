@@ -49,7 +49,7 @@
     <!-- Compile Java source files -->
     <target name="compile" depends="init">
         <mkdir dir="${classes_dir}" />
-        <javac srcdir="${src_dir}" destdir="${classes_dir}" source="1.5" target="1.5" debug="on" classpathref="classpath" includeantruntime="false">
+        <javac srcdir="${src_dir}" destdir="${classes_dir}" source="1.5" target="1.5" encoding="UTF-8" debug="on" classpathref="classpath" includeantruntime="false">
             <compilerarg value="-Xlint:-options"/>
             <compilerarg value="-Xlint:unchecked"/>
         </javac>
@@ -58,7 +58,7 @@
     <!-- Compile unit test source files -->
     <target name="compile-tests" depends="compile">
         <mkdir dir="${build_test_dir}" />
-        <javac srcdir="${test_dir}" destdir="${build_test_dir}" debug="on" includeantruntime="false">
+        <javac srcdir="${test_dir}" destdir="${build_test_dir}" encoding="UTF-8" debug="on" includeantruntime="false">
             <classpath>
                 <path location="${classes_dir}" />
                 <path refid="classpath" />
