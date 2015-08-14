@@ -49,7 +49,8 @@
     <!-- Compile Java source files -->
     <target name="compile" depends="init">
         <mkdir dir="${classes_dir}" />
-        <javac srcdir="${src_dir}" destdir="${classes_dir}" debug="on" classpathref="classpath" includeantruntime="false" />
+        <javac srcdir="${src_dir}" destdir="${classes_dir}" source="1.5" target="1.5" debug="on" classpathref="classpath" includeantruntime="false">
+        </javac>
     </target>
 
     <!-- Compile unit test source files -->
