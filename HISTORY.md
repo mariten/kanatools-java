@@ -1,3 +1,11 @@
+v1.1.2 :: Aug 14 2015
+======================
+* Library now supports older versions of Java back to 1.5 courtesy of better compiler options specified in build.xml
+* Fixed exclusion of the tilde character during zenkaku <--> hankaku ascii conversion
+    * Big thanks to [@NotSoOldNick](https://github.com/NotSoOldNick)!
+* Added basic integration testing script that tests a stand-alone Java program which includes the **kanatools** JAR file and calls `kanaConvert` on sample input
+
+
 v1.1.1 :: Aug 07 2015
 ======================
 * Added JaCoCo code coverage report to `ant test` build process - provides line-by-line guide to which code within the source file is actually executed during unit testing
