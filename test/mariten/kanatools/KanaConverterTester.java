@@ -199,7 +199,7 @@ public abstract class KanaConverterTester
     //{{{ String processPhpResult(String, int)
     /**
       * Add special logic to account for differences between this library and PHP's mb_convert_kana.
-      * @note   PHP ignores conversion of quote, double-quote, and backslash
+      * @note   PHP's "mb_convert_kana" ignores conversion of quote, double-quote, backslash, and tilde
       *
       * @param  php_raw_result  Actual result (output) of execution of mb_convert_kana
       * @param  conv_flags      Flag-based integer to convert
@@ -212,13 +212,15 @@ public abstract class KanaConverterTester
             php_processed_result = php_processed_result
             .replace('\'', '＇')
             .replace('\"', '＂')
-            .replace('\\', '＼');
+            .replace('\\', '＼')
+            .replace('~', '～');
         }
         if(0 != (conv_flags & KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII)) {
             php_processed_result = php_processed_result
             .replace('＇', '\'')
             .replace('＂', '\"')
-            .replace('＼', '\\');
+            .replace('＼', '\\')
+            .replace('～', '~');
         }
 
         return php_processed_result;

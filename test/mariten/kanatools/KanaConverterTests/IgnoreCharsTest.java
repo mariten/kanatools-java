@@ -10,7 +10,7 @@ public class IgnoreCharsTest extends KanaConverterTester
     @Test
     public void testAsciiIgnoreChars()
     {
-        String chars_to_exclude = "ABCＤＥＦ:；";
+        String chars_to_exclude = "ABCＤＥＦ:；～";
         super.assertConvertedWithExclusions(KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII, chars_to_exclude,
             "　！＂＃＄％＆＇（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～",
             " !\"#$%&'()*+,-./0123456789:；<=>?@ABCＤＥＦGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}～"
