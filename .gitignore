@@ -3,3 +3,6 @@
 
 # Editor swap files
 *.swp
+
+# Metafiles
+*.DS_Store
