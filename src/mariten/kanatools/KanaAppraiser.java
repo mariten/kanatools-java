@@ -12,6 +12,9 @@ public class KanaAppraiser
 
 
     //// Bounds for Katakana
+    public static final char HANKAKU_KATAKANA_FIRST = 'ｦ';              // U+FF66
+    public static final char HANKAKU_KATAKANA_LAST  = 'ﾝ';              // U+FF9D
+
     public static final char ZENKAKU_KATAKANA_FIRST = 'ァ';             // U+30A1
     public static final char ZENKAKU_KATAKANA_LAST_FOR_MAPPING  = 'ン'; // U+30F3
     public static final char ZENKAKU_KATAKANA_LAST  = 'ヺ';             // U+30FA
@@ -52,6 +55,18 @@ public class KanaAppraiser
     {
         if(eval_char >= ZENKAKU_HIRAGANA_FIRST
         && eval_char <= ZENKAKU_HIRAGANA_LAST) {
+            return true;
+        }
+        return false;
+    }
+    //}}}
+
+
+    //{{{ boolean isHankakuKatakana(char)
+    public static boolean isHankakuKatakana(char eval_char)
+    {
+        if(eval_char >= HANKAKU_KATAKANA_FIRST
+        && eval_char <= HANKAKU_KATAKANA_LAST) {
             return true;
         }
         return false;
