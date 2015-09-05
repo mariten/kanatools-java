@@ -1,4 +1,5 @@
 package mariten.kanatools;
+import mariten.kanatools.KanaAppraiser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -282,14 +283,6 @@ public class KanaConverter
     public static final char ZENKAKU_ASCII_FIRST = '！';
     public static final char ZENKAKU_ASCII_LAST  = '～';
 
-    // Hiragana constants
-    public static final char HIRAGANA_FIRST = 'ぁ';
-    public static final char HIRAGANA_LAST  = 'ん';
-
-    // Katakana constants
-    public static final char ZENKAKU_KATAKANA_FIRST = 'ァ';
-    public static final char ZENKAKU_KATAKANA_LAST  = 'ン';
-
     // Diacritic constants
     public static final char HANKAKU_VOICED_MARK    = 'ﾞ';  // dakuten
     public static final char HANKAKU_ASPIRATED_MARK = 'ﾟ';  // handakuten
@@ -534,6 +527,10 @@ public class KanaConverter
     //}}}
 
 
+    // Connect mapping of hiragana and katakana char codes
+    public static final int OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA =
+    (KanaAppraiser.ZENKAKU_KATAKANA_FIRST - KanaAppraiser.ZENKAKU_HIRAGANA_FIRST);
+
     //{{{ char convertHankakuAsciiToZenkakuAscii(char)
     protected static char convertHankakuAsciiToZenkakuAscii(char target)
     {
@@ -565,9 +562,8 @@ public class KanaConverter
     //{{{ char convertZenkakuHiraganaToZenkakuKatakana(char)
     protected static char convertZenkakuHiraganaToZenkakuKatakana(char target)
     {
-        if(target >= HIRAGANA_FIRST && target <= HIRAGANA_LAST) {
-            // Offset by difference in hira/kata kana char-code position
-            return (char)(target + (ZENKAKU_KATAKANA_FIRST - HIRAGANA_FIRST));
+        if(KanaAppraiser.isZenkakuHiragana(target)) {
+            return (char)(target + OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         } else {
             return target;
         }
@@ -578,9 +574,8 @@ public class KanaConverter
     //{{{ char convertZenkakuKatakanaToZenkakuHiragana(char)
     protected static char convertZenkakuKatakanaToZenkakuHiragana(char target)
     {
-        if(target >= ZENKAKU_KATAKANA_FIRST && target <= ZENKAKU_KATAKANA_LAST) {
-            // Offset by difference in hira/kata kana char-code position
-            return (char)(target - (ZENKAKU_KATAKANA_FIRST - HIRAGANA_FIRST));
+        if(KanaAppraiser.isZenkakuKatakana(target)) {
+            return (char)(target - OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         } else {
             return target;
         }
