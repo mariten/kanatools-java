@@ -91,6 +91,7 @@
                 <formatter type="xml" />
                 <batchtest todir="${report_dir}">
                     <fileset dir="${build_test_dir}">
+                        <include name="**/KanaAppraiserTests/*Test.class" />
                         <include name="**/KanaConverterTests/*Test.class" />
                     </fileset>
                 </batchtest>
@@ -123,6 +124,7 @@
         <echo message="---------------------------------------------------------------------------------" />
         <concat>
             <fileset dir="${report_dir}">
+                <include name="*.KanaAppraiserTests.*.txt" />
                 <include name="*.KanaConverterTests.*.txt" />
             </fileset>
         </concat>
