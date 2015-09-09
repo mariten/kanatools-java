@@ -120,12 +120,12 @@
     <!-- Output test details if they fail -->
     <target name="check-for-failed-tests" if="tests_failed">
         <echo message="FAILED UNIT TEST DETAILS:${line.separator}${line.separator}" />
-        <echo message="KanaConverter:" />
         <echo message="---------------------------------------------------------------------------------" />
         <concat>
             <fileset dir="${report_dir}">
                 <include name="*.KanaAppraiserTests.*.txt" />
                 <include name="*.KanaConverterTests.*.txt" />
+                <contains text="FAILED" />
             </fileset>
         </concat>
         <echo message="---------------------------------------------------------------------------------" />
