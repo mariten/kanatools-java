@@ -1,4 +1,4 @@
-package mariten.kanatools.KanaConverterTests;
+package mariten.kanatools.TestsKanaConverter;
 
 import mariten.kanatools.KanaConverter;
 import mariten.kanatools.KanaConverterTester;

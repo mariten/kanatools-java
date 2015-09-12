@@ -1,4 +1,4 @@
-package mariten.kanatools.KanaAppraiserTests;
+package mariten.kanatools.TestsKanaAppraiser;
 import mariten.kanatools.KanaAppraiser;
 import mariten.kanatools.KanaAppraiserTester;
 import org.junit.Test;
