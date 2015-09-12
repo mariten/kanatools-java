@@ -1,3 +1,10 @@
+v1.2.0 :: Sep 11 2015
+======================
+* Added **KanaAppraiser**, provides numerous functions to check whether a character is hiragana, katakana, hankaku, zenkaku, ASCII, and more
+* Include 100% unit test coverage for new class
+* Refactor code in **KanaConverter** to utilize **KanaAppraiser** since this logic has been part of the conversion logic up until now
+
+
 v1.1.2 :: Aug 14 2015
 ======================
 * Library now supports older versions of Java back to 1.5 courtesy of better compiler options specified in build.xml
