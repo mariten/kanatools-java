@@ -1,4 +1,5 @@
 package mariten.kanatools;
+import mariten.kanatools.KanaAppraiser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -259,48 +260,11 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ Character constants
-    // Numeric constants
-    public static final char HANKAKU_NUMBER_FIRST = '0';
-    public static final char HANKAKU_NUMBER_LAST  = '9';
-    public static final char ZENKAKU_NUMBER_FIRST = '０';
-    public static final char ZENKAKU_NUMBER_LAST  = '９';
-
-    // Alphabetic constants
-    public static final char HANKAKU_LETTER_UPPER_FIRST = 'A';
-    public static final char HANKAKU_LETTER_UPPER_LAST  = 'Z';
-    public static final char HANKAKU_LETTER_LOWER_FIRST = 'a';
-    public static final char HANKAKU_LETTER_LOWER_LAST  = 'z';
-    public static final char ZENKAKU_LETTER_UPPER_FIRST = 'Ａ';
-    public static final char ZENKAKU_LETTER_UPPER_LAST  = 'Ｚ';
-    public static final char ZENKAKU_LETTER_LOWER_FIRST = 'ａ';
-    public static final char ZENKAKU_LETTER_LOWER_LAST  = 'ｚ';
-
-    // Punctuation constants
-    public static final char HANKAKU_ASCII_FIRST = '!';
-    public static final char HANKAKU_ASCII_LAST  = '~';
-    public static final char ZENKAKU_ASCII_FIRST = '！';
-    public static final char ZENKAKU_ASCII_LAST  = '～';
-
-    // Hiragana constants
-    public static final char HIRAGANA_FIRST = 'ぁ';
-    public static final char HIRAGANA_LAST  = 'ん';
-
-    // Katakana constants
-    public static final char ZENKAKU_KATAKANA_FIRST = 'ァ';
-    public static final char ZENKAKU_KATAKANA_LAST  = 'ン';
-
+    //{{{ Hankaku Katakana related mappings
     // Diacritic constants
     public static final char HANKAKU_VOICED_MARK    = 'ﾞ';  // dakuten
     public static final char HANKAKU_ASPIRATED_MARK = 'ﾟ';  // handakuten
 
-    // Other constants
-    public static final char HANKAKU_SPACE = ' ';
-    public static final char ZENKAKU_SPACE = '　';
-    //}}}
-
-
-    //{{{ Hankaku Katakana related mappings
     protected static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED;
     static {
         MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED = new HashMap<Character, Character>();
@@ -534,16 +498,25 @@ public class KanaConverter
     //}}}
 
 
+    // Connect mapping of hiragana and katakana char codes
+    public static final int OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA =
+    (KanaAppraiser.ZENKAKU_KATAKANA_FIRST - KanaAppraiser.ZENKAKU_HIRAGANA_FIRST);
+
+    // Connect mapping of regular ASCII characters to Zenkaku ASCII characters
+    public static final int OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII =
+    (KanaAppraiser.ZENKAKU_ASCII_FIRST - KanaAppraiser.HANKAKU_ASCII_FIRST);
+
+
     //{{{ char convertHankakuAsciiToZenkakuAscii(char)
     protected static char convertHankakuAsciiToZenkakuAscii(char target)
     {
-        if(target >= HANKAKU_ASCII_FIRST && target <= HANKAKU_ASCII_LAST) {
-            return (char)(target + (ZENKAKU_ASCII_FIRST - HANKAKU_ASCII_FIRST));
-        } else if(target == HANKAKU_SPACE) {
-            return ZENKAKU_SPACE;
+        if(KanaAppraiser.isHankakuAscii(target)) {
+            return (char)(target + OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII);
+        } else if(target == KanaAppraiser.HANKAKU_SPACE) {
+            return KanaAppraiser.ZENKAKU_SPACE;
+        } else {
+            return target;
         }
-
-        return target;
     }
     //}}}
 
@@ -551,13 +524,13 @@ public class KanaConverter
     //{{{ char convertZenkakuAsciiToHankakuAscii(char)
     protected static char convertZenkakuAsciiToHankakuAscii(char target)
     {
-        if(target >= ZENKAKU_ASCII_FIRST && target <= ZENKAKU_ASCII_LAST) {
-            return (char)(target - (ZENKAKU_ASCII_FIRST - HANKAKU_ASCII_FIRST));
-        } else if(target == ZENKAKU_SPACE) {
-            return HANKAKU_SPACE;
+        if(KanaAppraiser.isZenkakuAscii(target)) {
+            return (char)(target - OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII);
+        } else if(target == KanaAppraiser.ZENKAKU_SPACE) {
+            return KanaAppraiser.HANKAKU_SPACE;
+        } else {
+            return target;
         }
-
-        return target;
     }
     //}}}
 
@@ -565,9 +538,8 @@ public class KanaConverter
     //{{{ char convertZenkakuHiraganaToZenkakuKatakana(char)
     protected static char convertZenkakuHiraganaToZenkakuKatakana(char target)
     {
-        if(target >= HIRAGANA_FIRST && target <= HIRAGANA_LAST) {
-            // Offset by difference in hira/kata kana char-code position
-            return (char)(target + (ZENKAKU_KATAKANA_FIRST - HIRAGANA_FIRST));
+        if(KanaAppraiser.isZenkakuHiragana(target)) {
+            return (char)(target + OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         } else {
             return target;
         }
@@ -578,9 +550,8 @@ public class KanaConverter
     //{{{ char convertZenkakuKatakanaToZenkakuHiragana(char)
     protected static char convertZenkakuKatakanaToZenkakuHiragana(char target)
     {
-        if(target >= ZENKAKU_KATAKANA_FIRST && target <= ZENKAKU_KATAKANA_LAST) {
-            // Offset by difference in hira/kata kana char-code position
-            return (char)(target - (ZENKAKU_KATAKANA_FIRST - HIRAGANA_FIRST));
+        if(KanaAppraiser.isMappableZenkakuKatakana(target)) {
+            return (char)(target - OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         } else {
             return target;
         }
@@ -651,9 +622,9 @@ public class KanaConverter
     //{{{ char convertHankakuNumberToZenkakuNumber(char)
     protected static char convertHankakuNumberToZenkakuNumber(char target)
     {
-        if(target >= HANKAKU_NUMBER_FIRST && target <= HANKAKU_NUMBER_LAST) {
+        if(KanaAppraiser.isHankakuNumber(target)) {
             // Offset by difference in char-code position
-            return (char)(target + (ZENKAKU_NUMBER_FIRST - HANKAKU_NUMBER_FIRST));
+            return (char)(target + OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII);
         } else {
             return target;
         }
@@ -664,9 +635,9 @@ public class KanaConverter
     //{{{ char convertZenkakuNumberToHankakuNumber(char)
     protected static char convertZenkakuNumberToHankakuNumber(char target)
     {
-        if(target >= ZENKAKU_NUMBER_FIRST && target <= ZENKAKU_NUMBER_LAST) {
+        if(KanaAppraiser.isZenkakuNumber(target)) {
             // Offset by difference in char-code position
-            return (char)(target - (ZENKAKU_NUMBER_FIRST - HANKAKU_NUMBER_FIRST));
+            return (char)(target - OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII);
         } else {
             return target;
         }
@@ -677,15 +648,9 @@ public class KanaConverter
     //{{{ char convertHankakuLetterToZenkakuLetter(char)
     protected static char convertHankakuLetterToZenkakuLetter(char target)
     {
-        if(target >= HANKAKU_LETTER_LOWER_FIRST && target <= HANKAKU_LETTER_LOWER_LAST) {
-            // Offset by difference in lower-case char-code position
-            return (char)(target + (ZENKAKU_LETTER_LOWER_FIRST - HANKAKU_LETTER_LOWER_FIRST));
-        }
-        else if(target >= HANKAKU_LETTER_UPPER_FIRST && target <= HANKAKU_LETTER_UPPER_LAST) {
-            // Offset by difference in upper-case char-code position
-            return (char)(target + (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
-        }
-        else {
+        if(KanaAppraiser.isHankakuLetter(target)) {
+            return (char)(target + OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII);
+        } else {
             return target;
         }
     }
@@ -695,15 +660,9 @@ public class KanaConverter
     //{{{ char convertZenkakuLetterToHankakuLetter(char)
     protected static char convertZenkakuLetterToHankakuLetter(char target)
     {
-        if(target >= ZENKAKU_LETTER_LOWER_FIRST && target <= ZENKAKU_LETTER_LOWER_LAST) {
-            // Offset by difference in lower-case char-code position
-            return (char)(target - (ZENKAKU_LETTER_LOWER_FIRST - HANKAKU_LETTER_LOWER_FIRST));
-        }
-        else if(target >= ZENKAKU_LETTER_UPPER_FIRST && target <= ZENKAKU_LETTER_UPPER_LAST) {
-            // Offset by difference in upper-case char-code position
-            return (char)(target - (ZENKAKU_LETTER_UPPER_FIRST - HANKAKU_LETTER_UPPER_FIRST));
-        }
-        else {
+        if(KanaAppraiser.isZenkakuLetter(target)) {
+            return (char)(target - OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII);
+        } else {
             return target;
         }
     }
@@ -713,8 +672,8 @@ public class KanaConverter
     //{{{ char convertHankakuSpaceToZenkakuSpace(char)
     protected static char convertHankakuSpaceToZenkakuSpace(char target)
     {
-        if(target == HANKAKU_SPACE) {
-            return ZENKAKU_SPACE;
+        if(target == KanaAppraiser.HANKAKU_SPACE) {
+            return KanaAppraiser.ZENKAKU_SPACE;
         } else {
             return target;
         }
@@ -725,8 +684,8 @@ public class KanaConverter
     //{{{ char convertZenkakuSpaceToHankakuSpace(char)
     protected static char convertZenkakuSpaceToHankakuSpace(char target)
     {
-        if(target == ZENKAKU_SPACE) {
-            return HANKAKU_SPACE;
+        if(target == KanaAppraiser.ZENKAKU_SPACE) {
+            return KanaAppraiser.HANKAKU_SPACE;
         } else {
             return target;
         }
