@@ -1,7 +1,4 @@
 language: java
-script:
-  - ant jar
-  - bash sample/test-sample.sh
 jdk:
   - oraclejdk8
   - oraclejdk7

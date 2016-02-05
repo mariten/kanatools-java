@@ -7,8 +7,8 @@ import java.util.Map;
 /**
   * Provides easy, automatic string conversions often necessary when dealing with Japanese text
   *
-  * @details Port of PHP's "mb_convert_kana" function for Java.
-  * @details http://www.php.net/manual/en/function.mb-convert-kana.php
+  * Port of PHP's "mb_convert_kana" function for Java.
+  * http://www.php.net/manual/en/function.mb-convert-kana.php
   */
 public class KanaConverter
 {
@@ -239,7 +239,7 @@ public class KanaConverter
       * Same as "convertKana()" above, but takes the conversion ops as a string (PHP-style)
       *
       * @param  original_string         Input string to perform conversion on
-      * @param  conversion_op_string    PHP mb_convert_kana style string specifying desired conversions
+      * @param  conversion_ops_string    PHP mb_convert_kana style string specifying desired conversions
       * @param  chars_to_ignore         Each character in this string will be excluded from conversion
       * @return                         original_string with specified conversion performed
       */
