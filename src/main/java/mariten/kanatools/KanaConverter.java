@@ -227,7 +227,12 @@ public class KanaConverter
     //}}}
     //{{{ String convertKana(String, int)
     /**
-      * Same as "convertKana()" above, but defaults to no ignored characters
+      * Converts a string containing kana or other characters used in Japanese text input
+      * according to one or more requested conversion methods.
+      *
+      * @param  original_string  Input string to perform conversion on
+      * @param  conversion_ops   Flag-based integer indicating which type of conversions to perform
+      * @return Content of "original_string" with specified conversions performed
       */
     public static String convertKana(String original_string, int conversion_ops)
     {
@@ -236,12 +241,13 @@ public class KanaConverter
     //}}}
     //{{{ String convertKana(String, String, String)
     /**
-      * Same as "convertKana()" above, but takes the conversion ops as a string (PHP-style)
+      * Converts a string containing kana or other characters used in Japanese text input
+      * according to one or more requested conversion methods.
       *
       * @param  original_string         Input string to perform conversion on
-      * @param  conversion_ops_string    PHP mb_convert_kana style string specifying desired conversions
+      * @param  conversion_ops_string   PHP mb_convert_kana style string specifying desired conversions
       * @param  chars_to_ignore         Each character in this string will be excluded from conversion
-      * @return                         original_string with specified conversion performed
+      * @return Content of "original_string" with specified conversions performed
       */
     public static String convertKana(String original_string, String conversion_ops_string, String chars_to_ignore)
     {
@@ -251,7 +257,12 @@ public class KanaConverter
     //}}}
     //{{{ String convertKana(String, String)
     /**
-      * Same as "convertKana()" above, but takes the conversion ops as a string (PHP-style)
+      * Converts a string containing kana or other characters used in Japanese text input
+      * according to one or more requested conversion methods.
+      *
+      * @param  original_string         Input string to perform conversion on
+      * @param  conversion_ops_string   PHP mb_convert_kana style string specifying desired conversions
+      * @return Content of "original_string" with specified conversions performed
       */
     public static String convertKana(String original_string, String conversion_ops_string)
     {
