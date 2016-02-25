@@ -1,13 +1,19 @@
 language: java
-script:
-  - ant jar
-  - bash sample/test-sample.sh
 sudo: false
 jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
   - openjdk6
+
+script:
+  - ./gradlew clean
+  - ./gradlew assemble
+  - ./gradlew check
+  - ./gradlew jacocoTestReport
+  - ant jar
+  - bash sample/test-sample.sh
+
 notifications:
   email:
     on_success: change
