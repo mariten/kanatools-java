@@ -6,8 +6,10 @@ jdk:
   - openjdk7
   - openjdk6
 
-script:
+install:
   - ./gradlew clean
+
+script:
   - ./gradlew assemble
   - ./gradlew check
   - ./gradlew jacocoTestReport
