@@ -549,7 +549,7 @@ public class KanaConverter
     //{{{ char convertZenkakuHiraganaToZenkakuKatakana(char)
     protected static char convertZenkakuHiraganaToZenkakuKatakana(char target)
     {
-        if(KanaAppraiser.isMappableZenkakuHiragana(target)) {
+        if(KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent(target)) {
             return (char)(target + OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         } else {
             return target;
@@ -561,7 +561,7 @@ public class KanaConverter
     //{{{ char convertZenkakuKatakanaToZenkakuHiragana(char)
     protected static char convertZenkakuKatakanaToZenkakuHiragana(char target)
     {
-        if(KanaAppraiser.isMappableZenkakuKatakana(target)) {
+        if(KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent(target)) {
             return (char)(target - OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         } else {
             return target;

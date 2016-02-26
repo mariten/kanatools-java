@@ -8,7 +8,7 @@ public class KanaAppraiser
     // Character set lower/upper bound definitions
     //// Bounds for Hiragana
     public static final char ZENKAKU_HIRAGANA_FIRST = 'ぁ';             // U+3041
-    public static final char ZENKAKU_HIRAGANA_LAST_FOR_MAPPING  = 'ん'; // U+3093
+    public static final char ZENKAKU_HIRAGANA_LAST_FOR_CONVERT  = 'ん'; // U+3093
     public static final char ZENKAKU_HIRAGANA_LAST  = 'ゖ';             // U+3096
 
 
@@ -17,7 +17,7 @@ public class KanaAppraiser
     public static final char HANKAKU_KATAKANA_LAST  = 'ﾝ';              // U+FF9D
 
     public static final char ZENKAKU_KATAKANA_FIRST = 'ァ';             // U+30A1
-    public static final char ZENKAKU_KATAKANA_LAST_FOR_MAPPING  = 'ン'; // U+30F3
+    public static final char ZENKAKU_KATAKANA_LAST_FOR_CONVERT  = 'ン'; // U+30F3
     public static final char ZENKAKU_KATAKANA_LAST  = 'ヺ';             // U+30FA
 
 
@@ -63,11 +63,11 @@ public class KanaAppraiser
     //}}}
 
 
-    //{{{ boolean isMappableZenkakuHiragana(char)
-    public static boolean isMappableZenkakuHiragana(char eval_char)
+    //{{{ boolean isZenkakuHiraganaWithKatakanaEquivalent(char)
+    public static boolean isZenkakuHiraganaWithKatakanaEquivalent(char eval_char)
     {
         if(eval_char >= ZENKAKU_HIRAGANA_FIRST
-        && eval_char <= ZENKAKU_HIRAGANA_LAST_FOR_MAPPING) {
+        && eval_char <= ZENKAKU_HIRAGANA_LAST_FOR_CONVERT) {
             return true;
         }
         return false;
@@ -99,11 +99,11 @@ public class KanaAppraiser
     //}}}
 
 
-    //{{{ boolean isMappableZenkakuKatakana(char)
-    public static boolean isMappableZenkakuKatakana(char eval_char)
+    //{{{ boolean isZenkakuKatakanaWithHiraganaEquivalent(char)
+    public static boolean isZenkakuKatakanaWithHiraganaEquivalent(char eval_char)
     {
         if(eval_char >= ZENKAKU_KATAKANA_FIRST
-        && eval_char <= ZENKAKU_KATAKANA_LAST_FOR_MAPPING) {
+        && eval_char <= ZENKAKU_KATAKANA_LAST_FOR_CONVERT) {
             return true;
         }
         return false;
