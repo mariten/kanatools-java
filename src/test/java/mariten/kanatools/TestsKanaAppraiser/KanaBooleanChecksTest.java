@@ -11,12 +11,32 @@ public class KanaBooleanChecksTest extends KanaAppraiserTester
     @Test
     public void testZenkakuHiraganaChecks()
     {
-        assertEquals(false, KanaAppraiser.isZenkakuHiragana('〶'));
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana('ぁ'));
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana('あ'));
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana('を'));
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana('ん'));
-        assertEquals(false, KanaAppraiser.isZenkakuHiragana('ゔ'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiragana        ('〶'));
+        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('〶'));
+
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ぁ'));
+        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('ぁ'));
+
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('あ'));
+        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('あ'));
+
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('を'));
+        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('を'));
+
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ん'));
+        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('ん'));
+
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ゔ'));
+        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('ゔ'));
+
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ゕ'));
+        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('ゕ'));
+
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ゖ'));
+        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('ゖ'));
+
+        assertEquals(false, KanaAppraiser.isZenkakuHiragana        ('゛'));
+        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('゛'));
     }
     //}}}
 

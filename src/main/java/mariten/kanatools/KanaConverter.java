@@ -549,7 +549,7 @@ public class KanaConverter
     //{{{ char convertZenkakuHiraganaToZenkakuKatakana(char)
     protected static char convertZenkakuHiraganaToZenkakuKatakana(char target)
     {
-        if(KanaAppraiser.isZenkakuHiragana(target)) {
+        if(KanaAppraiser.isMappableZenkakuHiragana(target)) {
             return (char)(target + OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA);
         } else {
             return target;
