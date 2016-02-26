@@ -11,32 +11,32 @@ public class KanaBooleanChecksTest extends KanaAppraiserTester
     @Test
     public void testZenkakuHiraganaChecks()
     {
-        assertEquals(false, KanaAppraiser.isZenkakuHiragana        ('〶'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('〶'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiragana                      ('〶'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('〶'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ぁ'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('ぁ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana                      ('ぁ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('ぁ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('あ'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('あ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana                      ('あ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('あ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('を'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('を'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana                      ('を'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('を'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ん'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuHiragana('ん'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana                      ('ん'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('ん'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ゔ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('ゔ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana                      ('ゔ'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('ゔ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ゕ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('ゕ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana                      ('ゕ'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('ゕ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuHiragana        ('ゖ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('ゖ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuHiragana                      ('ゖ'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('ゖ'));
 
-        assertEquals(false, KanaAppraiser.isZenkakuHiragana        ('゛'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuHiragana('゛'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiragana                      ('゛'));
+        assertEquals(false, KanaAppraiser.isZenkakuHiraganaWithKatakanaEquivalent('゛'));
     }
     //}}}
 
@@ -45,35 +45,35 @@ public class KanaBooleanChecksTest extends KanaAppraiserTester
     @Test
     public void testZenkakuKatakanaChecks()
     {
-        assertEquals(false, KanaAppraiser.isZenkakuKatakana        ('ゞ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuKatakana('ゞ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakana                      ('ゞ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ゞ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ァ'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuKatakana('ァ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ァ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ァ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ア'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuKatakana('ア'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ア'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ア'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ヲ'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuKatakana('ヲ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ヲ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ヲ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ン'));
-        assertEquals(true,  KanaAppraiser.isMappableZenkakuKatakana('ン'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ン'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ン'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ヴ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuKatakana('ヴ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ヴ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ヴ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ヵ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuKatakana('ヵ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ヵ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ヵ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ヹ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuKatakana('ヹ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ヹ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ヹ'));
 
-        assertEquals(true,  KanaAppraiser.isZenkakuKatakana        ('ヺ'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuKatakana('ヺ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKatakana                      ('ヺ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ヺ'));
 
-        assertEquals(false, KanaAppraiser.isZenkakuKatakana        ('・'));
-        assertEquals(false, KanaAppraiser.isMappableZenkakuKatakana('・'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakana                      ('・'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('・'));
     }
     //}}}
 
