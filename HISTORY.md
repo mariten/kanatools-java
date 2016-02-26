@@ -1,3 +1,13 @@
+v1.2.1 :: Feb 25 2016
+======================
+* Can now build using either Gradle or Ant
+* Like existing Ant build process, new Gradle build process handles compilation, unit testing, coverage report, and JAR creation
+    * Big thanks to [@knshiro](https://github.com/knshiro) for the pull request!
+    * He wrote the initial `build.gradle` and tweaked it to run with this repo
+* Updated Travis CI build config to ensure success of both Gradle-style and Ant-style builds
+* Also fixed some minor Javadoc inconsistencies caught and alerted by Gradle `javadoc` analyzer
+
+
 v1.2.0 :: Sep 11 2015
 ======================
 * Added **KanaAppraiser**, provides numerous functions to check whether a character is hiragana, katakana, hankaku, zenkaku, ASCII, and more
