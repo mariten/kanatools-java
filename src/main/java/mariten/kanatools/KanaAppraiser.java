@@ -8,7 +8,8 @@ public class KanaAppraiser
     // Character set lower/upper bound definitions
     //// Bounds for Hiragana
     public static final char ZENKAKU_HIRAGANA_FIRST = 'ぁ';             // U+3041
-    public static final char ZENKAKU_HIRAGANA_LAST  = 'ん';             // U+3093
+    public static final char ZENKAKU_HIRAGANA_LAST_FOR_MAPPING  = 'ん'; // U+3093
+    public static final char ZENKAKU_HIRAGANA_LAST  = 'ゖ';             // U+3096
 
 
     //// Bounds for Katakana
@@ -55,6 +56,18 @@ public class KanaAppraiser
     {
         if(eval_char >= ZENKAKU_HIRAGANA_FIRST
         && eval_char <= ZENKAKU_HIRAGANA_LAST) {
+            return true;
+        }
+        return false;
+    }
+    //}}}
+
+
+    //{{{ boolean isMappableZenkakuHiragana(char)
+    public static boolean isMappableZenkakuHiragana(char eval_char)
+    {
+        if(eval_char >= ZENKAKU_HIRAGANA_FIRST
+        && eval_char <= ZENKAKU_HIRAGANA_LAST_FOR_MAPPING) {
             return true;
         }
         return false;
