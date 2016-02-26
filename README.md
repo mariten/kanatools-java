@@ -44,6 +44,7 @@ after:  "テスティング 1-2-3"
     * **JDK 1.5+ for users** (those who just want to include the JAR in their own project)
     * **JDK 1.6+ for contributors** (those who want to build and test the code in this library)
 * :ant: Ant
+    * :elephant: Gradle 2.1+ builds are supported as well
 * :u6709: Japanese text display for your editor or console
 
 ### Setup
@@ -52,7 +53,12 @@ Perform the following process on the command line
 git clone https://github.com/mariten/kanatools-java.git
 cd kanatools-java
 git checkout staging
+
+# Ant Setup
 ant test
+
+# Gradle Setup
+./gradlew check
 ```
 
 When you see the `BUILD SUCCESSFUL` message you are good to go :thumbsup:
@@ -63,7 +69,7 @@ Please follow this process:
 0. If you are considering major changes, please consult me before starting (even just briefly)
 1. Fork this repository
 2. Make your changes in a new branch.  Please add or update unit tests accordingly.
-3. Ensure that `ant test` completes successfully.  Pull requests with failing or buggy unit tests will be rejected.
+3. Ensure that `ant test` and `./gradlew check` complete successfully.  Pull requests with failing or buggy unit tests will be rejected.
 4. Send the pull request to the **staging** branch and include an explanation of what your change accomplishes.  Please do not commit the JAR file in your pull request, that will only be done at release time.
 5. After a code review, your change will be merged and subsequently released into the **master** branch, at which time the changes will be reflected in an updated JAR file.
 6. Depending on your change, I would appreicate it if you updated the documentation on the `gh-pages` branch as well.
