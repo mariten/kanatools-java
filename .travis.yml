@@ -12,9 +12,11 @@ install:
 script:
   - ./gradlew assemble
   - ./gradlew check
-  - ./gradlew jacocoTestReport
   - ant jar
   - bash sample/test-sample.sh
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls
 
 notifications:
   email:

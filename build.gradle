@@ -6,6 +6,7 @@ buildscript {
 
 plugins {
     id "com.jfrog.bintray" version "1.6"
+    id "com.github.kt3k.coveralls" version "2.5.0"
 }
 
 apply plugin: 'java'
@@ -35,13 +36,11 @@ test {
 
 jacoco {
     toolVersion = '0.7.5.201505241946'
-    reportsDir = file("${buildDir}/coverage")
 }
 
 jacocoTestReport {
     reports {
         xml.enabled true
-        csv.enabled false
         html.enabled true
     }
 }
