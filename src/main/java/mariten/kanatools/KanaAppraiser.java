@@ -22,8 +22,9 @@ public class KanaAppraiser
 
 
     //// Bounds for Punctuation (kutoten)
-    public static final char HANKAKU_PUNCTUATION_FIRST = '｡';           // U+FF61
-    public static final char HANKAKU_PUNCTUATION_LAST  = 'ﾟ';           // U+FF9F
+    public static final char HANKAKU_PUNCTUATION_FIRST  = '｡';          // U+FF61
+    public static final char HANKAKU_PUNCTUATION_LAST   = 'ﾟ';          // U+FF9F
+    public static final char HANKAKU_PUNCTUATION_ONBIKI = 'ｰ';           // U+FF70
 
     public static final char ZENKAKU_PUNCTUATION_FIRST    = '、';       // U+3001
     public static final char ZENKAKU_PUNCTUATION_LAST     = '〜';       // U+301C
@@ -91,7 +92,8 @@ public class KanaAppraiser
     public static boolean isHankakuKatakana(char eval_char)
     {
         if(eval_char >= HANKAKU_KATAKANA_FIRST
-        && eval_char <= HANKAKU_KATAKANA_LAST) {
+        && eval_char <= HANKAKU_KATAKANA_LAST
+        && eval_char != HANKAKU_PUNCTUATION_ONBIKI) {
             return true;
         }
         return false;

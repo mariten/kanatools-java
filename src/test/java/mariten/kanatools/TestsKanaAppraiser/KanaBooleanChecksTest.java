@@ -74,6 +74,9 @@ public class KanaBooleanChecksTest extends KanaAppraiserTester
 
         assertEquals(false, KanaAppraiser.isZenkakuKatakana                      ('・'));
         assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('・'));
+
+        assertEquals(false, KanaAppraiser.isZenkakuKatakana                      ('ー'));
+        assertEquals(false, KanaAppraiser.isZenkakuKatakanaWithHiraganaEquivalent('ー'));
     }
     //}}}
 
@@ -86,6 +89,7 @@ public class KanaBooleanChecksTest extends KanaAppraiserTester
         assertEquals(false, KanaAppraiser.isHankakuKatakana('･'));
         assertEquals(true,  KanaAppraiser.isHankakuKatakana('ｦ'));
         assertEquals(true,  KanaAppraiser.isHankakuKatakana('ｧ'));
+        assertEquals(false, KanaAppraiser.isHankakuKatakana('ｰ'));
         assertEquals(true,  KanaAppraiser.isHankakuKatakana('ﾜ'));
         assertEquals(true,  KanaAppraiser.isHankakuKatakana('ﾝ'));
         assertEquals(false, KanaAppraiser.isHankakuKatakana('ﾞ'));
@@ -135,6 +139,7 @@ public class KanaBooleanChecksTest extends KanaAppraiserTester
         assertEquals(true,  KanaAppraiser.isHankakuKutoten('･'));
         assertEquals(false, KanaAppraiser.isHankakuKutoten('ｦ'));
         assertEquals(false, KanaAppraiser.isHankakuKutoten('ｧ'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('ｰ'));
         assertEquals(false, KanaAppraiser.isHankakuKutoten('ﾜ'));
         assertEquals(false, KanaAppraiser.isHankakuKutoten('ﾝ'));
         assertEquals(true,  KanaAppraiser.isHankakuKutoten('ﾞ'));
