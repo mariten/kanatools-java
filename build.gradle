@@ -46,7 +46,7 @@ jacocoTestReport {
     }
 }
 
-// custom tasks for creating source/javadoc jars
+// Custom tasks for creating source/javadoc JARs
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allJava
@@ -57,7 +57,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
-// add javadoc/source jar tasks as artifacts
+// Add javadoc/source jar tasks as artifacts
 artifacts {
     archives sourcesJar, javadocJar
 }
