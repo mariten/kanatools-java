@@ -21,6 +21,18 @@ public class KanaAppraiser
     public static final char ZENKAKU_KATAKANA_LAST  = 'ヺ';             // U+30FA
 
 
+    //// Bounds for Punctuation (kutoten)
+    public static final char HANKAKU_PUNCTUATION_FIRST = '｡';           // U+FF61
+    public static final char HANKAKU_PUNCTUATION_LAST  = 'ﾟ';           // U+FF9F
+
+    public static final char ZENKAKU_PUNCTUATION_FIRST    = '、';       // U+3001
+    public static final char ZENKAKU_PUNCTUATION_LAST     = '〜';       // U+301C
+    public static final char ZENKAKU_PUNCTUATION_HG_FIRST = '゛';       // U+309B
+    public static final char ZENKAKU_PUNCTUATION_HG_LAST  = 'ゞ';       // U+309E
+    public static final char ZENKAKU_PUNCTUATION_KK_FIRST = '・';       // U+30FB
+    public static final char ZENKAKU_PUNCTUATION_KK_LAST  = 'ヾ';       // U+30FE
+
+
     //// Bounds for Numeric
     public static final char HANKAKU_NUMBER_FIRST = '0';                // U+0030
     public static final char HANKAKU_NUMBER_LAST  = '9';                // U+0039
@@ -104,6 +116,32 @@ public class KanaAppraiser
     {
         if(eval_char >= ZENKAKU_KATAKANA_FIRST
         && eval_char <= ZENKAKU_KATAKANA_LAST_FOR_CONVERT) {
+            return true;
+        }
+        return false;
+    }
+    //}}}
+
+
+    //{{{ boolean isHankakuKutoten(char)
+    public static boolean isHankakuKutoten(char eval_char)
+    {
+        if(eval_char >= HANKAKU_PUNCTUATION_FIRST
+        && eval_char <= HANKAKU_PUNCTUATION_LAST
+        && !isHankakuKatakana(eval_char)) {
+            return true;
+        }
+        return false;
+    }
+    //}}}
+
+
+    //{{{ boolean isZenkakuKutoten(char)
+    public static boolean isZenkakuKutoten(char eval_char)
+    {
+        if((eval_char >= ZENKAKU_PUNCTUATION_FIRST    && eval_char <= ZENKAKU_PUNCTUATION_LAST)
+        || (eval_char >= ZENKAKU_PUNCTUATION_HG_FIRST && eval_char <= ZENKAKU_PUNCTUATION_HG_LAST)
+        || (eval_char >= ZENKAKU_PUNCTUATION_KK_FIRST && eval_char <= ZENKAKU_PUNCTUATION_KK_LAST)) {
             return true;
         }
         return false;
