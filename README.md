@@ -1,5 +1,6 @@
 # Japanese Kana Utilities for Java
 [![Build Status](https://travis-ci.org/mariten/kanatools-java.svg?branch=master)](https://travis-ci.org/mariten/kanatools-java)
+[![Coverage Status](https://coveralls.io/repos/github/mariten/kanatools-java/badge.svg?branch=master)](https://coveralls.io/github/mariten/kanatools-java)
 
 ### 日本語
 * **kanatools-java** とは、Java にて日本語文字処理を簡単にやってくれる小さなライブラリです。
