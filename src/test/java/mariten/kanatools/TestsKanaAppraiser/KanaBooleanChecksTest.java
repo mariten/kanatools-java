@@ -92,4 +92,55 @@ public class KanaBooleanChecksTest extends KanaAppraiserTester
         assertEquals(false, KanaAppraiser.isHankakuKatakana('ﾟ'));
     }
     //}}}
+
+
+    //{{{ testZenkakuKutotenChecks()
+    @Test
+    public void testZenkakuKutotenChecks()
+    {
+        assertEquals(false, KanaAppraiser.isZenkakuKutoten('　'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('、'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('。'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('〛'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('〜'));
+        assertEquals(false, KanaAppraiser.isZenkakuKutoten('〠'));
+        assertEquals(false, KanaAppraiser.isZenkakuKutoten('〡'));
+
+        assertEquals(false, KanaAppraiser.isZenkakuKutoten('ゖ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('゛'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('゜'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('ゝ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('ゞ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKutoten('ゟ'));
+
+        assertEquals(false, KanaAppraiser.isZenkakuKutoten('ヺ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('・'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('ー'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('ヽ'));
+        assertEquals(true,  KanaAppraiser.isZenkakuKutoten('ヾ'));
+        assertEquals(false, KanaAppraiser.isZenkakuKutoten('ヿ'));
+    }
+    //}}}
+
+
+    //{{{ testHankakuKutotenChecks()
+    @Test
+    public void testHankakuKutotenChecks()
+    {
+        assertEquals(false, KanaAppraiser.isHankakuKutoten('～'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('｡'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('｢'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('｣'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('､'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('･'));
+        assertEquals(false, KanaAppraiser.isHankakuKutoten('ｦ'));
+        assertEquals(false, KanaAppraiser.isHankakuKutoten('ｧ'));
+        assertEquals(false, KanaAppraiser.isHankakuKutoten('ﾜ'));
+        assertEquals(false, KanaAppraiser.isHankakuKutoten('ﾝ'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('ﾞ'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('ﾟ'));
+        assertEquals(true,  KanaAppraiser.isHankakuKutoten('ﾟ'));
+        assertEquals(false, KanaAppraiser.isHankakuKutoten('ﾡ'));
+    }
+    //}}}
 }
