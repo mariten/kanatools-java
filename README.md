@@ -1,4 +1,5 @@
 # Japanese Kana Utilities for Java
+[![Download](https://api.bintray.com/packages/mariten/maven/kanatools-java/images/download.svg)](https://bintray.com/mariten/maven/kanatools-java)
 [![Build Status](https://travis-ci.org/mariten/kanatools-java.svg?branch=master)](https://travis-ci.org/mariten/kanatools-java)
 [![Coverage Status](https://coveralls.io/repos/github/mariten/kanatools-java/badge.svg?branch=master)](https://coveralls.io/github/mariten/kanatools-java)
 
