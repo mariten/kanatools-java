@@ -74,16 +74,30 @@ publishing {
 }
 
 bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    user = 'mariten'
+    key = System.getenv('BINTRAY_API_KEY')
     publications = ['mavenJava']
     pkg {
         repo = 'maven'
         name = 'kanatools-java'
+        desc = 'Utilities for handling Japanese kana text easily in Java'
         licenses = ['Apache-2.0']
+
         websiteUrl = 'http://mariten.github.io/kanatools-java'
         issueTrackerUrl = 'https://github.com/mariten/kanatools-java/issues'
         vcsUrl = 'https://github.com/mariten/kanatools-java.git'
+
+        githubRepo = 'mariten/kanatools-java'
+        githubReleaseNotesFile = 'HISTORY.md'
+
+        publicDownloadNumbers = true
+        labels = ['japanese', 'conversion', 'kana', 'hiragana', 'katakana', 'romaji', 'zenkaku', 'hankaku']
+
+        version {
+            name = '1.2.1'
+            vcsTag = '1.2.1'
+            released  = new Date()
+        }
     }
 }
 
