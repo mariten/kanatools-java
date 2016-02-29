@@ -1,4 +1,4 @@
-import mariten.kanatools.KanaConverter;
+import com.mariten.kanatools.KanaConverter;
 
 class SampleKanaConverter
 {

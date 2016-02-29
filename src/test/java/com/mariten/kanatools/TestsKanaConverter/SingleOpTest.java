@@ -1,7 +1,7 @@
-package mariten.kanatools.TestsKanaConverter;
+package com.mariten.kanatools.TestsKanaConverter;
 
-import mariten.kanatools.KanaConverter;
-import mariten.kanatools.KanaConverterTester;
+import com.mariten.kanatools.KanaConverter;
+import com.mariten.kanatools.KanaConverterTester;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

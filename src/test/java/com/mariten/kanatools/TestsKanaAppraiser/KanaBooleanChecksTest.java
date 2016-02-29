@@ -1,6 +1,6 @@
-package mariten.kanatools.TestsKanaAppraiser;
-import mariten.kanatools.KanaAppraiser;
-import mariten.kanatools.KanaAppraiserTester;
+package com.mariten.kanatools.TestsKanaAppraiser;
+import com.mariten.kanatools.KanaAppraiser;
+import com.mariten.kanatools.KanaAppraiserTester;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

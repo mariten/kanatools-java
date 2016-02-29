@@ -18,7 +18,7 @@ repositories {
     mavenCentral()
 }
 
-group = 'mariten'
+group = 'com.mariten'
 version = '1.2.1'
 description = 'Utilities for handling Japanese kana text easily in Java'
 

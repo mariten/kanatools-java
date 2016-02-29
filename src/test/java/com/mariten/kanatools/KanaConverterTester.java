@@ -1,11 +1,11 @@
-package mariten.kanatools;
+package com.mariten.kanatools;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import mariten.kanatools.KanaConverter;
+import com.mariten.kanatools.KanaConverter;
 import static org.junit.Assert.*;
 
 public abstract class KanaConverterTester
@@ -57,7 +57,7 @@ public abstract class KanaConverterTester
             int conv_flags = -1;
             try {
                 // Translate int-flag op format to PHP-style string op format using restricted function in KanaConverter
-                Class<?> target_class = Class.forName("mariten.kanatools.KanaConverter");
+                Class<?> target_class = Class.forName("com.mariten.kanatools.KanaConverter");
                 Method restricted_converter = target_class.getDeclaredMethod("createOpsArrayFromString", String.class);
                 restricted_converter.setAccessible(true);
                 Object function_result = restricted_converter.invoke(null, conv_flags_string);

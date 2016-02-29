@@ -1,4 +1,4 @@
-package mariten.kanatools;
+package com.mariten.kanatools;
 
 /**
   * Confirms whether a given character is amongst certain types of Japanese text or not.

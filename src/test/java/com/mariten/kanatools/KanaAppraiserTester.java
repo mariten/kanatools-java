@@ -1,5 +1,5 @@
-package mariten.kanatools;
-import mariten.kanatools.KanaAppraiser;
+package com.mariten.kanatools;
+import com.mariten.kanatools.KanaAppraiser;
 
 public abstract class KanaAppraiserTester
 {
