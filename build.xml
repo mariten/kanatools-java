@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="kanatools-java" basedir="." default="compile" xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="kanatools" basedir="." default="compile" xmlns:jacoco="antlib:org.jacoco.ant">
     <description>Utilities for working with Japanese text in Java</description>
 
     <!-- Define relevant directories/targets -->
@@ -103,7 +103,7 @@
                 <file file="${coverage_dir}/jacoco.exec" />
             </executiondata>
 
-            <structure name="kanatools-java">
+            <structure name="kanatools">
                 <classfiles>
                     <fileset dir="${classes_dir}" />
                 </classfiles>

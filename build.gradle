@@ -78,7 +78,7 @@ bintray {
     publications = ['mavenJava']
     pkg {
         repo = 'maven'
-        name = 'kanatools-java'
+        name = project.getName()
         desc = 'Utilities for handling Japanese kana text easily in Java'
         licenses = ['Apache-2.0']
 
