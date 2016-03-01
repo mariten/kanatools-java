@@ -18,10 +18,12 @@ repositories {
     mavenCentral()
 }
 
+// Primary configuration
 group = 'com.mariten'
 version = '1.2.1'
 description = 'Utilities for handling Japanese kana text easily in Java'
 
+// JDK version compatibility
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
@@ -79,8 +81,8 @@ bintray {
     pkg {
         repo = 'maven'
         name = project.getName()
-        desc = 'Utilities for handling Japanese kana text easily in Java'
-        licenses = ['Apache-2.0']
+        desc = project.getDescription()
+        licenses = ['MIT']
 
         websiteUrl = 'http://mariten.github.io/kanatools-java'
         issueTrackerUrl = 'https://github.com/mariten/kanatools-java/issues'
@@ -90,11 +92,11 @@ bintray {
         githubReleaseNotesFile = 'HISTORY.md'
 
         publicDownloadNumbers = true
-        labels = ['japanese', 'conversion', 'kana', 'hiragana', 'katakana', 'romaji', 'zenkaku', 'hankaku']
+        labels = ['japanese', 'conversion', 'kana', 'hiragana', 'katakana', 'romaji', 'zenkaku', 'hankaku', '日本語', 'かな変換', 'ひらがな', 'カタカナ', '仮名', 'ローマ字', '全角', '半角']
 
         version {
-            name = '1.2.1'
-            vcsTag = '1.2.1'
+            name = project.getVersion()
+            vcsTag = project.getVersion()
             released  = new Date()
         }
     }
