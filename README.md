@@ -21,7 +21,7 @@
 
 ### Example
 ```java
-String before = "ﾃｽﾃｨﾝｸﾞ　１−２−３";
+String before = "かな変換ﾃｽﾃｨｰﾝｸﾞ｡　１－２－３";
 
 int conv_op_flags = 0;
 conv_op_flags |= KanaConverter.OP_HAN_KATA_TO_ZEN_KATA;    //半角カタカナを全角カタカナに変換
@@ -32,8 +32,8 @@ String after = KanaConverter.convertKana(before, conv_op_flags);
 
 Effect:
 ```
-before: "ﾃｽﾃｨﾝｸﾞ　１−２−３"
-after:  "テスティング 1-2-3"
+before: "かな変換ﾃｽﾃｨｰﾝｸﾞ｡　１－２－３"
+after:  "カナ変換テスティーング。 1-2-3"
 ```
 
 # Download and Install
