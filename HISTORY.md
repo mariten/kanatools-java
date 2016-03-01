@@ -1,3 +1,11 @@
+v1.3.0 :: Mar 01 2016
+======================
+* Added Japanese punctuation mark (*kutoten*) handling to **KanaAppraiser**
+    * Defines and appraises punctuation marks using `isHankakuKutoten` and `isZenkakuKutoten`, keeping them separate from Hiragana/Katakana
+* Added publishing capability in `build.gradle` to directly upload release artifacts to Bintray
+    * This allows automatic distribution to JCenter and Maven Central, making JAR download much easier for users
+
+
 v1.2.1 :: Feb 25 2016
 ======================
 * Can now build using either Gradle or Ant
