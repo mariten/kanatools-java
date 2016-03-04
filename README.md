@@ -15,12 +15,17 @@
 * Works with Java 1.5 and above
 * [Read more...](http://mariten.github.io/kanatools-java/en/)
 
-# KanaConverter
+# Classes
+### `KanaConverter`
 * [日本語の参考資料](http://mariten.github.io/kanatools-java/ja/kana-converter/)
 * [English Documentation](http://mariten.github.io/kanatools-java/en/kana-converter/)
 
-### Example
+##### Example
+Code:
 ```java
+import com.mariten.kanatools.KanaConverter;
+...
+
 String before = "かな変換ﾃｽﾃｨｰﾝｸﾞ｡　１－２－３";
 
 int conv_op_flags = 0;
@@ -68,10 +73,10 @@ git clone https://github.com/mariten/kanatools-java.git
 cd kanatools-java
 git checkout staging
 
-# Ant Setup
+# Compile and test with Ant
 ant test
 
-# Gradle Setup
+# Compile and test with Gradle
 ./gradlew check
 ```
 
@@ -84,8 +89,9 @@ Please follow this process:
 1. Fork this repository
 2. Make your changes in a new branch.  Please add or update unit tests accordingly.
 3. Ensure that `ant test` and `./gradlew check` complete successfully.  Pull requests with failing or buggy unit tests will be rejected.
-4. Send the pull request to the **staging** branch and include an explanation of what your change accomplishes.  Please do not commit the JAR file in your pull request, that will only be done at release time.
-5. After a code review, your change will be merged and subsequently released into the **master** branch, at which time the changes will be reflected in an updated JAR file.
-6. Depending on your change, I would appreicate it if you updated the documentation on the `gh-pages` branch as well.
+4. Send the pull request to the **staging** branch and include an explanation of what your change accomplishes.  Please do not commit the Kanatools JAR file in your pull request, that is only done when a new version is released.
+5. After a code review and upon passing all tests, your change will be merged into `staging`.
+6. When the next version is released these changes will be reflected into the **master** branch and subsequently included to the JAR published to JCenter and Maven Central.
+7. Depending on the nature of the change, updating the documentation in the `gh-pages` branch would be appreciated as well.
 
 **Looking forward to your pull requests!** :memo: :octocat:
