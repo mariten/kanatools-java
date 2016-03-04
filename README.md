@@ -37,7 +37,19 @@ after:  "カナ変換テスティーング。 1-2-3"
 ```
 
 # Download and Install
-1. Fetch the [**JAR**](https://github.com/mariten/kanatools-java/blob/master/compiled/jar/kanatools.jar) from the **master** branch of this repository
+### Option 1: Auto-Include as Dependency in Build Tool
+This library is available on the large public JAR repositories [**JCenter**](https://bintray.com/mariten/maven/kanatools) and [**Maven Central**](http://search.maven.org/#search|ga|1|com.mariten.kanatools)
+
+#### Package Metadata
+* **Group**
+    * `com.mariten`
+* **Artifact**
+    * `kanatools`
+* **Version**
+    * [![Version](https://api.bintray.com/packages/mariten/maven/kanatools/images/download.svg)](https://bintray.com/mariten/maven/kanatools)
+
+### Option 2: Directly Download JAR File
+1. The JAR for each stable version release is hosted on Bintray - [**Download the latest here**](https://dl.bintray.com/mariten/maven/com/mariten/kanatools/)
 2. Add to your lib directory or somewhere that is included in your Java CLASSPATH
 
 # Development
