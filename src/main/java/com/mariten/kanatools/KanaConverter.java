@@ -2,7 +2,9 @@ package com.mariten.kanatools;
 import com.mariten.kanatools.KanaAppraiser;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
   * Provides easy, automatic string conversions often necessary when dealing with Japanese text
@@ -82,6 +84,10 @@ public class KanaConverter
             do_collapse_on_hankaku_diacritic = false;
         }
 
+        // Prepare excluded characters lookup
+        Set<Character> ignore_char_lookup = makeIgnoreCharLookup(chars_to_ignore);
+
+        // Init data holders
         int char_count = original_string.length();
         StringBuffer new_string = new StringBuffer();
         int i = 0;
@@ -96,8 +102,7 @@ public class KanaConverter
             }
 
             // Skip all conversions if character is on the excluded chars list
-            boolean is_ignore_char = isIgnoreChar(current_char, chars_to_ignore);
-            if(is_ignore_char) {
+            if(ignore_char_lookup.contains(current_char)) {
                 new_string.append(current_char);
                 i++;
                 continue;
@@ -704,19 +709,15 @@ public class KanaConverter
     //}}}
 
 
-    //{{{ boolean isIgnoreChar(char, String)
-    protected static boolean isIgnoreChar(char char_to_check, String chars_to_ignore)
+    //{{{ boolean makeIgnoreCharLookup(String)
+    protected static Set<Character> makeIgnoreCharLookup(String chars_to_ignore)
     {
+        Set<Character> lookup_hash = new HashSet<Character>();
         int ignore_char_count = chars_to_ignore.length();
         for(int i = 0; i < ignore_char_count; i++) {
-            if(char_to_check == chars_to_ignore.charAt(i)) {
-                // Matched
-                return true;
-            }
+            lookup_hash.add(chars_to_ignore.charAt(i));
         }
-
-        // No matches
-        return false;
+        return lookup_hash;
     }
     //}}}
 
