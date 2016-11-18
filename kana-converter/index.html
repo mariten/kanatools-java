@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Kana Converter</title>
+</head>
+
+<body>
+<script>
+
+var sys_locale = 'en-US';
+var new_url = window.location.href.replace('kana-converter', 'en/kana-converter');
+if(typeof window.navigator.userLanguage != 'undefined') {
+    sys_locale = window.navigator.userLanguage;
+}
+else if(typeof window.navigator.language != 'undefined') {
+    sys_locale = window.navigator.language;
+}
+
+sys_language = sys_locale.toLowerCase().substring(0, 2);
+if(sys_language == 'ja'
+|| sys_language == 'jp') {
+    new_url = new_url.replace('/en/', '/ja/');
+}
+window.location = new_url;
+
+</script>
+<noscript>
+    <h1>Kana Converter</h1>
+    <ul>
+        <li><a href="/kanatools-java/en/kana-converter/">English</a></li>
+        <li><a href="/kanatools-java/ja/kana-converter/">日本語</a></li>
+    </ul>
+</noscript>
+</body>
+</html>
