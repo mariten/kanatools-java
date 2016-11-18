@@ -33,9 +33,10 @@ public class KanaConverter
     public static final int OP_ZEN_HIRA_TO_ZEN_KATA        = 0x00010000;
     public static final int OP_ZEN_KATA_TO_ZEN_HIRA        = 0x00020000;
 
+
     //// Maintain backwards compatibility (based on mb_convert_kana's "$option" parameter from PHP)
     //// Details: http://php.net/manual/en/function.mb-convert-kana.php
-    public static final Map<Character, Integer> LETTER_OP_CODE_LOOKUP;
+    protected static final Map<Character, Integer> LETTER_OP_CODE_LOOKUP;
     static {
         LETTER_OP_CODE_LOOKUP = new HashMap<Character, Integer>();
         LETTER_OP_CODE_LOOKUP.put('A', OP_HAN_ASCII_TO_ZEN_ASCII);
@@ -278,8 +279,8 @@ public class KanaConverter
 
     //{{{ Hankaku Katakana related mappings
     // Diacritic constants
-    public static final char HANKAKU_VOICED_MARK    = 'ﾞ';  // dakuten
-    public static final char HANKAKU_ASPIRATED_MARK = 'ﾟ';  // handakuten
+    protected static final char HANKAKU_VOICED_MARK    = 'ﾞ';  // dakuten
+    protected static final char HANKAKU_ASPIRATED_MARK = 'ﾟ';  // handakuten
 
     protected static final Map<Character, Character> MAPPING_HANKAKU_TO_ZENKAKU_KATAKANA_UNVOICED;
     static {
@@ -515,11 +516,11 @@ public class KanaConverter
 
 
     // Connect mapping of hiragana and katakana char codes
-    public static final int OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA =
+    protected static final int OFFSET_ZENKAKU_HIRAGANA_TO_ZENKAKU_KATAKANA =
     (KanaAppraiser.ZENKAKU_KATAKANA_FIRST - KanaAppraiser.ZENKAKU_HIRAGANA_FIRST);
 
     // Connect mapping of regular ASCII characters to Zenkaku ASCII characters
-    public static final int OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII =
+    protected static final int OFFSET_HANKAKU_ASCII_TO_ZENKAKU_ASCII =
     (KanaAppraiser.ZENKAKU_ASCII_FIRST - KanaAppraiser.HANKAKU_ASCII_FIRST);
 
 
