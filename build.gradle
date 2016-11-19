@@ -32,8 +32,18 @@ dependencies {
     testCompile 'junit:junit:4.11'
 }
 
-test {
-    systemProperty 'test_with_php', "$System.env.TEST_WITH_PHP"
+javadoc {
+    options.docEncoding 'utf-8'
+    options.charSet 'utf-8'
+    options.windowTitle 'Kana Tools for Java SDK'
+    options.noNavBar true
+    options.noHelp true
+    options.noDeprecated true
+    options.noDeprecatedList true
+    options.noQualifiers 'all'
+    options.memberLevel = JavadocMemberLevel.PUBLIC
+    options.links 'https://docs.oracle.com/javase/8/docs/api/'
+    options.stylesheetFile = new File(projectDir, "docs/kanatools-javadocs.css");
 }
 
 jacoco {
