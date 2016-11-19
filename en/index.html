@@ -60,18 +60,26 @@
         <div class="jumbotron">
             <h2>What Is This Library?</h2>
             <p>Light-weight utilities that make your life easier when dealing with Japanese text.<br>
-            Quickly process text containing kana characters with just a few lines of code.</p>
+            Quickly process text containing kana characters with just a few lines of code.<br>
+            <br>
 
             <a class="btn btn-lg btn-success" style="margin:10px 10px 0 0;" href="https://bintray.com/mariten/maven/kanatools">Get Latest Stable Release</a>
             <a class="btn btn-lg btn-primary" style="margin:10px 10px 0 0;" href="https://github.com/mariten/kanatools-java">GitHub Repository</a>
             <a class="btn btn-lg btn-primary" style="margin:10px 10px 0 0;" href="https://dl.bintray.com/mariten/maven/com/mariten/kanatools/">Download JAR</a>
+            </p>
         </div>
 
         <div class="bs-docs-section">
-            <h2 class="page-header">Components</h2>
+            <h2 class="page-header">The Basics</h2>
 
-            <h3><a href="/kanatools-java/en/kana-converter">KanaConverter</a></h3>
-            <p class="lead">Easy back-and-forth conversion of <i>kana</i>, <i>hankaku</i>, <i>zenkaku</i>, and other characters used in Japanese text</p>
+            <h3>Converting Kana</h3>
+
+            <b>Import:</b>
+            <div class="highlight">
+                <pre><code class="language-java">import com.mariten.kanatools.KanaConverter;</code></pre>
+            </div>
+
+            <b>Code:</b>
             <div class="highlight">
                 <pre><code class="language-java">String input_str = "ﾃｽﾃｨﾝｸﾞ　１−２−３";
 
@@ -83,9 +91,22 @@ conv_op_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
 // Convert the string
 String output_str = KanaConverter.convertKana(input_str, conv_op_flags);
 
-System.out.println(output_str);
-// "テスティング 1-2-3"</code></pre>
+// Compare result
+System.out.println("Before:  " + input_str);
+System.out.println("After:   " + output_str);</code></pre>
             </div>
+
+            <b>Output:</b>
+            <div class="highlight">
+                <pre><code>Before:  ﾃｽﾃｨﾝｸﾞ　１−２−３
+After:   テスティング 1-2-3</code></pre>
+            </div>
+
+            <h2 class="page-header">Class Details</h2>
+            <dl class="dl-horizontal" style="font-size:1.1em;">
+                <dt><a href="/kanatools-java/en/kana-converter">KanaConverter</a></dt>
+                <dd>Easy back-and-forth conversion of <i>kana</i>, <i>hankaku</i>, <i>zenkaku</i>, and other characters used in Japanese text</dd>
+            </dl>
         </div>
     </section>
 

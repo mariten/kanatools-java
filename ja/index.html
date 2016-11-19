@@ -60,18 +60,26 @@
         <div class="jumbotron">
             <h2>Kana Tools for Java とは？</h2>
             <p>Java で日本語の文字処理を簡単に行うための小さなライブラリ<br>
-            数行のコードだけで、仮名やローマ字の変換などを実装できます</p>
+            数行のコードだけで、仮名やローマ字の変換などを実装できます<br>
+            <br>
 
             <a class="btn btn-lg btn-success" style="margin:10px 10px 0 0;" href="https://bintray.com/mariten/maven/kanatools">最新の安定バージョンをゲットしよう</a>
             <a class="btn btn-lg btn-primary" style="margin:10px 10px 0 0;" href="https://github.com/mariten/kanatools-java">GitHub リポジトリ</a>
             <a class="btn btn-lg btn-primary" style="margin:10px 10px 0 0;" href="https://dl.bintray.com/mariten/maven/com/mariten/kanatools/">JAR ダウンロード</a>
+            </p>
         </div>
 
         <div class="bs-docs-section">
-            <h2 class="page-header">できること</h2>
+            <h2 class="page-header">簡単な例</h2>
 
-            <h3><a href="/kanatools-java/ja/kana-converter">KanaConverter</a></h3>
-            <p class="lead">全角・半角 の ひらがな・カタカナ・ローマ字 の相互変換</p>
+            <h3>仮名変換</h3>
+
+            <b>インポート</b>
+            <div class="highlight">
+                <pre><code class="language-java">import com.mariten.kanatools.KanaConverter;</code></pre>
+            </div>
+
+            <b>コード</b>
             <div class="highlight">
                 <pre><code class="language-java">String input_str = "ﾃｽﾃｨﾝｸﾞ　１−２−３";
 
@@ -83,9 +91,22 @@ conv_op_flags |= KanaConverter.OP_ZEN_ASCII_TO_HAN_ASCII;
 // Convert the string
 String output_str = KanaConverter.convertKana(input_str, conv_op_flags);
 
-System.out.println(output_str);
-// "テスティング 1-2-3"</code></pre>
+// Compare result
+System.out.println("Before:  " + input_str);
+System.out.println("After:   " + output_str);</code></pre>
             </div>
+
+            <b>出力</b>
+            <div class="highlight">
+                <pre><code>Before:  ﾃｽﾃｨﾝｸﾞ　１−２−３
+After:   テスティング 1-2-3</code></pre>
+            </div>
+
+            <h2 class="page-header">クラス詳細資料</h2>
+            <dl class="dl-horizontal" style="font-size:1.1em;">
+                <dt><a href="/kanatools-java/ja/kana-converter">KanaConverter</a></dt>
+                <dd>全角・半角 の ひらがな・カタカナ・ローマ字 の相互変換</dd>
+            </dl>
         </div>
     </section>
 
