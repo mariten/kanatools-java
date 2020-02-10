@@ -26,6 +26,11 @@ public class KanaAppraiser
  
 
 
+ 
+ 
+ 
+ 
+ 
     //// Bounds for Punctuation (kutoten)
     public static final char HANKAKU_PUNCTUATION_FIRST  = '｡';          // U+FF61
     public static final char HANKAKU_PUNCTUATION_LAST   = 'ﾟ';          // U+FF9F
