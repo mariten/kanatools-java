@@ -19,6 +19,11 @@ public class KanaAppraiser
     public static final char ZENKAKU_KATAKANA_FIRST = 'ァ';             // U+30A1
     public static final char ZENKAKU_KATAKANA_LAST_FOR_CONVERT  = 'ン'; // U+30F3
     public static final char ZENKAKU_KATAKANA_LAST  = 'ヺ';             // U+30FA
+ 
+ 
+ 
+ 
+ 
 
 
     //// Bounds for Punctuation (kutoten)
