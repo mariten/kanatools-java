@@ -7,21 +7,10 @@ public abstract class KanaAppraiserTester
     {
         // Test instantiation
         KanaAppraiser kana_evaluator_object = new KanaAppraiser();
-<<<<<<< Updated upstream
+
+
 System.out.println("");
-
-
-	
-		System.out.println();
-		System.out.println();
-			System.out.println();
-		System.out.println();
-			System.out.println();
-		System.out.println();
-				System.out.println();
-			System.out.println();
-		System.out.println();
->>>>>>> Stashed changes
-
-        System.out.println("");    }
+System.out.println("");
+System.out.println("");
+    }
 }
