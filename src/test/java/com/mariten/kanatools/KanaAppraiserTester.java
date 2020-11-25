@@ -4,12 +4,9 @@ import com.mariten.kanatools.KanaAppraiser;
 public abstract class KanaAppraiserTester
 {
     public KanaAppraiserTester()
-    {
-        // Test instantiation
+    {        // Test instantiation
         KanaAppraiser kana_evaluator_object = new KanaAppraiser();
 System.out.println("");
-
-
 System.out.println("");
     }
 }
