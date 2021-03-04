@@ -78,7 +78,7 @@ public class KanaAppraiser
 
     //{{{ boolean isZenkakuHiraganaWithKatakanaEquivalent(char)
     public static boolean isZenkakuHiraganaWithKatakanaEquivalent(char eval_char)
-    {
+    {   int i=0;
         if(eval_char >= ZENKAKU_HIRAGANA_FIRST
         && eval_char <= ZENKAKU_HIRAGANA_LAST_FOR_CONVERT) {
             return true;
