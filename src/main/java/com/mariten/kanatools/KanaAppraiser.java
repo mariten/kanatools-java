@@ -63,7 +63,7 @@ public class KanaAppraiser
     public static final char ZENKAKU_ASCII_FIRST = '！';                // U+FF01
     public static final char ZENKAKU_ASCII_LAST  = '～';                // U+FF5E
 
-
+  public static final char ZENKAKU_ASCII_LAST1  = '～';                // U+FF5E
     //{{{ boolean isZenkakuHiragana(char)
     public static boolean isZenkakuHiragana(char eval_char)
     {
