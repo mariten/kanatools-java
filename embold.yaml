@@ -1,9 +1,10 @@
 version: 1
 sources:
+  #Files or Directories to be Excluded are mentioned in exclusions
   exclusions:
     - 'generated'
     
-    # Specify the languages you would like to Scan. Default is all Detected
+# Specify the languages you would like to Scan. Default is all Detected
 languages: 'JAVA'
 
 #Specify CPP Specific Parser Settings
@@ -65,4 +66,3 @@ modules:
         value: ketki.thosar@acellere.com
       - name: jiraPassword
         value: rtrtrtrtrrtrtr
-
