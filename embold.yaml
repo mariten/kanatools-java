@@ -2,3 +2,67 @@ version: 1
 sources:
   exclusions:
     - 'generated'
+    
+    # Specify the languages you would like to Scan. Default is all Detected
+languages: 'JAVA'
+
+#Specify CPP Specific Parser Settings
+parserSettings:
+  additionalOptions:
+    - opt: '--cdb=<>'
+    - opt: '--jobs=2'
+includePaths:
+    - path: '/some/path1'
+    - path: '/some/path2'
+
+#Enable/Disable specific running of Analysis Steps. Default is all true
+analysers:
+  codeChecks: true
+  antiPatterns: true
+  duplication: true
+
+# Define modules one would like to run or disable. This is enough for Basic Users
+# Get List of Modules (Which are Default Enabled/Disabled) at https://docs.embold.io/
+#If you would like to disable specific checks, one can do so  using advanced settings
+# To get more idea about rules & modules visit https://docs.embold.io/
+modules:
+  - name: pmd
+    enabled: true
+    config:
+      - name: ruleSets
+        value: 'rulesets/java/strictexception.xml,rulesets/java/basic.xml,rulesets/java/design.xml,category/java/security.xml'
+      - name: javaVersion
+        value: '1.8'
+  - name: spotbugs
+    enabled: true
+    config:
+      - name: reportDir
+        value: ${basedir}/target
+  - name: junit
+    enabled: true
+    config:
+      - name: reportDir
+        value: ${basedir}/target
+  - name: gamma_cxx
+    enabled: true
+    rules:
+      - name: accessForwarded
+        enabled: true
+      - name: accessMoved
+        enabled: true
+      - name: arithOperationsOnVoidPointer
+        enabled: false
+  - name: relevance
+    enabled: true
+    config:
+      - name: mode
+        value: git
+      - name: jiraUrl
+        value: 'https://acellere.atlassian.net/'
+      - name: jiraProjectKey
+        value: COR
+      - name: jiraUsername
+        value: ketki.thosar@acellere.com
+      - name: jiraPassword
+        value: rtrtrtrtrrtrtr
+
