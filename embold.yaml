@@ -7,8 +7,6 @@ sources:
 # Specify the languages you would like to Scan. Default is all Detected
 languages: 'JAVA'
 
-
-
 #Enable/Disable specific running of Analysis Steps. Default is all true
 analysers:
   codeChecks: true
