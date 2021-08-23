@@ -3,7 +3,15 @@ sources:
   exclusions:
     - 'test'
     - 'generated'
-	@@ -16,18 +15,8 @@ sources:
+    - 'mock'
+    - 'thirdparty'
+    - 'third-party'
+    - '3rd-party'
+    - '3rdparty'
+    - 'external'
+    - 'build'
+    - 'node_modules'
+    - 'assets'
     - 'gulp'
     - 'grunt'
     - 'library'
