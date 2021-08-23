@@ -19,4 +19,4 @@ sources:
     - '.git'
     - '.so'
     - '.h'
-    - 'SAMPLE'
+    - 'sample'
