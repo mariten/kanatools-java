@@ -1,0 +1,14 @@
+version: 1
+sources:
+  exclusions:
+    - 'test'
+    - 'generated'
+	@@ -16,18 +15,8 @@ sources:
+    - 'gulp'
+    - 'grunt'
+    - 'library'
+    - 'libs'
+    - '.git'
+    - '.so'
+    - '.h'
+    - 'SAMPLE'
