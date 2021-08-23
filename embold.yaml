@@ -7,14 +7,7 @@ sources:
 # Specify the languages you would like to Scan. Default is all Detected
 languages: 'JAVA'
 
-#Specify CPP Specific Parser Settings
-parserSettings:
-  additionalOptions:
-    - opt: '--cdb=<>'
-    - opt: '--jobs=2'
-includePaths:
-    - path: '/some/path1'
-    - path: '/some/path2'
+
 
 #Enable/Disable specific running of Analysis Steps. Default is all true
 analysers:
