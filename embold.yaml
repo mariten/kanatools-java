@@ -1,5 +1,4 @@
 version: 1
 sources:
   exclusions:
-  -'man'
-    
+    - 'generated'
