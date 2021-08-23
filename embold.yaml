@@ -1,21 +1,5 @@
 version: 1
 sources:
   exclusions:
-    - 'generated'
-    - 'mock'
-    - 'thirdparty'
-    - 'third-party'
-    - '3rd-party'
-    - '3rdparty'
-    - 'external'
-    - 'build'
-    - 'node_modules'
-    - 'assets'
-    - 'gulp'
-    - 'grunt'
-    - 'library'
-    - 'libs'
-    - '.git'
-    - '.so'
-    - '.h'
+
     
