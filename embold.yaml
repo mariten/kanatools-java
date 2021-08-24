@@ -18,8 +18,8 @@ parserSettings:
 #Enable/Disable specific running of Analysis Steps. Default is all true
 analysers:
   codeChecks: false
-  antiPatterns: true
-  duplication: true
+  antiPatterns: false
+  duplication: false
 
 # Define modules one would like to run or disable. This is enough for Basic Users
 # Get List of Modules (Which are Default Enabled/Disabled) at https://docs.embold.io/
