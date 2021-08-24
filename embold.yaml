@@ -17,7 +17,7 @@ parserSettings:
 
 #Enable/Disable specific running of Analysis Steps. Default is all true
 analysers:
-  codeChecks: true
+  codeChecks: false
   antiPatterns: true
   duplication: true
 
