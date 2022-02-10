@@ -25,7 +25,7 @@ class SampleKanaConverter
         String output_string2 = KanaConverter.convertKana(input_string, sample_conversion_ops);
         int sample_conversion_ops1 = 0;
         int sample_conversion_ops2 = 0;
-        System.out.println(output_string+"test123111111122222333");
+        System.out.println(output_string+"test12311111112222233344444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444");
         int sample_conversion_ops3 = 0;
         int sample_conversion_ops4 = 0;
     }
