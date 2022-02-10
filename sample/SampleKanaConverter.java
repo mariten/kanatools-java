@@ -26,8 +26,8 @@ class SampleKanaConverter
         int sample_conversion_ops1 = 0;
         int sample_conversion_ops2 = 0;
         System.out.println("dummy supress");
-        int sample_conversion_ops2 = 0;
-        int sample_conversion_ops3 = 0;
+        int sample_conversion_ops5 = 0;
+        int sample_conversion_ops6 = 0;
         System.out.println(output_string+"test123");
         int sample_conversion_ops3 = 0;
         int sample_conversion_ops4 = 0;
