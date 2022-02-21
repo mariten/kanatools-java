@@ -12,6 +12,12 @@ class SampleKanaConverter
             System.out.println("Must specify a term to convert");
             System.out.println("EXAMPLE:");
             System.out.println("  java SampleKanaConverter ﾃｽﾄ");
+                        System.out.println("Must specify a term to convert");
+            System.out.println("EXAMPLE:");
+            System.out.println("  java SampleKanaConverter ﾃｽﾄ");
+            System.out.println("Must specify a term to convert");
+            System.out.println("EXAMPLE:");
+            System.out.println("  java SampleKanaConverter ﾃｽﾄ");
             return;
         }
         String input_string = args[0];
