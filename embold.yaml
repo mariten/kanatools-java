@@ -2,7 +2,7 @@ version: 1
 sources:
   ## Files or Directories to be excluded are mentioned in exclusions. Below are default exclusions. If you don’t want to exclude any of the below folders, please remove them from the list.
   exclusions:
-  #   - 'test'
+    - 'test'
     - 'generated'
     - 'mock'
     - 'thirdparty'
@@ -19,15 +19,15 @@ sources:
     - '.git'
 
 ## Specify the languages you would like to Scan. By default all languages are included
-# languages: 'JAVA,CPP'
+  languages: 'JAVA,CPP'
 
 
 ## Specify modules you would like to enable or disable.
- modules:
-   - name: gamma_java
-     enabled: true
-#     rules: ## Specify rules you would like to disable.
-       - key: 'EMB-JAVA-10'
+  modules:
+    - name: gamma_java
+      enabled: true
+       rules: ## Specify rules you would like to disable.
+       - key: 'EMB-JAVA-58'
          enabled: false
 
 
