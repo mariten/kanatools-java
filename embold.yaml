@@ -24,7 +24,7 @@ languages: 'JAVA,CPP'
 ## Specify modules you would like to enable or disable.
 modules:
     - name: gamma_java
-      enabled: true
+      enabled: false
       rules: 
              - key: 'EMB-JAVA-10000'
                enabled: false
