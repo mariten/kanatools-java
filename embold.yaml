@@ -29,7 +29,10 @@ modules:
              - key: 'EMB-JAVA-10000'
                enabled: false
     - name: pmd
-      enabled: false               
+      enabled: true
+      rules: 
+             - key: 'PMD-APEX-308'
+               enabled: false
 
 
 ## Please visit https://docs.embold.io/v2-quick-start-guide/#update-configurations to know more
