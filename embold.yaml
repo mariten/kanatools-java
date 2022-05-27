@@ -20,7 +20,7 @@ sources:
     - '.git'
 
 ## Specify the languages you would like to Scan. By default all languages are included
-languages: 'JAVA,CPP'
+languages: 'JAVA'
 ## Specify modules you would like to enable or disable.
 modules:
     - name: gamma_java
@@ -28,6 +28,8 @@ modules:
       rules: 
              - key: 'EMB-JAVA-10000'
                enabled: false
+    - name: pmd
+      enabled: false               
 
 
 ## Please visit https://docs.embold.io/v2-quick-start-guide/#update-configurations to know more
