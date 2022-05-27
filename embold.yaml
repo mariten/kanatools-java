@@ -22,7 +22,7 @@ sources:
 ## Specify the languages you would like to Scan. By default all languages are included
 
 ## Specify modules you would like to enable or disable.
-  modules:
+modules:
     - name: gamma_java
       enabled: true
 #       rules: ## Specify rules you would like to disable.
