@@ -26,8 +26,8 @@ modules:
     - name: gamma_java
       enabled: true
 #       rules: ## Specify rules you would like to disable.
-#       - key: 'EMB-JAVA-58'
-#         enabled: false
+       - key: 'EMB-JAVA-10'
+         enabled: false
 
 
 ## Please visit https://docs.embold.io/v2-quick-start-guide/#update-configurations to know more
