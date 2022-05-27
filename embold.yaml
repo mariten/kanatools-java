@@ -1,4 +1,5 @@
 version: 1
+languages: 'JAVA,CPP'
 sources:
   ## Files or Directories to be excluded are mentioned in exclusions. Below are default exclusions. If you don’t want to exclude any of the below folders, please remove them from the list.
   exclusions:
@@ -19,8 +20,6 @@ sources:
     - '.git'
 
 ## Specify the languages you would like to Scan. By default all languages are included
-  languages: 'JAVA,CPP'
-
 
 ## Specify modules you would like to enable or disable.
   modules:
