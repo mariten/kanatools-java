@@ -1,0 +1,34 @@
+version: 1
+sources:
+  ## Files or Directories to be excluded are mentioned in exclusions. Below are default exclusions. If you don’t want to exclude any of the below folders, please remove them from the list.
+  exclusions:
+  #   - 'test'
+    - 'generated'
+    - 'mock'
+    - 'thirdparty'
+    - 'third-party'
+    - '3rd-party'
+    - '3rdparty'
+    - 'external'
+    - 'build'
+    - 'node_modules'
+    - 'assets'
+    - 'gulp'
+    - 'grunt'
+    - 'library'
+    - '.git'
+
+## Specify the languages you would like to Scan. By default all languages are included
+# languages: 'JAVA,CPP'
+
+
+## Specify modules you would like to enable or disable.
+ modules:
+   - name: gamma_java
+     enabled: true
+#     rules: ## Specify rules you would like to disable.
+       - key: 'EMB-JAVA-10'
+         enabled: false
+
+
+## Please visit https://docs.embold.io/v2-quick-start-guide/#update-configurations to know more
