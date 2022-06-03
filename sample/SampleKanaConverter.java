@@ -28,5 +28,12 @@ class SampleKanaConverter
          System.out.println(output_string);
          System.out.println(output_string);
          System.out.println(output_string);
+         System.out.println(output_string);
+         System.out.println(output_string);
+         System.out.println(output_string);
+         System.out.println(output_string);
+         System.out.println(output_string);
+         System.out.println(output_string);
+         System.out.println(output_string);
     }
 }
