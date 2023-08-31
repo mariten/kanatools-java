@@ -10,6 +10,7 @@ import java.util.Map;
   * Port of PHP's "mb_convert_kana" function for Java.
   * http://www.php.net/manual/en/function.mb-convert-kana.php
   */
+
 public class KanaConverter
 {
     // Conversion Operations Types
